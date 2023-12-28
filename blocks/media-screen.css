@@ -1,13 +1,16 @@
 @media screen and (max-width: 768px) {
-  .profile {
-    flex-direction: column;
+  .profile__info {
+    grid-template-columns: auto;
   }
 
-  .profile__info {
-    width: 100%;
-    margin-left: 62px;
-    margin-right: 62px;
-    justify-content: center;
+  .profile__title {
+    font-size: ;
+    line-height: ;
+    max-width: auto;
+  }
+
+  .profile__image {
+    margin: 100%;
   }
 
   .profile__description {
@@ -15,26 +18,28 @@
     text-align: center;
   }
 
-  .profile__add-button {
-    margin: 0;
-    width: 100%;
+  .gallery {
+    width: auto;
+  }
+
+  .footer {
+    width: auto;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .profile {
-    flex-direction: column;
-    width: 196px;
-    height: 22px;
+  .profile__info {
+    grid-template-columns: auto;
   }
 
-  .profile__info {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-left: 62px;
-    margin-right: 62px;
-    justify-content: center;
+  .profile__title {
+    font-size: ;
+    line-height: ;
+    max-width: auto;
+  }
+
+  .profile__image {
+    margin: 100%;
   }
 
   .profile__description {
@@ -42,8 +47,11 @@
     text-align: center;
   }
 
-  .profile__add-button {
-    margin: 0;
-    width: 100%;
+  .gallery {
+    width: auto;
+  }
+
+  .footer {
+    width: auto;
   }
 }

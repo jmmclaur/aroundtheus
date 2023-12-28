@@ -65,9 +65,9 @@
   width: 150px;
   grid-area: button;
   border: 1px;
-  padding-left: 10px;
+  padding-left: 3.15px;
+  margin-right: 50px;
   transition: opacity 0.4s;
-  margin-left: 225px;
 }
 
 .profile__add-button:hover {
