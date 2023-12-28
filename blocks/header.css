@@ -2,4 +2,6 @@
   position: relative;
   margin-top: 45px;
   max-width: 880px;
+  border-style: solid;
+  border-color: black black #545454;
 }
