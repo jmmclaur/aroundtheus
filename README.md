@@ -8,14 +8,8 @@
 
 **Intro**
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+'Around the US' is a website showcasing all elements displaying correctly for desktop and mobile screen sizes with media queries. I exported images from Figma and optimized them on tinify. The repository was created in Github and connected with Gitbash to VSC.
 
-**Figma**
+Figma: https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!!
+Tinify: https://www.tinypng.com
