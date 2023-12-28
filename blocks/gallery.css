@@ -1,0 +1,18 @@
+.gallery {
+  font-family: "Inter", Arial, san-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 30px;
+  display: grid;
+  max-height: 742px;
+  border-radius: 10px 10px 0 0;
+}
+
+.gallery__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 17px;
+  margin: 0;
+  padding: 0;
+}

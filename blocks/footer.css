@@ -1,0 +1,14 @@
+.footer {
+  color: #545454;
+  padding-bottom: 10rem;
+  grid-area: footer;
+  overflow: auto;
+}
+
+.footer__content {
+  margin-left: 200px;
+}
+
+.footer__copyright {
+  margin: 108px 0 0;
+}

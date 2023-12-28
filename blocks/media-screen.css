@@ -1,0 +1,49 @@
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__info {
+    width: 100%;
+    margin-left: 62px;
+    margin-right: 62px;
+    justify-content: center;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    flex-direction: column;
+    width: 196px;
+    height: 22px;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 62px;
+    margin-right: 62px;
+    justify-content: center;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+  }
+}
