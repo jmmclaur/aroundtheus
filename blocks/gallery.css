@@ -7,8 +7,6 @@
   display: grid;
   max-height: 742px;
   border-radius: 10px 10px 0 0;
-  width: calc((100%-37px) / 3);
-  min-height: calc(100vh - 29px);
 }
 
 .gallery__cards {
