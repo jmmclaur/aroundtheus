@@ -4,3 +4,15 @@
   border-style: solid;
   border-color: black black #545454;
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    width: 100%;
+  }
+}
