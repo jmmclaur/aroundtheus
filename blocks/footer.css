@@ -1,9 +1,10 @@
 .footer {
   color: hsl(0, 0%, 33%);
-  display: flex;
-  grid-area: footer;
+  display: grid;
+  grid-template-columns: footer;
   padding-top: 45px;
   padding-bottom: 20px;
+  margin-left: 200px;
   line-height: 1.2;
   font-family: "Inter", Arial, san-serif;
   position: absolute;
