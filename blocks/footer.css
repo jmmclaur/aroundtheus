@@ -1,12 +1,12 @@
 .footer {
-  color: #545454;
-  display: grid;
+  color: hsl(0, 0%, 33%);
+  display: flex;
   grid-area: footer;
-  overflow: auto;
   padding-top: 45px;
   padding-bottom: 20px;
   line-height: 1.2;
   font-family: "Inter", Arial, san-serif;
+  position: absolute;
 }
 
 .footer__content {
@@ -21,34 +21,32 @@
   .footer {
     flex-direction: column;
     width: 100%;
-    font-size: ;
   }
 
   .footer__content {
-    position: static;
     width: 100%;
   }
 
   .footer__copyright {
-    position: static;
     width: 100%;
   }
 }
 
 @media screen and (max-width: 320px) {
   .footer {
+    display: flex;
     flex-direction: column;
     width: 100%;
-    font-size: ;
+    font-size: 14px;
   }
 
   .footer__content {
-    position: static;
+    position: absolute;
     width: 100%;
   }
 
   .footer__copyright {
-    position: static;
+    position: absolute;
     width: 100%;
   }
 }

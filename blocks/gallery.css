@@ -5,7 +5,6 @@
   line-height: 29px;
   margin-top: 30px;
   display: grid;
-  max-height: 742px;
   border-radius: 10px 10px 0 0;
 }
 
@@ -20,7 +19,6 @@
 @media screen and (max-width: 768px) {
   .gallery {
     width: 100%;
-    font-size: ;
   }
 
   .gallery__cards {
@@ -31,7 +29,7 @@
 @media screen and (max-width: 320px) {
   .gallery {
     width: 100%;
-    font-size: ;
+    font-size: 24px;
   }
 
   .gallery__cards {
