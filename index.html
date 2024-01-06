@@ -8,6 +8,8 @@
       name="viewport"
     />
     <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Images" />
+    <meta name="keywords" content="US Images" />
     <title>Around the U.S</title>
     <link href="./pages/index.css" rel="stylesheet" />
     <link rel="shortcut icon" href="./favicon.ico" />
@@ -18,10 +20,11 @@
         <img
           src="./images/around-the-world-logo.png"
           alt="Around the US logo"
+          class="header__logo"
         />
       </header>
       <main class="content">
-        <section class="profile">
+        <section class="profile page__section">
           <img
             src="./images/jacques-cousteau.jpg"
             alt="Avatar"
@@ -29,10 +32,10 @@
           />
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button class="profile__edit-button"></button>
+            <button class="profile__edit-button" type="button"></button>
             <p class="profile__description">Explorer</p>
-            <button class="profile__add-button"></button>
           </div>
+          <button class="profile__add-button" type="button"></button>
         </section>
 
         <section class="gallery page__section">
@@ -106,11 +109,10 @@
           </ul>
         </section>
       </main>
-    </div>
-    <footer class="footer">
-      <div>
+
+      <footer class="footer">
         <p class="footer__copyright">Jessica McLaurin @ 2023 Around the U.S.</p>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>

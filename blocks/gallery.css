@@ -10,6 +10,9 @@
 
 .gallery__cards {
   display: grid;
+  grid-template-areas:
+    "card1 card2 card3"
+    "card4 card5 card6";
   grid-template-columns: repeat(auto-fit, 282px);
   justify-content: center;
   grid-gap: 20px 17px;
@@ -18,7 +21,16 @@
 }
 
 @media screen and (max-width: 620px) {
-  .gallery {
+  .gallery__cards {
     padding-top: 36px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .gallery__cards {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
 }

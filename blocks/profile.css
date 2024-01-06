@@ -11,7 +11,7 @@
   display: grid;
   grid-template-areas:
     "title button1"
-    "description description";
+    "description button2";
   margin: 22px 0 auto 30px;
   grid-gap: 7px 18px;
 }
@@ -64,9 +64,10 @@
   background: transparent url(../images/add-button.png) no-repeat center;
   height: 50px;
   width: 150px;
+  grid-area: "button2";
   border: 2px solid #fff;
   margin-left: 185px;
-  margin-top: -40px;
+  margin-top: 40px;
   border-radius: 2px;
   transition: opacity 0.4s linear;
 }
@@ -103,7 +104,6 @@
   }
 
   .profile__add-button {
-    margin: 35px 0 0;
     width: 282px;
   }
 
