@@ -1,38 +1,24 @@
 .gallery {
-  font-family: "Inter", Arial, Helvetica, san-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 24px;
   line-height: 29px;
-  margin-top: 30px;
-  display: grid;
   border-radius: 10px 10px 0 0;
+  display: grid;
+  margin-top: 20px;
 }
 
 .gallery__cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
+  justify-content: center;
   grid-gap: 20px 17px;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 620px) {
   .gallery {
-    width: 100%;
-  }
-
-  .gallery__cards {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .gallery {
-    width: 100%;
-    font-size: 24px;
-  }
-
-  .gallery__cards {
-    width: 100%;
+    padding-top: 36px;
   }
 }

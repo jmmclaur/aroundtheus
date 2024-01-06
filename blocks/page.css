@@ -4,49 +4,24 @@
   max-width: 880px;
   min-width: 320px;
   margin: auto;
-  font-family: "Inter", Arial, Helvetica, san-serif;
-  padding: 3%;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  padding: 0 20px;
+  align-items: center;
 }
 
 .page__section {
-  width: 100%;
+  width: 880px;
   margin: auto;
-  padding-bottom: 45px;
-  border-radius: 1px;
 }
 
 .page__content {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin: auto;
 }
 
-@media screen and (max-width: 768px) {
-  .page {
-    width: 100%;
-    margin: auto;
-  }
-
-  .page__section {
-    width: 100%;
-  }
-
+@media screen and (max-width: 620px) {
   .page__content {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .page {
-    width: 282px;
-  }
-
-  .page__section {
-    width: 100%;
-  }
-
-  .page__content {
-    width: 100%;
+    padding: 0;
   }
 }

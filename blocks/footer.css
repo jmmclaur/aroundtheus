@@ -2,9 +2,8 @@
   color: hsl(0, 0%, 33%);
   display: grid;
   line-height: 1.2;
-  font-family: "Inter", Arial, Helvetica, san-serif;
-  position: absolute;
-  padding-bottom: 30px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  padding-bottom: 20px;
 }
 
 .footer__content {
@@ -22,14 +21,6 @@
     flex-direction: column;
     width: 100%;
   }
-
-  .footer__content {
-    width: 100%;
-  }
-
-  .footer__copyright {
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 320px) {
@@ -38,15 +29,5 @@
     flex-direction: column;
     width: 100%;
     font-size: 14px;
-  }
-
-  .footer__content {
-    position: absolute;
-    width: 100%;
-  }
-
-  .footer__copyright {
-    position: absolute;
-    width: 100%;
   }
 }
