@@ -112,6 +112,11 @@
     padding: 0;
     margin: 4px 15px 0 10px;
   }
+
+  .profile__add-button {
+    width: 95%;
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 320px) {
@@ -133,7 +138,7 @@
 
   .profile__add-button {
     height: 50px;
-    width: 282px;
+    width: 100%;
     border: 2px solid #fff;
   }
 }
