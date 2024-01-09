@@ -23,7 +23,7 @@
   .page__section {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     margin: auto;
     max-width: 100%;
   }
