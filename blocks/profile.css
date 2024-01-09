@@ -12,7 +12,7 @@
   grid-template-areas:
     "title button1"
     "description button2";
-  grid-template-columns: repeat(auto-fit, 282px);
+  grid-template-columns: minmax(auto, 375px) minmax(auto, 20px);
   margin: 22px 0 auto 30px;
   grid-gap: 7px 18px;
 }
@@ -86,8 +86,9 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 612px) {
   .profile {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
