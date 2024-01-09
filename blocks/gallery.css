@@ -22,6 +22,9 @@
 
 @media screen and (max-width: 612px) {
   .gallery {
+    grid-template-columns: repeat(auto-fit, 282px) center no-repeat;
+    grid-template-rows: repeat(auto-fit, 282px) center no-repeat;
+    margin-left: 75px;
     max-width: 100%;
   }
 }
