@@ -109,11 +109,10 @@
   .profile__edit-button {
     height: 21px;
     width: 21px;
-    margin: 0;
   }
 
   .profile__add-button {
-    width: 95%;
+    width: 282px;
     margin-left: 0;
   }
 }

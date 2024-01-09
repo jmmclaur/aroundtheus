@@ -6,8 +6,9 @@
   margin: 0;
 }
 
-@media screen and (max-width: 612px) {
+@media screen and (max-width: 320px) {
   .header {
-    width: 50%;
+    display: flex;
+    justify-content: left;
   }
 }

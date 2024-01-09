@@ -35,6 +35,8 @@
   font-weight: 900;
   line-height: 29px;
   padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   max-width: 219px;
   text-overflow: ellipsis;
   white-space: nowrap;
