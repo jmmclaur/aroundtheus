@@ -6,13 +6,7 @@
   padding-bottom: 20px;
 }
 
-.footer__content {
-  margin: 237px, auto;
-  padding-bottom: 30px;
-}
-
 .footer__copyright {
-  margin: 237px, auto;
   padding-bottom: 30px;
 }
 
@@ -28,7 +22,6 @@
   }
 
   .footer__copyright {
-    padding: auto;
-    justify-content: center;
+    margin: 50px;
   }
 }
