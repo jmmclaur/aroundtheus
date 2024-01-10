@@ -37,11 +37,12 @@
 }
 
 .profile__edit-button {
-  background: transparent url(../images/edit-button.png) no-repeat center;
+  background: transparent url(../images/edit-button.svg) no-repeat center;
   height: 24px;
   width: 24px;
   grid-area: "button1";
   border: 1px solid #fff;
+  border-radius: 5px;
   align-self: center;
   transition: opacity 0.4s linear;
 }
@@ -58,7 +59,7 @@
 }
 
 .profile__edit-button:hover {
-  opacity: 50%;
+  opacity: 0.5;
   cursor: pointer;
 }
 
@@ -70,12 +71,12 @@
   border: 2px solid #fff;
   margin-left: 250px;
   margin-top: 40px;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: opacity 0.4s linear;
 }
 
 .profile__add-button:hover {
-  opacity: 50%;
+  opacity: 0.5;
   cursor: pointer;
 }
 
