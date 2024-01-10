@@ -13,3 +13,5 @@
 Figma: https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1
 
 Tinify: https://www.tinypng.com
+
+Github: https://github.com/jmmclaur/se_project_aroundtheus
