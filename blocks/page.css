@@ -4,8 +4,9 @@
   max-width: 880px;
   min-width: 320px;
   margin: auto;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
   padding: 0 20px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+
   align-items: center;
 }
 
