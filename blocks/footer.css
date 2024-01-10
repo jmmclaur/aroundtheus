@@ -1,6 +1,7 @@
 .footer {
   color: hsl(0, 0%, 33%);
-  display: grid;
+  display: flex;
+  flex-direction: row;
   line-height: 1.2;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   padding-bottom: 20px;
@@ -10,9 +11,9 @@
   padding-bottom: 30px;
 }
 
-@media screen and (max-width: 612px) {
+@media screen and (max-width: 613px) {
   .footer {
-    width: 100%;
+    margin: auto;
   }
 }
 
@@ -22,6 +23,6 @@
   }
 
   .footer__copyright {
-    margin: 50px;
+    margin: 75px;
   }
 }
