@@ -1,7 +1,7 @@
 .profile {
   display: flex;
   flex-direction: row;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   width: 100%;
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
@@ -120,14 +120,8 @@
 }
 
 @media screen and (max-width: 320px) {
-  .profile {
-    grid-template-columns: repeat(auto-fit, 282px) center no-repeat;
-    grid-template-rows: repeat(auto-fit, 282px) center no-repeat;
-  }
-
   .profile__info {
     display: flex;
-    column-gap: 0;
     width: 100%;
   }
 
