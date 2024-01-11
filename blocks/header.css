@@ -7,6 +7,13 @@
   margin: 0;
 }
 
+.header__logo {
+  max-width: 173px;
+  max-height: 33px;
+  width: 100%;
+  height: 100%;
+}
+
 @media screen and (max-width: 320px) {
   .header {
     display: flex;

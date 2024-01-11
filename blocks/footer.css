@@ -1,13 +1,13 @@
 .footer {
   display: flex;
   flex-direction: column;
+}
+
+.footer__copyright {
   color: hsl(0, 0%, 33%);
   line-height: 1.2;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   padding-bottom: 20px;
-}
-
-.footer__copyright {
   padding-bottom: 30px;
 }
 
