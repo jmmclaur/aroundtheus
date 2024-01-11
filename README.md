@@ -14,7 +14,7 @@ Figma: https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-
 
 Tinify: https://www.tinypng.com
 
-Github: https://github.com/jmmclaur/se_project_aroundtheus
+Github: https://jmmclaur.github.io/se_project_aroundtheus/
 
 Fonts: https://rsms.me/inter/
 
