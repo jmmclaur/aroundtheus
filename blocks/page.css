@@ -25,3 +25,9 @@
     align-items: center;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .page__section {
+    padding-bottom: 0;
+  }
+}
