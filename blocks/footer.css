@@ -1,12 +1,14 @@
 .footer {
   display: flex;
   flex-direction: column;
+  padding-bottom: 60px;
 }
 
 .footer__copyright {
   color: hsl(0, 0%, 33%);
   line-height: 1.2;
   font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
   padding-bottom: 30px;
   font-size: 18px;
 }
@@ -20,5 +22,6 @@
 @media screen and (max-width: 320px) {
   .footer {
     font-size: 14px;
+    padding-bottom: 48px;
   }
 }

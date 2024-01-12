@@ -122,15 +122,15 @@
 @media screen and (max-width: 320px) {
   .profile {
     padding-bottom: 42px;
-  }
-  .profile__info {
     display: flex;
-    width: 100%;
   }
 
   .profile__edit-button {
     height: 18px;
     width: 18px;
+    margin-top: 280px;
+    margin-left: 268px;
+    margin-right: 34px;
   }
 
   .profile__add-button {

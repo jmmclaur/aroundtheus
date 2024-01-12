@@ -5,6 +5,7 @@
   line-height: 29px;
   margin-top: 20px;
   max-width: 100%;
+  padding-bottom: 67px;
 }
 
 .gallery__cards {
@@ -24,5 +25,11 @@
     margin-left: 50px;
     margin-right: 50px;
     padding-bottom: -40px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .gallery {
+    padding-bottom: 48px;
   }
 }
