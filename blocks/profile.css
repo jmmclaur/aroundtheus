@@ -30,6 +30,7 @@
   font-weight: 500;
   max-width: 380px;
   grid-template: "title";
+  text-align: left;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -56,6 +57,7 @@
   line-height: 22px;
   font-weight: 400;
   grid-template: "description";
+  text-align: left;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -96,7 +98,6 @@
     font-size: 22px;
     line-height: normal;
     margin: auto;
-    padding-left: 80px;
   }
 
   .profile__description {
@@ -104,13 +105,11 @@
     font-size: 14px;
     margin: auto;
     line-height: normal;
-    padding-left: 85px;
   }
 
   .profile__edit-button {
     height: 21px;
     width: 21px;
-    margin-right: 80px;
   }
 
   .profile__add-button {
