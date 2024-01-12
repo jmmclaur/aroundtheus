@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   flex-direction: row;
+  padding-top: 40px;
   padding-bottom: 20px;
   width: 100%;
   font-family: "Inter", Arial, Helvetica, sans-serif;
@@ -119,6 +120,9 @@
 }
 
 @media screen and (max-width: 320px) {
+  .profile {
+    padding-bottom: 42px;
+  }
   .profile__info {
     display: flex;
     width: 100%;

@@ -1,10 +1,9 @@
 .header {
   position: relative;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 45px;
+  padding-bottom: 40px;
   border-bottom: solid 1px rgba(84, 84, 84, 0.7);
   border-bottom-width: 100%;
-  margin: 0;
 }
 
 .header__logo {
@@ -25,6 +24,9 @@
 }
 
 @media screen and (max-width: 320px) {
+  .header {
+    padding-top: 28px;
+  }
   .header__logo {
     margin: 0 25px 0 0;
   }
