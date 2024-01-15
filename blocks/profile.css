@@ -1,9 +1,8 @@
 .profile {
   display: flex;
   flex-direction: row;
-  padding-top: 40px;
-  padding-bottom: 20px;
   width: 100%;
+  padding-top: 40px;
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
@@ -28,9 +27,8 @@
   font-size: 42px;
   line-height: 48px;
   font-weight: 500;
-  max-width: 380px;
+  max-width: 375px;
   grid-template: "title";
-  text-align: left;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -57,7 +55,7 @@
   line-height: 22px;
   font-weight: 400;
   grid-template: "description";
-  text-align: left;
+  max-width: 415px;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -70,8 +68,7 @@
   width: 150px;
   grid-area: "button2";
   border: 2px solid #fff;
-  margin-left: auto;
-  margin-top: 32px;
+  margin: 35px 0 0 auto;
   border-radius: 2px;
   transition: opacity 0.4s linear;
 }
@@ -87,9 +84,8 @@
   }
 }
 
-@media screen and (max-width: 612px) {
+@media screen and (max-width: 586px) {
   .profile {
-    max-width: 100%;
     flex-direction: column;
     align-items: center;
   }
@@ -97,19 +93,21 @@
   .profile__title {
     font-size: 22px;
     line-height: normal;
-    margin: auto;
+    margin-left: 30px;
   }
 
   .profile__description {
     text-align: center;
     font-size: 14px;
-    margin: auto;
+    margin-right: 30px;
     line-height: normal;
   }
 
   .profile__edit-button {
     height: 21px;
     width: 21px;
+    margin: 4px 15px 0 10px;
+    padding: 0;
   }
 
   .profile__add-button {
@@ -119,28 +117,18 @@
 }
 
 @media screen and (max-width: 320px) {
-  .profile {
-    padding-bottom: 42px;
-    display: flex;
-  }
-
   .profile__info {
-    display: flex;
     column-gap: 0;
   }
 
   .profile__edit-button {
     height: 18px;
     width: 18px;
-    margin-top: 280px;
-    margin-left: 260px;
-    margin-right: 34px;
   }
 
   .profile__add-button {
-    margin-left: 19px;
-    margin-right: 19px;
-    height: 50px;
     width: 282px;
+    height: 50px;
+    padding: 0;
   }
 }

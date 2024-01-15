@@ -2,32 +2,31 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 24px;
-  line-height: 29px;
-  margin-top: 20px;
-  max-width: 100%;
+  line-height: normal;
+  margin-top: 47px;
 }
 
 .gallery__cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, 282px);
+  grid-template-rows: 1fr 1fr;
   grid-auto-rows: min-content;
   grid-gap: 20px 17px;
   border-radius: 10px 10px 0 0;
   justify-content: center;
-  list-style: none;
   padding: 0;
   margin: 0;
 }
 
-@media screen and (max-width: 612px) {
+@media screen and (max-width: 586px) {
   .gallery {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-top: 30px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .gallery {
-    padding-bottom: 48px;
+  .gallery__cards {
+    max-width: 282px;
+    margin: 19px;
   }
 }
