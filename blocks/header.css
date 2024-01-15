@@ -1,5 +1,6 @@
 .header {
   display: flex;
+  flex-direction: column;
   padding: 45px 0 41px;
   border-bottom: solid 1px rgba(84, 84, 84, 0.7);
   border-bottom-width: 100%;
@@ -7,15 +8,16 @@
 }
 
 .header__logo {
-  width: 173px;
-  height: 33px;
+  max-width: 173px;
+  width: 100%;
+  max-height: 33px;
+  height: 100%;
   margin: 0 auto 0 0;
 }
 
 @media screen and (max-width: 586px) {
   .header {
-    padding: 28px 0 32px;
-    width: 282px;
+    padding: 28px 50px 32px;
     margin: 0 auto;
   }
 
