@@ -1,0 +1,40 @@
+.modal {
+  /* display: flex; */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0 19px;
+  background-color: rgba(127, 255, 212, 0.25);
+  color: #000;
+  z-index: 999;
+}
+
+.modal__opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: #fff;
+  position: relative;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+}
+
+.modal__close {
+  background-image: url("../images/close-button.svg");
+  border: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
+}
