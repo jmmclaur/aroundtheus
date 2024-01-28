@@ -49,16 +49,14 @@ function closePopUp() {
 
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
-  profileName.textContent = "replacement name content";
   profileDescriptionInput.value = profileDescription.textContent;
-  profileDescriptionInput.textContent = "replacement description content";
   profileEditModal.classList.add("modal_opened");
   console.log("button clicks");
 });
 
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  profileName.textContent = profileNameInput.value;
+  profileName.textContent = "replacement text content";
   profileDescription.textContent = profileDescriptionInput.value;
   closePopUp();
 });
