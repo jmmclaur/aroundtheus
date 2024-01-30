@@ -1,5 +1,5 @@
 .modal {
-  display: none;
+  /* display: none; */
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -20,7 +20,7 @@
 .modal__container {
   background-color: #fff;
   position: relative;
-  margin: auto;
+  margin: 195px 425px 195px 425px;
   padding: 36px;
   border-radius: 10px;
 }
