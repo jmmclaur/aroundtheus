@@ -1,86 +1,93 @@
 const initialCards = [
   {
-    name: "Rocky Mountain National Park",
-    link: "https://media.istockphoto.com/id/478656454/photo/maroon-bells-autumn-aspen-trees-lake-reflections-aspen-colorado.jpg?s=1024x1024&w=is&k=20&c=CrZVgb_84cwGhfGZwFFcDXZqSx9dLvCTMfy-oBXJKYU=",
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
   {
-    name: "Breckenridge",
-    link: "https://media.istockphoto.com/id/1276445053/photo/breckenridge-colorado-usa-in-winter.jpg?s=1024x1024&w=is&k=20&c=-sZ8OKxjprRniFEYepOl0oBAOyP8bIohcwPNTzNzHVo=",
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
-    name: "Frisco",
-    link: "https://media.istockphoto.com/id/1097392008/photo/friends-hiking-in-the-muntains-on-winter-break.jpg?s=1024x1024&w=is&k=20&c=B6fiAv_Q9EJSsu8n4O_7J3p7HdTZGE0OtHFwJjEgeDY=",
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
   {
-    name: "Estes Park",
-    link: "https://media.istockphoto.com/id/506187637/photo/north-american-elks.jpg?s=1024x1024&w=is&k=20&c=7Xx_HwEZu_FBzvn96jb75BrrO8i1H87Vu319_HsQQbc=",
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
   },
   {
-    name: "Maroon Bells",
-    link: "https://media.istockphoto.com/id/185850441/photo/maroon-bell-mountains.jpg?s=1024x1024&w=is&k=20&c=Kd0JaITNN87nUbBWMa6FojI6j23HnBMVQvaMKMUpXN8=",
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
   {
-    name: "Longs Peak",
-    link: "https://media.istockphoto.com/id/914687774/photo/full-moon-in-longmont.jpg?s=1024x1024&w=is&k=20&c=K9XXTxZugTxlaS5w0OBtwCQhqtIIowMOZfpu1E4OkLQ=",
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
 
+console.log(initialCards);
 /* Elements */
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
+/* const profileEditCloseButton = profileEditModal.querySelector(".modal__close"); */
+const profileModalCloseButton = document.querySelector(
+  "#profile-modal-close-button"
+);
+const addCardModalCloseButton = document.querySelector(
+  "#add-card-close-button"
+);
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-
-/*
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 const cardTemplate =
-  document.querySelector("#card-template").textContent.firstElementChild;
-const cardListE1 = document.querySelector(".gallery__cards");
+  document.querySelector("#card-template").content.firstElementChild;
+const cardListEl = document.querySelector(".gallery__cards");
+const addNewCardButton = document.querySelector(".profile__add-button");
+const addCardModal = document.querySelector("#add-card-modal");
+const saveCardButton = document.querySelector("#save-card-button");
 
-function closePopUp() {
-  profileEditModal.classList.remove("modal_opened");
+/* Functions */
+function openPopUp() {
+  document.getElementById("profile-edit-modal").style.display = "flex";
 }
-
-*/
-
-/* new */
-profileEditButton.addEventListener("click", () => {
-  profileEditModal.classList.add("modal_opened");
-  console.log("button clicks");
-});
-
-profileEditCloseButton.addEventListener("click", () => {
-  profileEditModal.classList.remove("modal_opened");
-});
-/* new */
-
-/*
-profileEditForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  profileName.textContent = "replacement text content";
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopUp();
-});
-
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
-  cardListE1.append(cardElement);
-});
-
-function getCardElement(data) {
+function closePopUp() {
+  document.getElementById("profile-edit-modal").style.display = "none";
+}
+function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
-  const cardImageE1 = cardElement.querySelector(".card__image");
-  const cardTextE1 = cardElement.querySelector(".card__text");
-  cardTextE1.textContent = data.name;
-  cardImageE1.src = data.link;
-  cardImageE1.alt = data.name;
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  cardTitleEl.textContent = cardData.name;
+  cardImageEl.src = cardData.link;
+  cardImageEl.alt = cardData.name;
   return cardElement;
 }
 
-*/
+/* Event Handlers */
+function handleProfileEditSubmit(e) {
+  e.preventDefault();
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closePopUp();
+}
+
+/* Event Listeners */
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
+});
+
+profileEditButton.addEventListener("click", () => {
+  profileDescriptionInput.value = profileDescription.textContent;
+});
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardListEl.append(cardElement);
+});
