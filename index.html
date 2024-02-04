@@ -14,7 +14,6 @@
     <link href="./pages/index.css" rel="stylesheet" />
     <link rel="shortcut icon" href="./favicon.ico" />
   </head>
-
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
@@ -34,46 +33,53 @@
             class="profile__image"
           />
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
-              onclick="openPopUp()"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description" id="profile-description">
+              Explorer
+            </p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            id="profile-add-button"
+            type="button"
+          ></button>
         </section>
         <section class="gallery page__section">
-          <ul id="g" class="gallery__cards"></ul>
+          <ul class="gallery__cards"></ul>
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__copyright">J M @ 2023 Around the U.S.</p>
+        <p class="footer__copyright">JM @ 2023 Around the U.S.</p>
       </footer>
     </div>
 
-    <div class="modal modal_opened" id="profile-edit-modal">
+    <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close"></button>
+        <button class="modal__close" type="button"></button>
         <p class="modal__title">Edit Profile</p>
-        <form action="https://google.com/search" class="modal__form">
+        <form class="modal__form">
           <input
-            class="modal__input"
+            class="modal__input-title"
             type="text"
             name="title"
-            id="profile-title-input"
             placeholder="Jacques Cousteau"
+            id="profile-title-input"
           />
           <input
-            class="modal__input"
+            class="modal__input-description"
             type="text"
             name="description"
-            id="profile-description-input"
             placeholder="Explorer"
+            id="profile-description-input"
           />
-          <button class="modal__button" onclick="closePopUp()">Save</button>
+          <button class="modal__button" type="submit" id="edit-save-button">
+            Save
+          </button>
         </form>
       </div>
     </div>

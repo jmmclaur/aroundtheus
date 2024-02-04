@@ -25,18 +25,10 @@ const initialCards = [
   },
 ];
 
-console.log(initialCards);
 /* Elements */
-
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-/* const profileEditCloseButton = profileEditModal.querySelector(".modal__close"); */
-const profileModalCloseButton = document.querySelector(
-  "#profile-modal-close-button"
-);
-const addCardModalCloseButton = document.querySelector(
-  "#add-card-close-button"
-);
+const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -44,50 +36,66 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditSubmit = profileEditModal.querySelector("#edit-save-button");
+
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".gallery__cards");
-const addNewCardButton = document.querySelector(".profile__add-button");
-const addCardModal = document.querySelector("#add-card-modal");
-const saveCardButton = document.querySelector("#save-card-button");
+
+/* ------------------------------------------------------------------------------ */
 
 /* Functions */
-function openPopUp() {
-  document.getElementById("profile-edit-modal").style.display = "flex";
-}
+
 function closePopUp() {
-  document.getElementById("profile-edit-modal").style.display = "none";
+  profileEditModal.classList.remove("modal_opened");
 }
-function getCardElement(cardData) {
+function handleprofileEditSubmit(e) {
+  e.preventDefault();
+  profileTitle.textContent = profileTitleInput.value.trim();
+  profileDescription.textContent = profileDescriptionInput.value.trim();
+  closePopUp();
+}
+function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-  cardTitleEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
+  cardTitleEl.textContent = data.name;
+  cardImageEl.src = data.link;
+  cardImageEl.alt = data.name;
   return cardElement;
 }
 
-/* Event Handlers */
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopUp();
-}
+/* ------------------------------------------------------------------------------ */
 
-/* Event Listeners */
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-
+/* Event Listener */
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
+  profileTitleInput.value = profileTitle.textContent.trim();
+  profileDescriptionInput.value = profileDescription.textContent.trim();
+  profileEditModal.classList.add("modal_opened");
+}); /* this is fine */
+
+profileEditCloseButton.addEventListener("click", () =>
+  profileEditModal.classList.remove("modal_opened")
+); /* this is fine */
+
+profileEditSubmit.addEventListener("submit", () => {
+  profileTitle.textContent = profileTitleInput.value.trim();
+  profileDescription.textContent = profileDescriptionInput.value.trim();
+  closeModal();
 });
 
-profileEditButton.addEventListener("click", () => {
-  profileDescriptionInput.value = profileDescription.textContent;
-});
+/* ------------------------------------------------------------------------------ */
+
+/* For Each */
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.append(cardElement);
 });
+/* something here is affecting the gallery, pulls up 'undefined' 
+too many cardData's*/
+
+/* ------------------------------------------------------------------------------ */
+
+/* Event Handlers */
+profileEditForm.addEventListener("submit", handleprofileEditSubmit);
