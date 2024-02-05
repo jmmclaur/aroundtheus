@@ -77,9 +77,8 @@
   height: 14px;
   gap: 30px;
   padding: 0;
-  border-bottom-width: 1px;
-  border-style: solid;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .modal__button {
