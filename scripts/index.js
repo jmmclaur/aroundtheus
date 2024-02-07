@@ -49,7 +49,7 @@ const cardListEl = document.querySelector(".gallery__cards");
 function closePopUp() {
   profileEditModal.classList.remove("modal_opened");
 }
-function handleprofileEditSubmit(e) {
+function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
   profileDescription.textContent = profileDescriptionInput.value.trim();
@@ -75,8 +75,10 @@ profileEditButton.addEventListener("click", () => {
 });
 
 profileEditCloseButton.addEventListener("click", closePopUp);
+/* ------------------------------------------------------------------------------ */
 
-profileEditForm.addEventListener("submit", handleprofileEditSubmit);
+/* Event Handler */
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 /* ------------------------------------------------------------------------------ */
 
@@ -87,6 +89,3 @@ initialCards.forEach((cardData) => {
 });
 
 /* ------------------------------------------------------------------------------ */
-
-/* Event Handlers */
-profileEditForm.addEventListener("submit", handleprofileEditSubmit);
