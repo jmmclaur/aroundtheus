@@ -72,11 +72,11 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
   profileEditModal.classList.add("modal_opened");
-}); /* this is fine */
+});
 
 profileEditCloseButton.addEventListener("click", () =>
   profileEditModal.classList.remove("modal_opened")
-); /* this is fine */
+);
 
 profileEditSubmit.addEventListener("submit", () => {
   profileTitle.textContent = profileTitleInput.value.trim();
@@ -87,13 +87,10 @@ profileEditSubmit.addEventListener("submit", () => {
 /* ------------------------------------------------------------------------------ */
 
 /* For Each */
-
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.append(cardElement);
 });
-/* something here is affecting the gallery, pulls up 'undefined' 
-too many cardData's*/
 
 /* ------------------------------------------------------------------------------ */
 
