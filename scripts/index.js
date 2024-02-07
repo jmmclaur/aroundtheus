@@ -74,15 +74,9 @@ profileEditButton.addEventListener("click", () => {
   profileEditModal.classList.add("modal_opened");
 });
 
-profileEditCloseButton.addEventListener("click", () =>
-  profileEditModal.classList.remove("modal_opened")
-);
+profileEditCloseButton.addEventListener("click", closePopUp);
 
-profileEditSubmit.addEventListener("submit", () => {
-  profileTitle.textContent = profileTitleInput.value.trim();
-  profileDescription.textContent = profileDescriptionInput.value.trim();
-  closeModal();
-});
+profileEditForm.addEventListener("submit", handleprofileEditSubmit);
 
 /* ------------------------------------------------------------------------------ */
 
