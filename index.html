@@ -45,7 +45,7 @@
           </div>
           <button
             class="profile__add-button"
-            id="profile-add-button"
+            id="profile-add-button add-card-button"
             type="button"
           ></button>
         </section>
@@ -58,6 +58,7 @@
       </footer>
     </div>
 
+    <!--Edit Modal-->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
@@ -84,36 +85,38 @@
       </div>
     </div>
 
-    <div class="modal" id="card-add-modal">
+    <!--Add Modal-->
+    <div class="modal" id="add-card-modal">
       <div class="modal__container">
         <button
-          class="modal__close"
+          class="modal__add-close"
           type="button"
           id="modal-close-button"
         ></button>
-        <p class="modal__heading">New Location</p>
-        <form class="modal__form">
+        <p class="modal__title">New Place</p>
+        <form class="modal__card-form">
           <input
-            class="modal__input modal__input-title"
+            class="modal__input add__place card__place"
             type="text"
-            name="Title"
-            placeholder="Title"
-            id="card-title-input"
+            name="Place"
+            placeholder="Place"
+            id="card-place-input"
           />
           <input
-            class="modal__input modal__input-link"
+            class="modal__input add__link card__link"
             type="text"
-            name="Add Link"
-            placeholder="Add Link"
+            name="Link"
+            placeholder="Image Link"
             id="card-link-input"
           />
-          <button class="modal__button" type="submit">Create</button>
+          <button class="modal__button" type="submit" id="add-save-button">
+            Create
+          </button>
         </form>
       </div>
     </div>
 
-    <!--image modal-->
-
+    <!--Image Modal-->
     <div class="modal" id="preview-image-modal">
       <div class="modal__image_container">
         <button class="modal__close" id="modal-close-button"></button>
