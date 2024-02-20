@@ -42,8 +42,6 @@ const profileEditSubmit = profileEditModal.querySelector("#edit-save-button");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".gallery__cards");
-/* const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
-const addNewCardModal = document.querySelector("#profile-add-modal"); it doesn't work w/ these */
 
 /* Add Button Elements */
 const addCardForm = document.querySelector(".modal__card-form");
@@ -52,14 +50,14 @@ const addNewCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addNewCardModal.querySelector(".modal__close");
 
 /* Card Form Element */
-const cardPlaceInput = document.querySelector("#card-place-input");
+const cardNameInput = document.querySelector("#card-name-input");
 const cardLinkInput = document.querySelector("#card-link-input");
-/* new below */ const previewModal = document.querySelector("#preview-modal");
+const previewModal = document.querySelector("#preview-modal");
 const modalPreviewImageElement = document.querySelector(
   ".modal__preview_image"
 );
-const trashCardButton = document.querySelector(".card__trash-button");
-const trashCardCloseButton = document.querySelector(".trash-button");
+const cardDeleteButton = document.querySelector("card__trash-button");
+const cardDeleteCloseButton = document.querySelector("trash-button");
 
 /* ------------------------------------------------------------------------------ */
 
@@ -94,8 +92,7 @@ function getCardElement(data) {
 
   /* new below, preview image still isn't popping up, trash button doesn't delete yet */
   function getCardElement(cardData) {
-    const cardElement = cardTemplate.cloneNode(true);
-    cardElement.querySelector(".card__title").textContent = cardData.place;
+    cardElement.querySelector(".card__title").textContent = cardData.name;
     const imageEl = cardElement.querySelector(".card__image");
     imageEl.style.backgroundImage = "url(${cardData.link})";
 
@@ -103,15 +100,15 @@ function getCardElement(data) {
       modalPreviewImageElement.src = cardData.link;
       previewPicture({
         link: cardData.link,
-        place: cardData.name,
+        name: cardData.name,
       });
     });
 
     const cardDeleteButton = cardElement.querySelector(".card__trash-button");
-    console.log(deleteButton);
     cardDeleteButton.addEventListener("click", () => {
       cardElement.remove();
     });
+    return cardElement;
   }
 
   cardTitleEl.textContent = data.name;
@@ -122,9 +119,9 @@ function getCardElement(data) {
 
 function handleAddCardSubmit(e) {
   e.preventDefault();
-  const place = cardPlaceInput.value;
+  const name = cardNameInput.value;
   const link = cardLinkInput.value;
-  renderCard({ place, link }, cardListEl);
+  renderCard({ name, link }, cardListEl);
   closeModal(addNewCardModal);
 }
 
@@ -136,9 +133,6 @@ function renderCard(cardData, container) {
   container.prepend(cardData);
 } /* new */
 
-/* function previewPicture({ place, link }) {
-  previewModal.classList.add("modal_opened");
-} maybe take this out */
 /* ------------------------------------------------------------------------------ */
 
 /* Event Listener */
@@ -168,7 +162,5 @@ initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.append(cardElement);
 });
-
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 /* ------------------------------------------------------------------------------ */
