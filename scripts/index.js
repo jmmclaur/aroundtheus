@@ -106,7 +106,7 @@ function getCardElement(data) {
 
     const cardDeleteButton = cardElement.querySelector(".card__trash-button");
     cardDeleteButton.addEventListener("click", () => {
-      cardElement.remove();
+      cardElement.remove("card__trash-button");
     });
     return cardElement;
   }
