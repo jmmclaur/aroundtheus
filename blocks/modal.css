@@ -23,6 +23,7 @@
   position: relative;
   padding: 36px;
   border-radius: 10px;
+  width: 358px; /* new */
 }
 
 .modal_opened {
@@ -47,25 +48,6 @@
 }
 
 .modal__close:hover {
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.modal__add-close {
-  background-image: url("../images/close-button.svg");
-  border: none;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: absolute;
-  top: -45px;
-  right: -45px;
-  background-color: transparent;
-  height: 40px;
-  width: 40px;
-  padding: 0;
-}
-
-.modal__add-close:hover {
   opacity: 0.5;
   cursor: pointer;
 }
@@ -117,6 +99,50 @@
 .modal__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.card-place-input {
+  width: 358px;
+}
+
+.card-link-input {
+  width: 358px;
+}
+
+/* new */
+.modal__heading {
+  margin: 0;
+  font-size: 24px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  word-wrap: break-word;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__input_1 {
+  margin-top: 54px;
+  border: none;
+  border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  padding-bottom: 13px;
+}
+
+.modal__input_2 {
+  margin-top: 30px;
+  border: none;
+  border-bottom: 1px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  padding-bottom: 13px;
 }
 
 @media screen and (max-width: 586px) {
