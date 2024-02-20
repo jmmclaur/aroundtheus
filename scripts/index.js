@@ -131,7 +131,7 @@ function toggleModalWindow(modal) {
 
 function renderCard(cardData, container) {
   container.prepend(cardData);
-} /* new */
+}
 
 /* ------------------------------------------------------------------------------ */
 
