@@ -43,7 +43,7 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListEl = document.querySelector(".gallery__cards");
 /* const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
-const addNewCardModal = document.querySelector("#profile-add-modal"); */
+const addNewCardModal = document.querySelector("#profile-add-modal"); it doesn't work w/ these */
 
 /* Add Button Elements */
 const addCardForm = document.querySelector(".modal__card-form");
@@ -55,10 +55,6 @@ const addCardCloseButton = addNewCardModal.querySelector(".modal__close");
 const cardPlaceInput = document.querySelector("#card-place-input");
 const cardLinkInput = document.querySelector("#card-link-input");
 /* new below */ const previewModal = document.querySelector("#preview-modal");
-/* const previewCloseModal = modalPreviewPopUp.querySelector(
-  "#preview-close-modal"
-); */
-/* these two above can be deleted and the objects are there, add in these 3 below */
 const modalPreviewImageElement = document.querySelector(
   ".modal__preview_image"
 );
@@ -96,7 +92,7 @@ function getCardElement(data) {
     likeButton.classList.toggle("card__like-button_active");
   });
 
-  /* new, but the image still isn't popping up nor the trash button */
+  /* new below, preview image still isn't popping up, trash button doesn't delete yet */
   function getCardElement(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector(".card__title").textContent = cardData.place;
@@ -140,9 +136,9 @@ function renderCard(cardData, container) {
   container.prepend(cardData);
 } /* new */
 
-function previewPicture({ place, link }) {
+/* function previewPicture({ place, link }) {
   previewModal.classList.add("modal_opened");
-}
+} maybe take this out */
 /* ------------------------------------------------------------------------------ */
 
 /* Event Listener */
