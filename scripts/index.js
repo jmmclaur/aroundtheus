@@ -150,10 +150,6 @@ addCardCloseButton.addEventListener("click", () => closeModal(addNewCardModal));
 
 /* ------------------------------------------------------------------------------ */
 
-/* Event Handler */
-
-/* ------------------------------------------------------------------------------ */
-
 /* For Each */
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
