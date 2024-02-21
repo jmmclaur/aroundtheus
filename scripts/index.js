@@ -44,27 +44,28 @@ const cardTemplate =
 const cardListEl = document.querySelector(".gallery__cards");
 
 /* Add Button Elements */
-const addCardForm = document.querySelector(".modal__card-form");
 const addCardButton = document.querySelector(".profile__add-button");
+const addCardForm = document.querySelector(".modal__card-form");
 const addNewCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addNewCardModal.querySelector(".modal__close");
-
-/* Card Form Element */
+const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
 const cardNameInput = document.querySelector("#card-name-input");
 const cardLinkInput = document.querySelector("#card-link-input");
-const previewModal = document.querySelector("#preview-modal");
-const modalPreviewImageElement = document.querySelector(
-  ".modal__preview_image"
-);
 const cardDeleteButton = document.querySelector("card__trash-button");
 const cardDeleteCloseButton = document.querySelector("trash-button");
 
+/* Preview Elements */
+const previewCardModal = document.querySelector("#modal-preview");
+const previewImage = document.querySelector(".modal__preview-image");
+const previewDescription = document.querySelector(
+  ".modal__preview-description"
+);
+const previewCloseButton = previewCardModal.querySelector(
+  ".modal__close_image"
+);
 /* ------------------------------------------------------------------------------ */
 
-/* Edit Functions */
-function closePopUp() {
-  profileEditModal.classList.remove("modal_opened");
-}
+/* Functions */
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
@@ -72,6 +73,9 @@ function handleProfileEditSubmit(e) {
   closePopUp(profileEditModal);
 }
 
+function closePopUp() {
+  profileEditModal.classList.remove("modal_opened");
+}
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -79,58 +83,54 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
-/* Card Functions */
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  /* new below, preview image still isn't popping up, trash button doesn't delete yet */
-  function getCardElement(cardData) {
-    cardElement.querySelector(".card__title").textContent = cardData.name;
-    const imageEl = cardElement.querySelector(".card__image");
-    imageEl.style.backgroundImage = "url(${cardData.link})";
-
-    imageEl.addEventListener("click", function () {
-      modalPreviewImageElement.src = cardData.link;
-      previewPicture({
-        link: cardData.link,
-        name: cardData.name,
-      });
-    });
-
-    const cardDeleteButton = cardElement.querySelector(".card__trash-button");
-    cardDeleteButton.addEventListener("click", () => {
-      cardElement.remove("card__trash-button");
-    });
-    return cardElement;
-  }
-
-  cardTitleEl.textContent = data.name;
-  cardImageEl.src = data.link;
-  cardImageEl.alt = data.name;
-  return cardElement;
-}
+// re-write, okay so it works more now! The add button creates a new card, idk why there are 12 cards tho
+profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addCardButton.addEventListener("click", () => openModal(addNewCardModal));
+addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = cardNameInput.value;
   const link = cardLinkInput.value;
-  renderCard({ name, link }, cardListEl);
+  const data = { name, link };
+
+  const newCard = getCardElement(data);
+  cardListEl.prepend(newCard);
+  e.target.reset();
   closeModal(addNewCardModal);
 }
 
-function toggleModalWindow(modal) {
-  modal.classList.toggle("modal_opened");
-}
+initialCards.forEach((data) => {
+  const cardElement = getCardElement(data);
+  cardListEl.append(cardElement);
+});
 
-function renderCard(cardData, container) {
-  container.prepend(cardData);
+function getCardElement(data) {
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const trashButton = cardElement.querySelector(".card__trash-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  trashButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImageEl.addEventListener("click", () => {
+    openModal(previewCardModal);
+    previewImage.src = data.link;
+    previewDescription.textContent = data.name;
+    previewImage.alt = `${data.name}`;
+  });
+
+  cardTitleEl.textContent = data.name;
+  cardImageEl.src = data.link;
+  cardImageEl.alt = data.name;
+  return cardElement;
 }
 
 /* ------------------------------------------------------------------------------ */
@@ -140,20 +140,17 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
   profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
 profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
 );
 
 addCardCloseButton.addEventListener("click", () => closeModal(addNewCardModal));
-addCardButton.addEventListener("click", () => openModal(addNewCardModal));
-addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /* ------------------------------------------------------------------------------ */
 
 /* Event Handler */
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-addCardForm.addEventListener("submit", handleAddCardSubmit);
 
 /* ------------------------------------------------------------------------------ */
 

@@ -94,19 +94,19 @@
           id="modal-close-button"
         ></button>
         <p class="modal__title">New Place</p>
-        <form class="modal__card-form">
+        <form class="modal__card-form" id="add-card-form">
           <input
             class="modal__input modal__input_1"
             type="text"
-            name="name"
-            placeholder="name"
+            name="Name"
+            placeholder="Name"
             id="card-name-input"
           />
           <input
             class="modal__input modal__input_2"
             type="text"
             name="Link"
-            placeholder="Image Link"
+            placeholder="Image URL"
             id="card-link-input"
           />
           <button class="modal__button" type="submit" id="add-save-button">
@@ -116,18 +116,19 @@
       </div>
     </div>
 
-    <!--Image Modal-->
-    <div class="modal" id="preview-image-modal">
-      <div class="modal__image_container">
+    <!--Preview Modal-->
+    <div class="modal" id="modal-preview">
+      <div class="modal__preview-container" id="modal-preview-container">
         <button
-          class="modal__close"
-          id="modal-close-button preview-close-modal"
+          class="modal__close modal__close_image"
+          id="preview-modal-close"
         ></button>
-        <img src="" alt="" class="modal__image" id="preview-card-image" />
-        <p class="modal__image-caption"></p>
+        <img src="" alt="" class="modal__preview-image" />
+        <h2 class="modal__preview-description"></h2>
       </div>
     </div>
 
+    <!--Template-->
     <template id="card-template">
       <li class="card">
         <img src="" class="card__image" alt="" />

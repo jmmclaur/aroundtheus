@@ -101,15 +101,6 @@
   cursor: pointer;
 }
 
-.card-name-input {
-  width: 358px;
-}
-
-.card-link-input {
-  width: 358px;
-}
-
-/* new */
 .modal__heading {
   margin: 0;
   font-size: 24px;
@@ -136,13 +127,26 @@
 
 .modal__input_2 {
   margin-top: 30px;
+  margin-bottom: 30px;
   border: none;
-  border-bottom: 1px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
   font-size: 14px;
   font-weight: 400;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   word-wrap: break-word;
   padding-bottom: 13px;
+}
+
+.modal__preview-image {
+  margin-top: 90px;
+  width: 500px;
+  height: 550px;
+}
+.modal__preview-description {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 @media screen and (max-width: 586px) {
