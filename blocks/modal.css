@@ -137,11 +137,17 @@
   padding-bottom: 13px;
 }
 
+.modal__preview {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  position: relative;
+}
+
 .modal__preview-image {
-  margin-top: 90px;
   width: 500px;
   height: 550px;
 }
+
 .modal__preview-description {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   word-wrap: break-word;
@@ -159,6 +165,8 @@
 
   .modal__container {
     padding: 25px 22px;
+    width: 238px;
+    height: 300px;
   }
 
   .modal__form {
@@ -176,9 +184,14 @@
   }
 
   .modal__button {
-    margin-top: 46px;
+    margin-top: 20px;
     font-size: 14px;
     height: 46px;
     width: 238px;
+  }
+
+  .modal__preview-image {
+    width: 240px;
+    height: 299px;
   }
 }

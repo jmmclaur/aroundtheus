@@ -60,9 +60,7 @@ const previewImage = document.querySelector(".modal__preview-image");
 const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
-const previewCloseButton = previewCardModal.querySelector(
-  ".modal__close_image"
-);
+const previewCloseButton = previewCardModal.querySelector(".modal__close");
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
@@ -83,7 +81,6 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
-// re-write, okay so it works more now! The add button creates a new card, idk why there are 12 cards tho
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -99,11 +96,6 @@ function handleAddCardSubmit(e) {
   e.target.reset();
   closeModal(addNewCardModal);
 }
-
-initialCards.forEach((data) => {
-  const cardElement = getCardElement(data);
-  cardListEl.append(cardElement);
-});
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -127,6 +119,10 @@ function getCardElement(data) {
     previewImage.alt = `${data.name}`;
   });
 
+  previewCloseButton.addEventListener("click", () => {
+    closeModal(previewCardModal);
+  });
+
   cardTitleEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
@@ -142,6 +138,7 @@ profileEditButton.addEventListener("click", () => {
   profileEditModal.classList.add("modal_opened");
   openModal(profileEditModal);
 });
+
 profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
 );
