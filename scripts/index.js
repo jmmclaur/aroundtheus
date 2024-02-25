@@ -25,6 +25,7 @@ const initialCards = [
   },
 ];
 
+/* okay so I fixed the close buttons, and deleted the closePopUp, now need to smoothen transitions */
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -47,7 +48,8 @@ const cardListEl = document.querySelector(".gallery__cards");
 const addCardButton = document.querySelector(".profile__add-button");
 const addCardForm = document.querySelector(".modal__card-form");
 const addNewCardModal = document.querySelector("#add-card-modal");
-const addCardCloseButton = addNewCardModal.querySelector(".modal__close");
+const addCardCloseButton = addNewCardModal.querySelector("button");
+
 const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
 const cardNameInput = document.querySelector("#card-name-input");
 const cardLinkInput = document.querySelector("#card-link-input");
@@ -60,7 +62,7 @@ const previewImage = document.querySelector(".modal__preview-image");
 const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
-const previewCloseButton = previewCardModal.querySelector(".modal__close");
+const previewCloseButton = previewCardModal.querySelector("button");
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
@@ -71,9 +73,6 @@ function handleProfileEditSubmit(e) {
   closePopUp(profileEditModal);
 }
 
-function closePopUp() {
-  profileEditModal.classList.remove("modal_opened");
-}
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -141,10 +140,11 @@ profileEditButton.addEventListener("click", () => {
 
 profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
-);
+); /*original */
 
-addCardCloseButton.addEventListener("click", () => closeModal(addNewCardModal));
-
+addCardCloseButton.addEventListener("click", function () {
+  closeModal(addNewCardModal);
+});
 /* ------------------------------------------------------------------------------ */
 
 /* For Each */
