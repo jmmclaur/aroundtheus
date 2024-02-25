@@ -69,7 +69,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value.trim();
   profileDescription.textContent = profileDescriptionInput.value.trim();
-  closePopUp(profileEditModal);
+  closeModal(profileEditModal);
 }
 
 function closeModal(modal) {
@@ -138,7 +138,7 @@ profileEditButton.addEventListener("click", () => {
 
 profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
-); /*original */
+);
 
 addCardCloseButton.addEventListener("click", function () {
   closeModal(addNewCardModal);
