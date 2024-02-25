@@ -25,7 +25,6 @@ const initialCards = [
   },
 ];
 
-/* okay so I fixed the close buttons, and deleted the closePopUp, now need to smoothen transitions */
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -49,7 +48,6 @@ const addCardButton = document.querySelector(".profile__add-button");
 const addCardForm = document.querySelector(".modal__card-form");
 const addNewCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addNewCardModal.querySelector("button");
-
 const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
 const cardNameInput = document.querySelector("#card-name-input");
 const cardLinkInput = document.querySelector("#card-link-input");
@@ -63,6 +61,7 @@ const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
 const previewCloseButton = previewCardModal.querySelector("button");
+
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
@@ -134,7 +133,6 @@ function getCardElement(data) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent.trim();
   profileDescriptionInput.value = profileDescription.textContent.trim();
-  profileEditModal.classList.add("modal_opened");
   openModal(profileEditModal);
 });
 
