@@ -46,6 +46,7 @@
   height: 40px;
   width: 40px;
   padding: 0;
+  margin-top: 41px;
 }
 
 .modal__close:hover {
@@ -145,8 +146,12 @@
 }
 
 .modal__preview-image {
-  width: 500px;
-  height: 550px;
+  width: auto;
+  max-width: 75vw;
+  height: auto;
+  max-height: 75vh;
+  object-fit: cover;
+  margin-top: 41px;
 }
 
 .modal__preview-description {
