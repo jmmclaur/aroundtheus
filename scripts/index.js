@@ -62,6 +62,14 @@ const previewDescription = document.querySelector(
 );
 const previewCloseButton = previewCardModal.querySelector("button");
 
+/* const closeButtons = document.querySelector(".modal__close");
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  profileEditCloseButton.addEventListener("click", () => closeModal(modal));
+  addCardCloseButton.addEventListener("click", () => closeModal(modal));
+  previewCloseButton.addEventListener("click", () => closeModal(modal));
+}); */
+
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
