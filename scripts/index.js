@@ -125,10 +125,6 @@ function getCardElement(data) {
     previewImage.alt = `${data.name}`;
   });
 
-  previewCloseButton.addEventListener("click", () => {
-    closeModal(previewCardModal);
-  });
-
   cardTitleEl.textContent = data.name;
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
@@ -148,8 +144,12 @@ profileEditCloseButton.addEventListener("click", () =>
   closeModal(profileEditModal)
 );
 
-addCardCloseButton.addEventListener("click", function () {
+addCardCloseButton.addEventListener("click", () => {
   closeModal(addNewCardModal);
+});
+
+previewCloseButton.addEventListener("click", () => {
+  closeModal(previewCardModal);
 });
 /* ------------------------------------------------------------------------------ */
 
