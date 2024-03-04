@@ -63,22 +63,37 @@
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <p class="modal__title">Edit Profile</p>
-        <form class="modal__form">
+        <form class="modal__form" id="profile-edit-form">
           <input
             class="modal__input"
             type="text"
             name="title"
             placeholder="Jacques Cousteau"
             id="profile-title-input"
+            maxlength="40"
+            minlength="2"
+            required
           />
+          <span class="popup__error" id="profile-title-input-error"></span>
           <input
             class="modal__input"
             type="text"
             name="description"
             placeholder="Explorer"
             id="profile-description-input"
+            maxlength="200"
+            minlength="2"
+            required
           />
-          <button class="modal__button" type="submit" id="edit-save-button">
+          <span
+            class="modal__error"
+            id="profile-description-input-error"
+          ></span>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
             Save
           </button>
         </form>
@@ -94,22 +109,32 @@
           id="modal-close-button"
         ></button>
         <p class="modal__title">New Place</p>
-        <form class="modal__card-form" id="add-card-form">
+        <form class="modal__card-form js-modal-form" id="add-card-form">
           <input
             class="modal__input modal__input_1"
             type="text"
             name="Name"
             placeholder="Name"
             id="card-name-input"
+            required
+            maxlength="30"
+            minlength="2"
           />
+          <span class="modal__error" id="name-error"></span>
           <input
             class="modal__input modal__input_2"
             type="text"
             name="Link"
             placeholder="Image URL"
             id="card-link-input"
+            required
           />
-          <button class="modal__button" type="submit" id="add-save-button">
+          <span class="modal__error" id="url-error"></span>
+          <button
+            class="modal__button popup__button_disabled"
+            type="submit"
+            disabled
+          >
             Create
           </button>
         </form>
@@ -119,7 +144,11 @@
     <!-- Modal-->
     <div class="modal" id="modal-preview">
       <div class="modal__preview">
-        <button class="modal__close" id="preview-modal-close"></button>
+        <button
+          class="modal__close"
+          id="preview-modal-close"
+          type="button"
+        ></button>
         <img src="" alt="" class="modal__preview-image" />
         <h2 class="modal__preview-description"></h2>
       </div>
@@ -131,14 +160,19 @@
     <template id="card-template">
       <li class="card">
         <img src="" class="card__image" alt="" />
-        <button type="button" class="card__trash-button"></button>
+        <button
+          type="button"
+          class="card__trash-button"
+          id="card__remove-button"
+        ></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button class="card__like-button" type="button"></button>
+          <button class="card__like-button"></button>
         </div>
       </li>
     </template>
 
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>

@@ -152,3 +152,27 @@ initialCards.forEach((cardData) => {
 });
 
 /* ------------------------------------------------------------------------------ */
+
+/* Escape Key Event Listeners */
+/* 
+profileEditModal.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal(profileEditModal);
+  }
+});
+
+profileEditModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#profile-edit-form");
+  closeModal(profileEditModal);
+});
+
+addNewCardModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#add-card-form");
+  closeModal(addNewCardModal);
+});
+
+previewCardModal.addEventListener("click", (e) => {
+  if (e.target.id !== "#modal-preview");
+  closeModal(previewCardModal);
+});
+*/
