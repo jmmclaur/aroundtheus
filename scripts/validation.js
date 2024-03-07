@@ -14,65 +14,50 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   errorMessageEl.classList.remove(errorClass);
 }
 
-function checkInputValidity(formEl, inputEl, options) {
+function checkInputValidity(formEl, options, inputEl) {
   if (!inputEl.validity.valid) {
-    showInputError(formEl, inputEl, options);
-  } else {
-    hideInputError(formEl, inputEl, options);
+    return showInputError(formEl, inputEl, options);
   }
+  hideInputError(formEl, inputEl, options);
 }
 
 function hasInvalidInput(inputList) {
   return !inputList.every((inputEl) => inputEl.validity.valid);
 }
 
-function toggleButtonState(inputEl, submitButton, { inactiveButtonClass }) {
-  let foundInvalid = false;
-  inputEls.forEach((inputEl) => {
-    if (!inputEl.validity.valid) {
-      foundInvalid = true;
-    }
-  });
-
-  if (foundInvalid) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
-  } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
-  }
+function enableButton(submitButton, { inactiveButtonClass }) {
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
-// make an enableButton function
-// I also need to make the popup error light up red/have text
+function disableButton(submitButton, { inactiveButtonClass }) {
+  submitButton.classList.add(inactiveButtonClass);
+  submitButton.disabled = true;
+}
 
-/* function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   if (hasInvalidInput(inputEls)) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
+    disableButton(submitButton, { inactiveButtonClass });
     return;
   }
 
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = true;
-} */
+  enableButton(submitButton, { inactiveButtonClass });
+}
 
 function setEventListeners(formEl, options) {
-  const { inputSelector } = options; // object destcrucuring, used in React
+  const { inputSelector, submitButtonSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(options.submitButtonSelector);
+  const submitButton = formEl.querySelector(submitButtonSelector);
   inputEls.forEach((inputEl) => {
-    inputEl.addEventListener("input", (e) => {
-      checkInputValidity(formEl, inputEl, options);
+    inputEl.addEventListener("input", () => {
+      checkInputValidity(formEl, options, inputEl);
       toggleButtonState(inputEls, submitButton, options);
     });
   });
 }
 
 function enableValidation(options) {
-  const formEls = [
-    ...document.querySelectorAll(options.formSelector),
-  ]; /* needs 2 arrays */
+  const formEls = [...document.querySelectorAll(options.formSelector)];
   formEls.forEach((formEl) => {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault(); //so the event doesn't reset after submission
@@ -90,6 +75,7 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 }; /* this is an object */
+//where are these things in index.js and validation.js
 
 enableValidation(config);
 
