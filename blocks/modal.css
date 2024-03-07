@@ -128,16 +128,9 @@
   visibility: visible;
 }
 
-.modal__input:valid {
-  border-bottom: 1px solid green;
-}
-
-.modal__input:invalid {
-  border-bottom: 1px solid red;
-}
-
 .modal__error_visible {
   color: #ff0000;
+  border-bottom: 1px solid;
   visibility: visible;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 12px;

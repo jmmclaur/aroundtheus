@@ -78,7 +78,7 @@
             minlength="2"
           />
           <label class="form__field"> Enter your name </label>
-          <span class="modal__error" id="profile-title-error"></span>
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             class="modal__input modal__input_type_desc"
             type="text"
@@ -90,7 +90,10 @@
             minlength="2"
           />
           <label class="form__field"> Enter your profession </label>
-          <span class="modal__error" id="profile-description-error"></span>
+          <span
+            class="modal__error"
+            id="profile-description-input-error"
+          ></span>
           <button class="modal__button" type="button">Save</button>
         </form>
       </div>
@@ -111,6 +114,7 @@
             type="text"
             name="name"
             placeholder="Name"
+            id="modal-image"
             required
             maxlength="80"
             minlength="2"
@@ -122,6 +126,7 @@
             type="text"
             name="link"
             placeholder="Image URL"
+            id="modal-url"
             required
             maxlength="80"
             minlength="2"

@@ -10,7 +10,7 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.remove(inputErrorClass);
-  errorMessageEl.textContent = "";
+  errorMessageEl.textContent = " ";
   errorMessageEl.classList.remove(errorClass);
 }
 
@@ -74,8 +74,7 @@ const config = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
-}; /* this is an object */
-//where are these things in index.js and validation.js
+};
 
 enableValidation(config);
 
