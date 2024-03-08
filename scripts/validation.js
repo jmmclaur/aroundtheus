@@ -77,5 +77,3 @@ const config = {
 };
 
 enableValidation(config);
-
-// collect all of your forms and their inputs, query for ea
