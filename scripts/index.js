@@ -45,7 +45,7 @@ const cardListEl = document.querySelector(".gallery__cards");
 
 /* Add Button Elements */
 const addCardButton = document.querySelector(".profile__add-button");
-const addCardForm = document.querySelector(".modal__form");
+const addCardForm = document.querySelector("#add-card-form");
 const addNewCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addNewCardModal.querySelector("button");
 const addCardSubmit = addNewCardModal.querySelector("#add-save-button");
