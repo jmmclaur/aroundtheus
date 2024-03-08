@@ -103,17 +103,16 @@
   cursor: pointer;
 }
 
+.modal__button_disabled {
+  opacity: 0.2;
+}
+
 .modal__heading {
   margin: 0;
   font-size: 24px;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 900;
   word-wrap: break-word;
-}
-
-.modal__form {
-  display: flex;
-  flex-direction: column;
 }
 
 .modal__error {
@@ -135,14 +134,6 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 14px;
-}
-
-.modal__button_disabled {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  opacity: 0.2;
-  cursor: default;
 }
 
 .modal__preview {
