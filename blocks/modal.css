@@ -76,7 +76,7 @@
   font-size: 14px;
   line-height: 17px;
   color: #000;
-  width: 358px;
+  width: 100%;
   height: 14px;
   padding: 0;
   margin-bottom: 5px;
@@ -88,7 +88,7 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
-  width: 358px;
+  width: 100%;
   height: 50px;
   background-color: #000;
   color: #fff;
@@ -98,13 +98,14 @@
   padding: 0;
 }
 
-.modal__button:hover {
+.modal__button:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.modal__button_disabled {
+.modal__button_disabled:hover {
   opacity: 0.2;
+  cursor: default;
 }
 
 .modal__heading {
@@ -116,24 +117,18 @@
 }
 
 .modal__error {
-  margin-bottom: 13px;
-  visibility: hidden;
-  width: 358px;
-  height: 12px;
-}
-
-.modal__input_type_error {
-  border-bottom: 1px solid #ff0000;
-  visibility: visible;
-}
-
-.modal__error_visible {
-  color: #ff0000;
-  border-bottom: 1px solid;
-  visibility: visible;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 14px;
+  color: #ff0000;
+  margin-bottom: 13px;
+  visibility: hidden;
+  width: 100%;
+  height: 12px;
+}
+
+.modal__error_visible {
+  visibility: visible;
 }
 
 .modal__preview {
@@ -189,7 +184,6 @@
     margin-top: 20px;
     font-size: 14px;
     height: 46px;
-    width: 238px;
   }
 
   .modal__preview-image {

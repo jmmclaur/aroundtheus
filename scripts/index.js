@@ -162,26 +162,24 @@ initialCards.forEach((cardData) => {
 
 /* ------------------------------------------------------------------------------ */
 
-/* Escape Key Event Listeners */
-/* 
-profileEditModal.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal(profileEditModal);
+/* Escape Event Listeners */
+function openPopUp(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
+  document.addEventListener("click", handleOutsideClick);
+}
+
+function closePopUp(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+  document.removeEventListener("click", handleOutsideClick);
+}
+
+function handleOutsideClick(e) {
+  console.log(e.target);
+  if (e.target === e.currentTarget) {
+    closePopUp(addNewCardModal);
+    closePopUp(profileEditModal);
+    closePopUp(previewCardModal);
   }
-});
-
-profileEditModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#profile-edit-form");
-  closeModal(profileEditModal);
-});
-
-addNewCardModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#add-card-form");
-  closeModal(addNewCardModal);
-});
-
-previewCardModal.addEventListener("click", (e) => {
-  if (e.target.id !== "#modal-preview");
-  closeModal(previewCardModal);
-});
-*/
+}
