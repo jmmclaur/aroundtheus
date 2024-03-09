@@ -103,7 +103,7 @@
   cursor: pointer;
 }
 
-.modal__button_disabled:hover {
+.modal__button_disabled {
   opacity: 0.2;
   cursor: default;
 }
@@ -120,11 +120,20 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 14px;
+  border-bottom: #ff0000;
   color: #ff0000;
   margin-bottom: 13px;
   visibility: hidden;
   width: 100%;
   height: 12px;
+}
+
+.modal__input:valid {
+  border-bottom: 1px solid green;
+}
+
+.modal__input:invalid {
+  border-bottom: 1px solid red;
 }
 
 .modal__error_visible {

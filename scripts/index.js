@@ -152,6 +152,20 @@ addCardCloseButton.addEventListener("click", () => {
 previewCloseButton.addEventListener("click", () => {
   closeModal(previewCardModal);
 });
+
+window.onclick = function (event) {
+  const addModal = document.getElementById("add-card-modal");
+  const editModal = document.getElementById("profile-edit-modal");
+  const previewModal = document.getElementById("modal-preview");
+  if (event.target === addModal) {
+    closeModal(addModal);
+  } else if (event.target === editModal) {
+    closeModal(editModal);
+  } else if (event.target === previewModal) {
+    closeModal(previewModal);
+  }
+};
+
 /* ------------------------------------------------------------------------------ */
 
 /* For Each */
@@ -161,25 +175,3 @@ initialCards.forEach((cardData) => {
 });
 
 /* ------------------------------------------------------------------------------ */
-
-/* Escape Event Listeners */
-function openPopUp(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscape);
-  document.addEventListener("click", handleOutsideClick);
-}
-
-function closePopUp(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscape);
-  document.removeEventListener("click", handleOutsideClick);
-}
-
-function handleOutsideClick(e) {
-  console.log(e.target);
-  if (e.target === e.currentTarget) {
-    closePopUp(addNewCardModal);
-    closePopUp(profileEditModal);
-    closePopUp(previewCardModal);
-  }
-}
