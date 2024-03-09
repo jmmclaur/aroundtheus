@@ -128,16 +128,12 @@
   height: 12px;
 }
 
-.modal__input:valid {
-  border-bottom: 1px solid green;
-}
-
-.modal__input:invalid {
-  border-bottom: 1px solid red;
-}
-
 .modal__error_visible {
   visibility: visible;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid red;
 }
 
 .modal__preview {
