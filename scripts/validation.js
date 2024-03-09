@@ -9,16 +9,18 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
+  console.log(inputEl.id);
   inputEl.classList.remove(inputErrorClass);
-  errorMessageEl.textContent = " ";
+  errorMessageEl.textContent = "";
   errorMessageEl.classList.remove(errorClass);
 }
 
 function checkInputValidity(formEl, options, inputEl) {
   if (!inputEl.validity.valid) {
-    return showInputError(formEl, inputEl, options);
+    showInputError(formEl, inputEl, options);
+  } else {
+    hideInputError(formEl, inputEl, options);
   }
-  hideInputError(formEl, inputEl, options);
 }
 
 function hasInvalidInput(inputList) {
@@ -40,7 +42,6 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     disableButton(submitButton, { inactiveButtonClass });
     return;
   }
-
   enableButton(submitButton, { inactiveButtonClass });
 }
 

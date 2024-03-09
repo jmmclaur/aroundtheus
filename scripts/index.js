@@ -178,9 +178,6 @@ profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
-modal.addEventListener("mousedown", closeModalOnRemoteClick);
-modal.removeEventListener("mousedown", closeModalOnRemoteClick);
-
 /* window.onclick = function (event) {
   const addModal = document.getElementById("add-card-modal");
   const editModal = document.getElementById("profile-edit-modal");
