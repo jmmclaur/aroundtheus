@@ -153,7 +153,35 @@ previewCloseButton.addEventListener("click", () => {
   closeModal(previewCardModal);
 });
 
-window.onclick = function (event) {
+/* ------------------------------------------------------------------------------ */
+
+/* For Each */
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardListEl.append(cardElement);
+});
+
+/* ------------------------------------------------------------------------------ */
+
+/* Popup Escape */
+
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closeModal(evt.target);
+  }
+}
+
+profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
+addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+
+modal.addEventListener("mousedown", closeModalOnRemoteClick);
+modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+
+/* window.onclick = function (event) {
   const addModal = document.getElementById("add-card-modal");
   const editModal = document.getElementById("profile-edit-modal");
   const previewModal = document.getElementById("modal-preview");
@@ -164,14 +192,4 @@ window.onclick = function (event) {
   } else if (event.target === previewModal) {
     closeModal(previewModal);
   }
-};
-
-/* ------------------------------------------------------------------------------ */
-
-/* For Each */
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
-});
-
-/* ------------------------------------------------------------------------------ */
+}; this still works but let's make one that's not a global function*/

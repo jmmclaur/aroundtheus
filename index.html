@@ -117,7 +117,7 @@
             id="modal-name"
             required
             maxlength="30"
-            minlength="1"
+            minlength="2"
           />
           <span class="modal__error" id="modal-image-error"></span>
           <input
@@ -131,7 +131,11 @@
             minlength="2"
           />
           <span class="modal__error" id="modal-url-error"></span>
-          <button class="modal__button modal__button_disabled" type="submit">
+          <button
+            class="modal__button modal__button_disabled"
+            disabled
+            type="submit"
+          >
             Create
           </button>
         </form>
@@ -170,6 +174,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validation.js"></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
