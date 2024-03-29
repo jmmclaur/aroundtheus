@@ -7,19 +7,16 @@ export default class Card {
   }
 
   _setEventListeners() {
-    //likeButton
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         this._handleLikeButton();
       });
-    //deleteButton
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
         this._handleDeleteButton();
       });
-    //imageClick
     this._cardElement
       .querySelector(".modal__preview-image")
       .addEventListener("click", () => {
@@ -51,10 +48,3 @@ export default class Card {
     return this._cardElement;
   }
 }
-
-//card preview won't show up b/c the validation form isn't showing? something is listed wrong in html
-// nope it was under the index.js up at the top of the page wrote FormValidator instead of validation
-
-//issue w/ validation.js something at the bottom is not defined
-
-// okay the above is fixed but the disable button isn't defined now. Where should I put that? this might be in my index.js file

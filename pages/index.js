@@ -1,5 +1,5 @@
 import Card from "../components/Card.js";
-import FormValidator from "../components/validation.js";
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -74,16 +74,16 @@ function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
     closeModal(modal);
-  }
+  } //good
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeKey);
-}
+} //good
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
-}
+} //good
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addNewCardModal));
@@ -185,14 +185,14 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
+function createCard(item) {
+  const card = new Card(item, "#card-template", handleImageClick);
   return card.getView();
-}
+} //good
 
 function renderCard(cardElement) {
   cardListElement.prepend(cardElement);
-}
+} //good
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit); //something is wrong w/ this
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -228,3 +228,20 @@ function handleProfileEditSubmit(evt) {
   addModalForm.reset();
   addModalFormValidator.disableSubmitButton();
 }
+/*
+function handleProfileEditSubmit(evt) {
+  evt.preventDefault();
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closeModal(profileEditModal);
+}
+
+function handleAddCardSubmit(evt) {
+  evt.preventDefault();
+  const newCard = { name: addTitleInput.value, link: addUrlInput.value };
+  const cardElement = createCard(newCard);
+  renderCard(cardElement);
+  closeModal(addModal);
+  addModalForm.reset();
+  addModalFormValidator.disableSubmitButton();
+} */

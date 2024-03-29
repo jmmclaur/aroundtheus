@@ -29,7 +29,6 @@ export default class FormValidator {
     const errorElement = this._formElement.querySelector(
       `#${inputElement.id}-error`
     );
-    /* console.log(inputEl.id); */
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.textContent = "";
     errorElement.classList.remove(this._errorClass);
@@ -43,26 +42,6 @@ export default class FormValidator {
     }
   }
 
-  /*
-  _hasInvalidInput(inputList) {
-    return !inputList.every((inputEl) => inputEl.validity.valid);
-  }
-
-   idk if I need these in this format or nah 
-  _hasInvalidInput(inputEls) {
-    return inputEls.some((inputEl) => !inputEl.validity.valid);
-  }
-
-  _enableButton() {
-    this._submitButton.classList.remove(this._inactiveButtonClass);
-    this._submitButton.disabled = false;
-  }
-
-  _disableButton() {
-    this._submitButton.classList.add(this._inactiveButtonClass);
-    this._submitButton.disabled = true;
-  } */
-
   _toggleButtonState() {
     const isFormValid = this._inputList.every(
       (inputElement) => inputElement.validity.valid
@@ -72,7 +51,18 @@ export default class FormValidator {
     } else {
       this.disableSubmitButton();
     }
-  } //good
+  }
+
+  /*
+  _enableSubmitButton() {
+    this._submitButton.classList.remove(this._inactiveButtonClass);
+    this._submitButton.disabled = false;
+  }
+
+  _disableSubmitButton() {
+    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.disabled = true;
+  } */
 
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
@@ -81,7 +71,7 @@ export default class FormValidator {
         this._toggleButtonState(this._buttonElement);
       });
     });
-  } //done
+  }
 
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
