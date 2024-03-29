@@ -1,4 +1,5 @@
-import Card from "./Card.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/validation.js";
 
 const initialCards = [
   {
@@ -69,13 +70,6 @@ const previewCloseButton = previewCardModal.querySelector("button");
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value.trim();
-  profileDescription.textContent = profileDescriptionInput.value.trim();
-  closeModal(profileEditModal);
-}
-
 function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
@@ -166,7 +160,6 @@ initialCards.forEach((cardData) => {
 /* ------------------------------------------------------------------------------ */
 
 /* Popup Escape */
-
 function closeModalOnRemoteClick(evt) {
   if (
     evt.target === evt.currentTarget ||
@@ -180,15 +173,58 @@ profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addNewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 
-/* window.onclick = function (event) {
-  const addModal = document.getElementById("add-card-modal");
-  const editModal = document.getElementById("profile-edit-modal");
-  const previewModal = document.getElementById("modal-preview");
-  if (event.target === addModal) {
-    closeModal(addModal);
-  } else if (event.target === editModal) {
-    closeModal(editModal);
-  } else if (event.target === previewModal) {
-    closeModal(previewModal);
-  }
-}; this still works but let's make one that's not a global function*/
+/* ------------------------------------------------------------------------------ */
+
+/* Restructuring */
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
+}
+
+function renderCard(cardElement) {
+  cardListElement.prepend(cardElement);
+}
+
+profileEditForm.addEventListener("submit", handleProfileEditSubmit); //something is wrong w/ this
+addCardForm.addEventListener("submit", handleAddCardSubmit);
+//the button isn't working
+
+const handleImageClick = (cardData) => {
+  previewImageElement.src = cardData._link;
+  previewImageElement.alt = cardData._name;
+  previewImageElementName.textContent = cardData._name;
+  openModal(previewImageModal);
+};
+
+initialCards.forEach((cardData) => {
+  const cardView = createCard(cardData);
+  renderCard(cardView);
+});
+
+const profileEditFormValidator = new FormValidator(
+  config,
+  profileEditModalForm
+);
+profileEditFormValidator.enableValidation();
+
+const addModalFormValidator = new FormValidator(config, addModalForm);
+addModalFormValidator.enableValidation();
+
+function handleProfileEditSubmit(evt) {
+  evt.preventDefault();
+  const newCard = { name: addTitleInput.value, link: addUrlInput.value };
+  const cardElement = createCard(newCard);
+  renderCard(cardElement);
+  closeModal(addModal);
+  addModalForm.reset();
+  addModalFormValidator.disableSubmitButton();
+}
