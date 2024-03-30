@@ -38,8 +38,8 @@ export default class Card {
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
-      .content.querySelector(".element")
-      .cloneNode(true);
+      .content.querySelector(".card");
+    cloneNode(true);
     this._cardElement.querySelector("#card-image").src = this._link;
     this._cardElement.querySelector("#card-image").alt = this._name;
     this._cardElement.querySelector("#card-title").textContent = this._name;
