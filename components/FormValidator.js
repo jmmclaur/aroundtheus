@@ -35,7 +35,7 @@ export default class FormValidator {
   }
 
   _checkInputValidity(inputElement) {
-    if (!inputEl.validity.valid) {
+    if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
@@ -53,7 +53,6 @@ export default class FormValidator {
     }
   }
 
-  /*
   _enableSubmitButton() {
     this._submitButton.classList.remove(this._inactiveButtonClass);
     this._submitButton.disabled = false;
@@ -62,7 +61,7 @@ export default class FormValidator {
   _disableSubmitButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
-  } */
+  }
 
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
