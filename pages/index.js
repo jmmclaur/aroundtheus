@@ -74,16 +74,16 @@ function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
     closeModal(modal);
-  } //good
+  }
 }
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEscapeKey);
-} //good
+}
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
-} //good
+}
 
 profileEditButton.addEventListener("click", () => openModal(profileEditForm));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -180,23 +180,23 @@ const config = {
 function createCard(item) {
   const card = new Card(item, "#card-template", handleImageClick);
   return card.getView();
-} //good
+}
 
 function renderCard(cardElement) {
   cardListEl.prepend(cardElement);
-} //good
+}
 
 //profileEditForm.addEventListener("click", handleProfileEditSubmit); //something is wrong w/ this
 //addCardModalForm.addEventListener("click", handleAddCardSubmit);
 //addModalForm.addEventListener("click", handleAddCardSubmit);
 //the button isn't working
 
-const handleImageClick = (cardData) => {
-  previewImageElement.src = cardData._link;
-  previewImageElement.alt = cardData._name;
-  previewImageElementName.textContent = cardData._name;
-  openModal(previewImageModal);
-};
+function handleImageClick(cardData) {
+  openModal(previewCardModal);
+  previewImage.src = cardData.link;
+  previewImage.setAttribute("alt", cardData.name);
+  previewDescription.textContent = cardData.name;
+}
 
 initialCards.forEach((cardData) => {
   const cardView = createCard(cardData);

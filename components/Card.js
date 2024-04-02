@@ -4,16 +4,16 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    console.log(name + link);
+    //console.log(name + link);
   }
 
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLikeIcon();
+        this._handleLikeButton();
       });
-    //
+
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
@@ -27,13 +27,16 @@ export default class Card {
       });
   }
 
+  /* _handleLikeButton() {
+    this._handleLikeButton.classList.toggle("card__like-button_active");
+  } */
+
   _handleLikeButton() {
     this._cardElement
       .querySelector(".card__like-button")
       .classList.toggle(".card__like-button_active");
   }
-
-  _handleDeleteCard() {
+  _handleDeleteButton() {
     this._cardElement.remove();
     this._cardElement = null;
   }
@@ -41,13 +44,18 @@ export default class Card {
   getView() {
     this._cardElement = document
       .querySelector(this._cardSelector)
-      //where is this._cardSelector defined?
-      //.content.querySelector(".element") //what is element? it's not in hemlt
-      .content.querySelector(".card") //instead of element let's use .card
+      .content.querySelector(".card")
       .cloneNode(true);
-    this._cardElement.querySelector("#card-image").src = this._link;
-    this._cardElement.querySelector("#card-image").alt = this._name;
-    this._cardElement.querySelector("#card-title").textContent = this._name;
+
+    const cardImageEl = this._cardElement.querySelector("#card-image");
+    const cardTitleEl = this._cardElement.querySelector("#card-title");
+    cardImageEl.src = this._link;
+    cardImageEl.alt = this._name;
+    cardTitleEl.textContent = this._name;
+
+    //this._cardElement.querySelector("#card-image").src = this._link;
+    //this._cardElement.querySelector("#card-image").alt = this._name;
+    //this._cardElement.querySelector("#card-title").textContent = this._name;
 
     this._setEventListeners();
     return this._cardElement;
