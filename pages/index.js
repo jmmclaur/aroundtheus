@@ -39,7 +39,6 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileEditSubmit = profileEditModal.querySelector("#edit-save-button");
 
 /* Gallery Elements */
 const cardTemplate =
@@ -51,13 +50,6 @@ const addCardButton = document.querySelector(".profile__add-button");
 const addCardForm = document.querySelector("#add-card-form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addCardModal.querySelector("button");
-const addCardSubmit = addCardModal.querySelector("#add-save-button");
-const cardNameInput = document.querySelector(".modal__input_type_name");
-const cardLinkInput = document.querySelector(".modal__input_type_url");
-//const cardDeleteButton = document.querySelector("card__trash-button");
-//const cardDeleteCloseButton = document.querySelector("trash-button");
-
-//const modalForms = document.querySelectorAll(".modal__form");
 
 /* Preview Elements */
 const previewCardModal = document.querySelector("#modal-preview");
@@ -90,46 +82,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
 
-/*
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const name = cardNameInput.value;
-  const link = cardLinkInput.value;
-  const data = { name, link };
-  const newCard = getCardElement(data);
-  cardListEl.prepend(newCard);
-  e.target.reset();
-  closeModal(addCardModal);
-} */
-
-function getCardElement(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const trashButton = cardElement.querySelector(".card__trash-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  trashButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageEl.addEventListener("click", () => {
-    openModal(previewCardModal);
-    previewImage.src = data.link;
-    previewDescription.textContent = data.name;
-    previewImage.alt = `${data.name}`;
-  });
-
-  cardTitleEl.textContent = data.name;
-  cardImageEl.src = data.link;
-  cardImageEl.alt = data.name;
-  return cardElement;
-}
-
 /* ------------------------------------------------------------------------------ */
 
 /* Event Listener */
@@ -150,6 +102,8 @@ addCardCloseButton.addEventListener("click", () => {
 previewCloseButton.addEventListener("click", () => {
   closeModal(previewCardModal);
 });
+
+/* ------------------------------------------------------------------------------ */
 
 /* Popup Escape */
 function closeModalOnRemoteClick(evt) {
@@ -178,18 +132,13 @@ const config = {
 };
 
 function createCard(item) {
-  const card = new Card(item, "#card-template", handleImageClick);
-  return card.getView();
-}
+  const cardElement = new Card(item, "#card-template", handleImageClick);
+  return cardElement.getView();
+} //used cardElement instead of card
 
 function renderCard(cardElement) {
   cardListEl.prepend(cardElement);
 }
-
-//profileEditForm.addEventListener("click", handleProfileEditSubmit); //something is wrong w/ this
-//addCardModalForm.addEventListener("click", handleAddCardSubmit);
-//addModalForm.addEventListener("click", handleAddCardSubmit);
-//the button isn't working
 
 function handleImageClick(cardData) {
   openModal(previewCardModal);
@@ -209,19 +158,6 @@ forms.forEach((form) => {
   const formValidator = new FormValidator(config, form);
   formValidator.enableValidation();
 });
-/*
-function handleProfileEditSubmit(evt) {
-  evt.preventDefault();
-  const newCard = {
-    name: addCardNameInput.value,
-    link: addCardLinkInput.value,
-  };
-  const cardElement = createCard(newCard);
-  renderCard(cardElement);
-  closeModal(addModal);
-  addModalForm.reset();
-  addModalFormValidator.disableSubmitButton();
-} */
 
 function handleProfileEditSubmit(evt) {
   evt.preventDefault();
@@ -244,5 +180,5 @@ function handleAddCardSubmit(evt) {
   renderCard(cardElement);
   closeModal(addCardModal);
   document.getElementById("add-card-form").reset();
-  document.getElementById("add-submit").disabled = true; //write disable function instead and call it
+  document.getElementById("add-submit").disabled = true; //maybe write a disable function instead and calling it?
 }
