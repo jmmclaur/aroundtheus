@@ -19,3 +19,8 @@ Github: https://jmmclaur.github.io/se_project_aroundtheus/
 Fonts: https://rsms.me/inter/
 
 Video: https://drive.google.com/file/d/1zcXwME2415ckeFhVCZWQcmapA8dV2Po0/view?usp=drive_link
+
+Sprint 4:
+Sprint 5:
+Sprint 6:
+Sprint 7: In this sprint, I focused on using object-oriented-programming to consolidate code. I created a components section to include Card.js and FormValidator.js, where both files were exported to index.js.

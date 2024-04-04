@@ -131,14 +131,14 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-function createCard(item) {
+/* function createCard(item) {
   const cardElement = new Card(item, "#card-template", handleImageClick);
   return cardElement.getView();
 } //used cardElement instead of card
 
 function renderCard(cardElement) {
   cardListEl.prepend(cardElement);
-}
+} */
 
 function handleImageClick(cardData) {
   openModal(previewCardModal);
@@ -166,19 +166,33 @@ function handleProfileEditSubmit(evt) {
   closeModal(profileEditModal);
 }
 
+//Fixing add card [object object]
+
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  const cardNameInput = addCardModal.querySelector("#modal-name");
-  const cardUrlInput = addCardModal.querySelector("#modal-url");
   const name = cardNameInput.value;
   const link = cardUrlInput.value;
-  const cardElement = new Card(
-    { name, link },
-    "#card-template",
-    handleImageClick
-  );
-  renderCard(cardElement);
+  renderCard({ name, link });
+  addCardForm.reset();
   closeModal(addCardModal);
-  document.getElementById("add-card-form").reset();
-  document.getElementById("add-submit").disabled = true; //maybe write a disable function instead and calling it?
 }
+
+function createCard(data) {
+  const cardElement = new Card(data, "#card-template", handleImageClick);
+  return cardElement.getView();
+}
+
+function renderCard(cardElement) {
+  cardListEl.prepend(cardElement);
+} //let's see if this works instead
+
+/* function handleAddCardSubmit(evt) {
+  evt.preventDefault();
+  const cardNameInput = addCardForm.querySelector("#modal-name");
+  const cardUrlInput = addCardForm.querySelector("#modal-url");
+  const name = cardNameInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link });
+  addCardForm.reset();
+  closeModal(addCardModal);
+} //let's see if this works instead */
