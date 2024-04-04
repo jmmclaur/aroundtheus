@@ -168,6 +168,7 @@ function handleProfileEditSubmit(evt) {
 
 //Fixing add card [object object]
 
+/*
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   const name = cardNameInput.value;
@@ -175,7 +176,7 @@ function handleAddCardSubmit(evt) {
   renderCard({ name, link });
   addCardForm.reset();
   closeModal(addCardModal);
-}
+} */
 
 function createCard(data) {
   const cardElement = new Card(data, "#card-template", handleImageClick);
@@ -186,7 +187,7 @@ function renderCard(cardElement) {
   cardListEl.prepend(cardElement);
 } //let's see if this works instead
 
-/* function handleAddCardSubmit(evt) {
+function handleAddCardSubmit(evt) {
   evt.preventDefault();
   const cardNameInput = addCardForm.querySelector("#modal-name");
   const cardUrlInput = addCardForm.querySelector("#modal-url");
@@ -195,4 +196,4 @@ function renderCard(cardElement) {
   renderCard({ name, link });
   addCardForm.reset();
   closeModal(addCardModal);
-} //let's see if this works instead */
+} //let's see if this works instead
