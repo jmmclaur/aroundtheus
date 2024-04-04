@@ -131,15 +131,6 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-/* function createCard(item) {
-  const cardElement = new Card(item, "#card-template", handleImageClick);
-  return cardElement.getView();
-} //used cardElement instead of card
-
-function renderCard(cardElement) {
-  cardListEl.prepend(cardElement);
-} */
-
 function handleImageClick(cardData) {
   openModal(previewCardModal);
   previewImage.src = cardData.link;
@@ -149,7 +140,7 @@ function handleImageClick(cardData) {
 
 initialCards.forEach((cardData) => {
   const cardView = createCard(cardData);
-  renderCard(cardView);
+  cardListEl.prepend(cardView);
 });
 
 const forms = document.querySelectorAll(config.formSelector);
@@ -166,34 +157,16 @@ function handleProfileEditSubmit(evt) {
   closeModal(profileEditModal);
 }
 
-//Fixing add card [object object]
-
-/*
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const name = cardNameInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name, link });
-  addCardForm.reset();
-  closeModal(addCardModal);
-} */
-
 function createCard(data) {
   const cardElement = new Card(data, "#card-template", handleImageClick);
   return cardElement.getView();
 }
 
-function renderCard(cardElement) {
-  cardListEl.prepend(cardElement);
-} //let's see if this works instead
-
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
-  const cardNameInput = addCardForm.querySelector("#modal-name");
-  const cardUrlInput = addCardForm.querySelector("#modal-url");
-  const name = cardNameInput.value;
-  const link = cardUrlInput.value;
-  renderCard({ name, link });
-  addCardForm.reset();
+function handleAddCardSubmit(data) {
+  console.log(data);
+  const name = data.target.name.value;
+  const link = data.target.link.value;
+  const Card = createCard({ name, link });
+  cardListEl.prepend(Card);
   closeModal(addCardModal);
-} //let's see if this works instead
+}
