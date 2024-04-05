@@ -163,10 +163,10 @@ function createCard(data) {
 }
 
 function handleAddCardSubmit(data) {
-  console.log(data);
   const name = data.target.name.value;
   const link = data.target.link.value;
-  const Card = createCard({ name, link });
-  cardListEl.prepend(Card);
+  const card = createCard({ name, link });
+  cardListEl.prepend(card);
   closeModal(addCardModal);
+  addCardForm.reset();
 }
