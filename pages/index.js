@@ -75,6 +75,7 @@ function closeModal(modal) {
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
+  //submitButtonSelector.reset;
 }
 
 profileEditButton.addEventListener("click", () => openModal(profileEditForm));
@@ -169,4 +170,6 @@ function handleAddCardSubmit(data) {
   cardListEl.prepend(card);
   closeModal(addCardModal);
   addCardForm.reset();
+  formValidator.disableSubmitButton();
+  //I need to reset the submit button after a new card is made
 }

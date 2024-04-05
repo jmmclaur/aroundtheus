@@ -49,7 +49,7 @@ export default class FormValidator {
     if (isFormValid) {
       this._enableSubmitButton();
     } else {
-      this.disableSubmitButton();
+      this._disableSubmitButton();
     }
   }
 
