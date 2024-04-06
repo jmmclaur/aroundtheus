@@ -46,10 +46,11 @@ const cardTemplate =
 const cardListEl = document.querySelector(".gallery__cards");
 
 /* Add Button Elements */
-const addCardButton = document.querySelector(".profile__add-button");
+const addCardButton = document.querySelector(".profile__add-button"); //change from document to addCardModal
 const addCardForm = document.querySelector("#add-card-form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardCloseButton = addCardModal.querySelector("button");
+const addSubmitButton = addCardModal.querySelector(".modal__button");
 
 /* Preview Elements */
 const previewCardModal = document.querySelector("#modal-preview");
@@ -75,10 +76,9 @@ function closeModal(modal) {
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
-  //submitButtonSelector.reset;
 }
 
-profileEditButton.addEventListener("click", () => openModal(profileEditForm));
+//profileEditButton.addEventListener("click", () => openModal(profileEditForm));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -132,6 +132,18 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
+const formList = document.querySelectorAll(".modal__form");
+const formValidators = {};
+const enableValidation = (formList) => {
+  formList.forEach((form) => {
+    const formValidator = new FormValidator(config, form);
+    formValidator.enableValidation();
+    formValidators[form.getAttribute("id")] = formValidator;
+    return formValidators;
+  });
+};
+enableValidation(formList);
+
 function handleImageClick(cardData) {
   openModal(previewCardModal);
   previewImage.src = cardData.link;
@@ -145,10 +157,11 @@ initialCards.forEach((cardData) => {
 });
 
 const forms = document.querySelectorAll(config.formSelector);
-
 forms.forEach((form) => {
-  const formValidator = new FormValidator(config, form);
-  formValidator.enableValidation();
+  const addCardForm = new FormValidator(config, form);
+  addCardForm.enableValidation();
+  const profileEditForm = new FormValidator(config, form);
+  profileEditForm.enableValidation();
 });
 
 function handleProfileEditSubmit(evt) {
@@ -170,6 +183,6 @@ function handleAddCardSubmit(data) {
   cardListEl.prepend(card);
   closeModal(addCardModal);
   addCardForm.reset();
-  formValidator.disableSubmitButton();
-  //I need to reset the submit button after a new card is made
+  addSubmitButton.classList.add("modal__button_disabled"); // Assuming you have such a class
+  addSubmitButton.disabled = true;
 }
