@@ -78,7 +78,7 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscapeKey);
 }
 
-//profileEditButton.addEventListener("click", () => openModal(profileEditForm));
+//profileEditButton.addEventListener("click", () => openModal(profileEditForm)); reviewer wants removed
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -109,8 +109,8 @@ previewCloseButton.addEventListener("click", () => {
 /* Popup Escape */
 function closeModalOnRemoteClick(evt) {
   if (
-    evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal__close")
+    evt.target === evt.currentTarget //||
+    //evt.target.classList.contains("modal__close") reviewer wants removed
   ) {
     closeModal(evt.target);
   }
@@ -156,19 +156,13 @@ initialCards.forEach((cardData) => {
   cardListEl.prepend(cardView);
 });
 
-const forms = document.querySelectorAll(config.formSelector);
-forms.forEach((form) => {
-  const addCardForm = new FormValidator(config, form);
-  addCardForm.enableValidation();
-  const profileEditForm = new FormValidator(config, form);
-  profileEditForm.enableValidation();
-});
-
 function handleProfileEditSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
+  //formValidators["profile-edit-form"].disableSubmitButton;
+  //profileEditForm.reset();
 }
 
 function createCard(data) {
@@ -182,7 +176,11 @@ function handleAddCardSubmit(data) {
   const card = createCard({ name, link });
   cardListEl.prepend(card);
   closeModal(addCardModal);
+  formValidators[
+    addCardForm.getAttribute("add-card-form")
+  ].disableSubmitButton();
   addCardForm.reset();
-  addSubmitButton.classList.add("modal__button_disabled"); // Assuming you have such a class
-  addSubmitButton.disabled = true;
+  //addCardForm.reset(); original below works, reviewer wants formValidator used
+  //addSubmitButton.classList.add("modal__button_disabled"); // Assuming you have such a class
+  //addSubmitButton.disabled = true;
 }
