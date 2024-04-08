@@ -78,7 +78,6 @@ function openModal(modal) {
   document.addEventListener("keydown", handleEscapeKey);
 }
 
-//profileEditButton.addEventListener("click", () => openModal(profileEditForm)); reviewer wants removed
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit);
@@ -133,6 +132,7 @@ const config = {
 };
 
 const formList = document.querySelectorAll(".modal__form");
+
 const formValidators = {};
 const enableValidation = (formList) => {
   formList.forEach((form) => {
@@ -152,8 +152,8 @@ function handleImageClick(cardData) {
 }
 
 initialCards.forEach((cardData) => {
-  const cardView = createCard(cardData);
-  cardListEl.prepend(cardView);
+  const cardView = new createCard(cardData);
+  cardListEl.append(cardView);
 });
 
 function handleProfileEditSubmit(evt) {
@@ -161,8 +161,6 @@ function handleProfileEditSubmit(evt) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closeModal(profileEditModal);
-  //formValidators["profile-edit-form"].disableSubmitButton;
-  //profileEditForm.reset();
 }
 
 function createCard(data) {
@@ -171,16 +169,12 @@ function createCard(data) {
 }
 
 function handleAddCardSubmit(data) {
+  data.preventDefault();
   const name = data.target.name.value;
   const link = data.target.link.value;
   const card = createCard({ name, link });
   cardListEl.prepend(card);
   closeModal(addCardModal);
-  formValidators[
-    addCardForm.getAttribute("add-card-form")
-  ].disableSubmitButton();
+  formValidators["add-card-form"].disableSubmitButton();
   addCardForm.reset();
-  //addCardForm.reset(); original below works, reviewer wants formValidator used
-  //addSubmitButton.classList.add("modal__button_disabled"); // Assuming you have such a class
-  //addSubmitButton.disabled = true;
 }
