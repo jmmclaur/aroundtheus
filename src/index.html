@@ -71,18 +71,20 @@
         ></button>
         <p class="modal__title">Edit Profile</p>
         <form class="modal__form" id="profile-edit-form">
-          <input
-            class="modal__input modal__input_type_title"
-            type="text"
-            name="Title"
-            placeholder="Jacques Cousteau"
-            id="profile-title-input"
-            required
-            maxlength="40"
-            minlength="2"
-          />
+          <label class="modal__label" for="modal-title-input">
+            <input
+              class="modal__input modal__input_type_title"
+              type="text"
+              name="Title"
+              placeholder="Jacques Cousteau"
+              id="profile-title-input"
+              required
+              maxlength="40"
+              minlength="2"
+            />
+          </label>
           <span class="modal__error" id="profile-title-input-error"></span>
-          <label class="modal__label" for="modal-job-input">
+          <label class="modal__label" for="modal-description-input">
             <input
               class="modal__input modal__input_type_description"
               type="text"
