@@ -1,12 +1,12 @@
-import Card from "../../components/Card.js";
-import FormValidator from "../../components/FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 import "./index.css";
-import userInfo from "../components/UserInfo.js";
+import UserInfo from "../components/UserInfo.js";
 import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popupWithImage from "../components/PopUpWithImage.js";
 //import { data } from "autoprefixer";
-import { initialCards } from "../utils/constants.js";
+import { initialCards } from "../utils.js/constant.js";
 
 /* import {
   initialCards,
@@ -148,10 +148,10 @@ const cardPopUp = new popUpWithForm(
 );
 cardPopUp.setEventListeners();
 
-const popupWithImage = new popupWithImage("#preview__image-modal");
-popupWithImage.setEventListeners();
+const popupImage = new popupWithImage("#preview__image-modal");
+popupImage.setEventListeners();
 
-const userInfo = new userInfo({
+const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   descriptionSelector: ".profile__description",
 });
