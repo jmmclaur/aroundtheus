@@ -6,7 +6,13 @@ import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popupWithImage from "../components/PopUpWithImage.js";
 //import { data } from "autoprefixer";
-import { cardListEl, initialCards } from "../utils.js/constant.js";
+import {
+  cardListEl,
+  initialCards,
+  addCardButton,
+  profileEditForm,
+  addCardForm,
+} from "../utils.js/constant.js";
 
 /* import {
   initialCards,
@@ -15,41 +21,10 @@ import { cardListEl, initialCards } from "../utils.js/constant.js";
   addCardForm,
 } from "../../utils.js/constant.js"; */
 
-/* Profile Elements */
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
-const profileTitle = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-
-/* Gallery Elements */
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
-const cardListEl = document.querySelector(".gallery__cards");
-
-/* Add Button Elements */
-const addCardButton = document.querySelector(".profile__add-button"); //change from document to addCardModal
-const addCardForm = document.querySelector("#add-card-form");
-const addCardModal = document.querySelector("#add-card-modal");
-const addCardCloseButton = addCardModal.querySelector("button");
-const addSubmitButton = addCardModal.querySelector(".modal__button");
-
-/* Preview Elements */
-const previewCardModal = document.querySelector("#modal-preview");
-const previewImage = document.querySelector(".modal__preview-image");
-const previewDescription = document.querySelector(
-  ".modal__preview-description"
-);
-const previewCloseButton = previewCardModal.querySelector("button");
-
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
+/*
 function handleEscapeKey(evt) {
   if (evt.key === "Escape") {
     const modal = document.querySelector(".modal_opened");
@@ -64,6 +39,7 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
 }
+*/
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
