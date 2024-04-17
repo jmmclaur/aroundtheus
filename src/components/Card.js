@@ -1,7 +1,6 @@
 export default class Card {
+  //good to go 4.17
   constructor(data, cardSelector, handleImageClick) {
-    //this._name = name;
-    //this._link = link;
     this._data = data;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
@@ -21,7 +20,6 @@ export default class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        //this._handleImageClick({ name: this._name, link: this._link });
         this._handleImageClick(this._data);
       });
   }
