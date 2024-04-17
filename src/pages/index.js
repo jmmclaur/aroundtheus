@@ -6,7 +6,7 @@ import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popupWithImage from "../components/PopUpWithImage.js";
 //import { data } from "autoprefixer";
-import { initialCards } from "../utils.js/constant.js";
+import { cardListEl, initialCards } from "../utils.js/constant.js";
 
 /* import {
   initialCards,
@@ -62,10 +62,7 @@ previewCloseButton.addEventListener("click", () => {
 
 /* Popup Escape */
 function closeModalOnRemoteClick(evt) {
-  if (
-    evt.target === evt.currentTarget //||
-    //evt.target.classList.contains("modal__close") reviewer wants removed
-  ) {
+  if (evt.target === evt.currentTarget) {
     closeModal(evt.target);
   }
 }
@@ -89,6 +86,7 @@ const config = {
 const formList = document.querySelectorAll(".modal__form");
 
 const formValidators = {};
+
 const enableValidation = (formList) => {
   formList.forEach((form) => {
     const formValidator = new FormValidator(config, form);
@@ -111,6 +109,11 @@ initialCards.forEach((cardData) => {
   cardListEl.append(cardView);
 });
 
+function renderCard(cardData) {
+  const card = createCard(cardData);
+  cardListEl.prepend(card);
+} //idk if I need this
+
 function handleProfileEditSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -131,30 +134,27 @@ function handleAddCardSubmit(data) {
   cardListEl.prepend(card);
   closeModal(addCardModal);
   formValidators["add-card-form"].disableSubmitButton();
+  renderCard({ name, link });
   addCardForm.reset();
 }
 
-// sprint 8 extra re-writes
-
+// sprint 8 refactoring
 const profilePopUp = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
-profilePopUp.setEventListeners();
+profilePopUp.setEventListeners(); //id ok
 
-const cardPopUp = new popUpWithForm(
-  "#profile-add-modal",
-  handleAddCardFormSubmit
-);
-cardPopUp.setEventListeners();
+const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardFormSubmit);
+cardPopUp.setEventListeners(); //id ok
 
-const popupImage = new popupWithImage("#preview__image-modal");
-popupImage.setEventListeners();
+const popupImage = new popupWithImage(".modal__preview-image");
+popupImage.setEventListeners(); //class ok
 
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   descriptionSelector: ".profile__description",
-});
+}); //class ok
 
 const cardSection = new section(
   {
@@ -165,4 +165,4 @@ const cardSection = new section(
     },
   },
   ".gallery__cards"
-);
+); //class ok
