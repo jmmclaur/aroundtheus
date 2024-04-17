@@ -2,26 +2,187 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Webpack</title>
+    <meta
+      content="width=device-width, user-scalable=no, initial-scale=1.0,
+    maximum-scale=1.0"
+      name="viewport"
+    />
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Images" />
+    <meta name="keywords" content="US Images" />
+    <title>Around the U.S</title>
+    <link href="./pages/index.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="./favicon.ico" />
   </head>
+
   <body class="page">
-    <h1 class="page__title">Hello from Webpack!</h1>
-    <h2 class="page__subtitle">Image and Font Files Processing!</h2>
-    <!-- add an image here -->
-    <div class="page__image_wrapper">
-      <img id="image-steps" class="page__image" src="./images/steps.png" />
+    <div class="page__content">
+      <header class="header page__section">
+        <img
+          src="<%=require('./images/around-the-world-logo.svg')%>"
+          alt="Around the US logo"
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile page__section">
+          <img
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
+            alt="Avatar"
+            class="profile__image"
+          />
+          <div class="profile__info">
+            <div class="profile__wrapper">
+              <h1 class="profile__title" id="profile-title">
+                Jacques Cousteau
+              </h1>
+              <button
+                class="profile__edit-button"
+                id="profile-edit-button"
+                type="button"
+              ></button>
+            </div>
+            <p class="profile__description" id="profile-description">
+              Explorer
+            </p>
+          </div>
+          <button
+            class="profile__add-button"
+            id="profile-add-button add-card-button"
+            type="button"
+          ></button>
+        </section>
+        <section class="gallery page__section">
+          <ul class="gallery__cards"></ul>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">JM @ 2023 Around the U.S.</p>
+      </footer>
     </div>
-    <!-- add a div block -->
-    <div class="page__image_wrapper">
-      <div class="page__image page__image_achievements"></div>
+
+    <!--Edit Modal-->
+    <div class="modal" id="profile-edit-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="modal-close-button"
+        ></button>
+        <p class="modal__title">Edit Profile</p>
+        <form class="modal__form" id="profile-edit-form">
+          <input
+            class="modal__input modal__input_type_title"
+            type="text"
+            name="Title"
+            placeholder="Jacques Cousteau"
+            id="profile-title-input"
+            required
+            maxlength="40"
+            minlength="2"
+          />
+          <span class="modal__error" id="profile-title-input-error"></span>
+          <label class="modal__label" for="modal-job-input">
+            <input
+              class="modal__input modal__input_type_description"
+              type="text"
+              name="Description"
+              placeholder="Explorer"
+              id="profile-description-input"
+              required
+              maxlength="200"
+              minlength="2"
+            />
+            <span
+              class="modal__error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
+          <button class="modal__button modal__button_disabled" type="submit">
+            Save
+          </button>
+        </form>
+      </div>
     </div>
-    <!-- add another image here -->
-    <div class="page__image_wrapper">
-      <img
-        class="page__image"
-        src="<%= require('./images/website-contacts.jpg')%>"
-      />
+
+    <!--Add Modal-->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="modal-close-button"
+        ></button>
+        <p class="modal__title">New Place</p>
+        <form class="modal__form" id="add-card-form">
+          <label class="modal__label" for="modal-place-input">
+            <input
+              class="modal__input modal__input_type_name"
+              type="text"
+              name="name"
+              placeholder="Name"
+              id="modal-name"
+              required
+              maxlength="30"
+              minlength="2"
+            />
+            <span class="modal__error" id="modal-name-error"></span>
+            <input
+              class="modal__input modal__input_type_url"
+              type="url"
+              name="link"
+              placeholder="Image URL"
+              id="modal-url"
+              required
+              maxlength="80"
+              minlength="2"
+            />
+            <span class="modal__error" id="modal-url-error"></span>
+          </label>
+          <button
+            id="add-submit"
+            class="modal__button modal__button_disabled"
+            disabled
+            type="submit"
+          >
+            Create
+          </button>
+        </form>
+      </div>
     </div>
+
+    <!--Preview Modal-->
+    <div class="modal" id="modal-preview">
+      <div class="modal__preview">
+        <button
+          class="modal__close"
+          id="preview-modal-close"
+          type="button"
+        ></button>
+        <img src="" alt="" class="modal__preview-image" id="modal-image" />
+        <h2 class="modal__preview-description"></h2>
+      </div>
+    </div>
+
+    <!--Template-->
+    <template id="card-template">
+      <li class="card">
+        <img src="#" alt="" class="card__image" id="card-image" />
+        <button
+          type="button"
+          class="card__trash-button"
+          id="card__remove-button"
+        ></button>
+        <div class="card__description">
+          <h2 class="card__title" id="card-title"></h2>
+          <button
+            type="button"
+            class="card__like-button"
+            id="card__like-button"
+          ></button>
+        </div>
+      </li>
+    </template>
+    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
-<!-- we're wrapping each element in a div so that it appears on the next line -->
