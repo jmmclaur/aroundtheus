@@ -132,7 +132,7 @@ function handleAddCardSubmit(data) {
   addCardForm.reset();
 }
 
-// sprint 8 extra re-writes
+/* sprint 8 extra re-writes
 
 function handleProfileEditSubmit() {
   filledUserInfo.setUserInfo();
@@ -198,3 +198,4 @@ const formValidator = new FormValidator(settings, profileEditForm);
 const cardValidator = new FormValidator(settings, profileAddForm);
 formValidator.enableValidation();
 cardValidator.enableValidation();
+*/
