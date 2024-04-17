@@ -15,6 +15,38 @@ import { cardListEl, initialCards } from "../utils.js/constant.js";
   addCardForm,
 } from "../../utils.js/constant.js"; */
 
+/* Profile Elements */
+const profileEditButton = document.querySelector("#profile-edit-button");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const profileTitleInput = document.querySelector("#profile-title-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
+const profileEditForm = profileEditModal.querySelector(".modal__form");
+
+/* Gallery Elements */
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+const cardListEl = document.querySelector(".gallery__cards");
+
+/* Add Button Elements */
+const addCardButton = document.querySelector(".profile__add-button"); //change from document to addCardModal
+const addCardForm = document.querySelector("#add-card-form");
+const addCardModal = document.querySelector("#add-card-modal");
+const addCardCloseButton = addCardModal.querySelector("button");
+const addSubmitButton = addCardModal.querySelector(".modal__button");
+
+/* Preview Elements */
+const previewCardModal = document.querySelector("#modal-preview");
+const previewImage = document.querySelector(".modal__preview-image");
+const previewDescription = document.querySelector(
+  ".modal__preview-description"
+);
+const previewCloseButton = previewCardModal.querySelector("button");
+
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
