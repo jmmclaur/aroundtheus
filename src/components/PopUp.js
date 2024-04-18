@@ -27,11 +27,11 @@ export default class PopUp {
       closeModal(modal);
     }
   }
-  closeModal() {
+  close() {
     this._popUpElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscapeKey);
   }
-  openModal() {
+  open() {
     this._popUpElement.classList.add("modal_opened");
     document.addEventListener("keydown", handleEscapeKey);
   }
