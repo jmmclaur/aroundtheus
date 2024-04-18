@@ -148,13 +148,6 @@ initialCards.forEach((cardData) => {
 function renderCard(cardData) {
   const card = createCard(cardData);
   cardListEl.prepend(card);
-} //idk if I need this
-
-function handleProfileEditSubmit(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
 }
 
 function createCard(cardData) {
@@ -162,6 +155,29 @@ function createCard(cardData) {
   return cardElement.getView();
 }
 
+/* function handleProfileEditSubmit(evt) {
+  evt.preventDefault();
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closeModal(profileEditModal);
+} */
+
+function handleProfileEditSubmit() {
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  profilePopUp.close();
+}
+
+function handleAddCardSubmit(data) {
+  data.preventDefault();
+  const name = data.target.name.value;
+  const link = data.target.link.value;
+  const card = createCard({ name, link });
+  renderCard({ name, link });
+  addCardForm.reset(card);
+}
+
+/*
 function handleAddCardSubmit(data) {
   data.preventDefault();
   const name = data.target.name.value;
@@ -173,6 +189,7 @@ function handleAddCardSubmit(data) {
   renderCard({ name, link });
   addCardForm.reset();
 }
+*/
 
 // sprint 8 refactoring
 const profilePopUp = new popUpWithForm(
