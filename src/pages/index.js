@@ -75,7 +75,7 @@ addCardForm.addEventListener("submit", handleAddCardSubmit);
 }); */
 
 profileEditButton.addEventListener("click", () => {
-  profilePopUp.openModal();
+  profilePopUp.open();
 });
 
 profileEditCloseButton.addEventListener("click", () => {
@@ -83,7 +83,7 @@ profileEditCloseButton.addEventListener("click", () => {
 });
 
 addCardButton.addEventListener("click", () => {
-  cardPopUp.openModal();
+  cardPopUp.open();
 });
 
 addCardCloseButton.addEventListener("click", () => {
@@ -187,7 +187,7 @@ cardPopUp.setEventListeners(); //id ok
 const popUpImage = new popUpWithImage(".modal__preview-image");
 popUpImage.setEventListeners(); //class ok
 
-const UserInfo = new UserInfo({
+const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   descriptionSelector: ".profile__description",
 }); //class ok
