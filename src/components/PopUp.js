@@ -1,5 +1,5 @@
-//updated 4.19.2024
-import { openModal, closeModal } from "../src/utils.js";
+//updated 4.19.2024, 4.22
+//import { openModal, closeModal } from "../src/utils.js";
 
 export default class PopUp {
   constructor({ popUpSelector }) {
@@ -23,17 +23,17 @@ export default class PopUp {
   } */
 
   close() {
-    closeModal(this._popUpElement);
-    //this._popUpElement.classList.remove("modal_opened");
+    //closeModal(this._popUpElement);
+    this._popUpElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", (evt) => {
       this._handleEscapeKey(evt);
     });
   }
 
   open() {
-    openModal(this._popUpElement);
-    //this._popUpElement.classList.add("modal_opened");
-    //document.addEventListener("keydown", handleEscapeKey);
+    //openModal(this._popUpElement);
+    this._popUpElement.classList.add("modal_opened");
+    document.addEventListener("keydown", handleEscapeKey);
   }
   //
 

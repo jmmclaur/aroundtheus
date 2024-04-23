@@ -5,19 +5,18 @@ import UserInfo from "../components/UserInfo.js";
 import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popUpWithImage from "../components/PopUpWithImage.js";
-import {
+import { initialCards } from "../utils/constant.js";
+
+/* import {
   initialCards,
-  /* createNewCard,
-  placeNewCard,
-  handleImageClick,
-  openModal,
-  closeModal,
-  handleModalCloseClick,
-  handleCardAddSubmit,
-  userInfo,
-  initializeProfileEditForm,
-  handleProfileFormSubmit, */
+  config,
+  formValidators,
+  profileEditButton,
+  addCardButton,
+  profileTitleInput,
+  profileDescriptionInput,
 } from "../utils/constant.js";
+// import { createCard, handleAddCardSubmit } from "../utils/utils.js";
 
 /* ------------------------------------------------------------------------------ */
 
@@ -57,7 +56,7 @@ const previewCloseButton = previewCardModal.querySelector("button");
 /* ------------------------------------------------------------------------------ */
 
 /* Form Validators */
-
+/*
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
@@ -117,7 +116,6 @@ previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 /* ------------------------------------------------------------------------------ */
 
 /* Restructuring */
-
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -186,9 +184,7 @@ function handleAddCardSubmit(data) {
   addCardForm.reset();
 } //ok
 
-/* ------------------------------------------------------------------------------ */
-
-// Sprint 8 Refactoring
+// sprint 8 refactoring
 const profilePopUp = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
