@@ -1,23 +1,13 @@
+//updated 4.19.2024
+import { openModal, closeModal } from "../src/utils.js";
+
 export default class PopUp {
   constructor({ popUpSelector }) {
     this._popUpElement = document.querySelector(popUpSelector);
-    this._handleEscapeKey = this._handleEscapeKey(this);
-    //this._handleEscClose = this._handleEscClose();
+    this._handleEscapeKey = this._handleEscapeKey.bind(this);
   }
 
-  /*
-  open() {
-    this._popUpElement.classList.add("modal_opened");
-    document.addEventListener("keydown", this._handleEscapeKey);
-  }
-
-  close() {
-    this._popUpElement.classList.remove("modal_opened");
-    document.removeEventListener("keydown", this._handleEscapeKey);
-  }
-  */
-
-  _handleEscClose = (evt) => {
+  _handleEscapeKey = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
@@ -33,12 +23,17 @@ export default class PopUp {
   } */
 
   close() {
-    this._popUpElement.classList.remove("modal_opened");
-    document.removeEventListener("keydown", this._handleEscapeKey);
+    closeModal(this._popUpElement);
+    //this._popUpElement.classList.remove("modal_opened");
+    document.removeEventListener("keydown", (evt) => {
+      this._handleEscapeKey(evt);
+    });
   }
+
   open() {
-    this._popUpElement.classList.add("modal_opened");
-    document.addEventListener("keydown", handleEscapeKey);
+    openModal(this._popUpElement);
+    //this._popUpElement.classList.add("modal_opened");
+    //document.addEventListener("keydown", handleEscapeKey);
   }
   //
 
@@ -49,15 +44,19 @@ export default class PopUp {
   };
 
   setEventListeners() {
-    this._closeButton = this._popUpElement.querySelector(".modal__edit-close");
+    document.addEventListener("keydown", (evt) => {
+      this._handleEscapeKey(evt);
+    });
+    /*
+    this._closeButton = this._popUpElement.querySelector(".modal__close");
     this._closeButton.addEventListener("click", () => {
       this.close();
     });
-    this._popUpElement.addEventListener("click", this._handleOutsideClick);
+    //this._popUpElement.addEventListener("click", this._handleOutsideClick);
     this._popUpElement.addEventListener("mousedown", (evt) => {
       if (evt.target === evt.currentTarget) {
         this.close();
       }
-    });
+    }); */
   }
 }

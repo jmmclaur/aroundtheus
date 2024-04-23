@@ -5,8 +5,21 @@ import UserInfo from "../components/UserInfo.js";
 import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popUpWithImage from "../components/PopUpWithImage.js";
-// import { data } from "autoprefixer";
-import { initialCards } from "../utils.js/constant.js";
+import {
+  initialCards,
+  /* createNewCard,
+  placeNewCard,
+  handleImageClick,
+  openModal,
+  closeModal,
+  handleModalCloseClick,
+  handleCardAddSubmit,
+  userInfo,
+  initializeProfileEditForm,
+  handleProfileFormSubmit, */
+} from "../utils/constant.js";
+
+/* ------------------------------------------------------------------------------ */
 
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -43,6 +56,22 @@ const previewCloseButton = previewCardModal.querySelector("button");
 
 /* ------------------------------------------------------------------------------ */
 
+/* Form Validators */
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config);
+
+/* ------------------------------------------------------------------------------ */
+
 /* Functions */
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit); //ok
@@ -52,7 +81,6 @@ addCardForm.addEventListener("submit", handleAddCardSubmit); //ok
 /* ------------------------------------------------------------------------------ */
 
 /* Event Listener */
-
 profileEditButton.addEventListener("click", () => {
   profilePopUp.open();
 }); //ok
@@ -89,6 +117,7 @@ previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
 /* ------------------------------------------------------------------------------ */
 
 /* Restructuring */
+
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -157,7 +186,9 @@ function handleAddCardSubmit(data) {
   addCardForm.reset();
 } //ok
 
-// sprint 8 refactoring
+/* ------------------------------------------------------------------------------ */
+
+// Sprint 8 Refactoring
 const profilePopUp = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -167,8 +198,8 @@ profilePopUp.setEventListeners(); //ok
 const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
 cardPopUp.setEventListeners(); //ok
 
-const popUpImage = new popUpWithImage(".modal__preview-image");
-popUpImage.setEventListeners(); //ok
+const popupWithImage = new popUpWithImage(".modal__preview-image");
+popupWithImage.setEventListeners(); //ok
 
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
