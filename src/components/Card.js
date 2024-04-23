@@ -2,31 +2,34 @@ export default class Card {
   //good to go 4.17
   constructor(data, cardSelector, handleImageClick) {
     this._data = data;
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
 
   _setEventListeners() {
-    this._cardElement
+    this._likeButton
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         this._handleLikeIcon();
       });
-    this._cardElement
+    this._trashButton
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
         this._handleDeleteButton();
       });
-    this._cardElement
+    this._cardImageEl
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        this._handleImageClick(this._data);
+        this._handleImageClick({ name: this._name, link: this._link });
       });
   }
 
   _handleLikeIcon() {
-    this._cardElement
+    this._likeButton
       .querySelector(".card__like-button")
+      .cloneNode(true)
       .classList.toggle("card__like-button_active");
   }
   _handleDeleteButton() {
@@ -45,7 +48,6 @@ export default class Card {
     cardImageEl.src = this._data.link;
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
-
     this._setEventListeners();
     return this._cardElement;
   }
