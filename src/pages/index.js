@@ -1,3 +1,6 @@
+// as of 4.22.2024 the like/trash buttons work, and I can open the modals for edit/add but clicking on close button doesn't work (it exits the entire dev window).
+// and I need to test out the validator, right now it's commented out b/c it's causing issues
+
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
@@ -146,13 +149,28 @@ const enableValidation = (formList) => {
 };
 enableValidation(formList); */
 
+/* function handleImageClick(cardData) {
 function handleImageClick(cardData) {
-  //openModal(previewCardModal);
+  openModal(previewCardModal);
   popUpImage.open(cardData);
   previewImage.src = cardData.link;
   previewImage.setAttribute("alt", cardData.name);
+  previewDescription.textContent = cardData.name; 
+} 
+
+function handleImageClick(description, link) {
+  previewDescription = description;
+  previewImage = link;
+  previewCardModal.open();
+} 
+*/
+
+function handleImageClick(cardData) {
+  previewImage.setAttribute("src", cardData.link);
+  previewImage.setAttribute("alt", cardData.name);
   previewDescription.textContent = cardData.name;
-} //ok
+  previewCardModal.open(cardData);
+} //preview still isn't workings
 
 initialCards.forEach((cardData) => {
   const card = createCard(cardData);
