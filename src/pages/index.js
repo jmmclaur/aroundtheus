@@ -1,32 +1,21 @@
 // as of 4.22.2024 the like/trash buttons work, and I can open the modals for edit/add but clicking on close button doesn't work (it exits the entire dev window).
 // and I need to test out the validator, right now it's commented out b/c it's causing issues
 
+import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import popUpWithForm from "../components/PopUpWithForm.js";
 import section from "../components/Section.js";
 import popUpWithImage from "../components/PopUpWithImage.js";
 import { initialCards } from "../utils/constant.js";
 
-/* import {
-  initialCards,
-  config,
-  formValidators,
-  profileEditButton,
-  addCardButton,
-  profileTitleInput,
-  profileDescriptionInput,
-} from "../utils/constant.js";
-// import { createCard, handleAddCardSubmit } from "../utils/utils.js";
-
 /* ------------------------------------------------------------------------------ */
 
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
+//const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -44,8 +33,8 @@ const cardListEl = document.querySelector(".gallery__cards");
 const addCardButton = document.querySelector(".profile__add-button"); //change from document to addCardModal
 const addCardForm = document.querySelector("#add-card-form");
 const addCardModal = document.querySelector("#add-card-modal");
-const addCardCloseButton = addCardModal.querySelector("button");
-//const addSubmitButton = addCardModal.querySelector(".modal__button");
+//const addCardCloseButton = addCardModal.querySelector("button");
+const addSubmitButton = addCardModal.querySelector(".modal__button");
 
 /* Preview Elements */
 const previewCardModal = document.querySelector("#modal-preview");
@@ -54,30 +43,18 @@ const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
 const previewTitle = document.querySelector(".modal-image");
-const previewCloseButton = previewCardModal.querySelector("button");
+//const previewCloseButton = previewCardModal.querySelector("button");
 
+const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------ */
 
 /* Form Validators */
-/*
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(config, formElement);
-    const formName = formElement.getAttribute("name");
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-
-enableValidation(config);
 
 /* ------------------------------------------------------------------------------ */
 
 /* Functions */
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit); //ok
-//addCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardForm.addEventListener("submit", handleAddCardSubmit); //ok
 
 /* ------------------------------------------------------------------------------ */
@@ -87,21 +64,9 @@ profileEditButton.addEventListener("click", () => {
   profilePopUp.open();
 }); //ok
 
-profileEditCloseButton.addEventListener("click", () => {
-  close(profileEditModal);
-});
-
 addCardButton.addEventListener("click", () => {
   cardPopUp.open();
 }); //ok
-
-addCardCloseButton.addEventListener("click", () => {
-  close(addCardModal);
-});
-
-previewCloseButton.addEventListener("click", () => {
-  close(previewCardModal);
-});
 
 /* ------------------------------------------------------------------------------ */
 
@@ -135,42 +100,13 @@ forms.forEach((form) => {
   formValidator.enableValidation();
 }); //ok
 
-/* const formList = document.querySelectorAll(".modal__form");
+//Old stuff down below
+//previewImage, previewDescription, previewTitle
 
-const formValidators = {};
-
-const enableValidation = (formList) => {
-  formList.forEach((form) => {
-    const formValidator = new FormValidator(config, form);
-    formValidator.enableValidation();
-    formValidators[form.getAttribute("id")] = formValidator;
-    return formValidators;
-  });
-};
-enableValidation(formList); */
-
-/* function handleImageClick(cardData) {
-function handleImageClick(cardData) {
-  openModal(previewCardModal);
-  popUpImage.open(cardData);
-  previewImage.src = cardData.link;
-  previewImage.setAttribute("alt", cardData.name);
-  previewDescription.textContent = cardData.name; 
-} 
-
-function handleImageClick(description, link) {
-  previewDescription = description;
-  previewImage = link;
-  previewCardModal.open();
-} 
-*/
-
-function handleImageClick(cardData) {
-  previewImage.setAttribute("src", cardData.link);
-  previewImage.setAttribute("alt", cardData.name);
-  previewDescription.textContent = cardData.name;
-  previewCardModal.open(cardData);
-} //preview still isn't workings
+// let's try to figure out the preview stuff
+function handleImageClick(name, link) {
+  previewCardModal.open(name, link);
+}
 
 initialCards.forEach((cardData) => {
   const card = createCard(cardData);
@@ -178,8 +114,9 @@ initialCards.forEach((cardData) => {
 }); //ok
 
 function renderCard(cardData) {
-  const card = createCard(cardData);
+  const card = createCard(cardData, cardSelector, handleImageClick);
   cardListEl.prepend(card);
+  return card.getView();
 } //ok
 
 function createCard(cardData) {
@@ -187,20 +124,27 @@ function createCard(cardData) {
   return cardElement.getView();
 } //ok
 
-function handleProfileEditSubmit() {
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  profilePopUp.close();
-} //ok
+function handleProfileEditSubmit(data) {
+  userInfo.setUserInfo({ name: data.title, description: data.description });
+  profileEditModal.closest();
+}
 
-function handleAddCardSubmit(data) {
-  data.preventDefault();
-  const name = data.target.name.value;
-  const link = data.target.link.value;
-  //const card = createCard({ name, link });
-  renderCard({ name, link });
-  addCardForm.reset();
-} //ok
+function handleAddCardSubmit(userInfo) {
+  const name = userInfo.title;
+  const link = userInfo.link;
+  const createCard = renderCard({ name, link });
+  cardSection.addItem(createCard);
+  addCardModal.closest();
+}
+
+profileEditButton.addEventListener("click", () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  profileTitleInput.value = currentUserInfo.name;
+  profileDescriptionInput.value = currentUserInfo.description;
+  profileEditModal.open();
+});
+
+// so I need to remove the close buttons and from here, move event listeners (close buttons too) to popup.js, and some listeners into popupwithform.js
 
 // sprint 8 refactoring
 const profilePopUp = new popUpWithForm(

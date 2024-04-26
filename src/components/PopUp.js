@@ -1,17 +1,17 @@
-//updated 4.19.2024, 4.22
-//import { openModal, closeModal } from "../src/utils.js";
-
 export default class PopUp {
   constructor({ popUpSelector }) {
     this._popUpElement = document.querySelector(popUpSelector);
-    this._handleEscapeKey = this._handleEscapeKey.bind(this);
+    //this._handleEscapeKey = this._handleEscapeKey.bind(this);
+    this._closeButton = this._popUpElement.querySelector(".modal__close");
+    this.close = this.close.bind(this);
   }
 
+  /*
   _handleEscapeKey = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
-  };
+  }; */
 
   //
   /*
@@ -22,32 +22,55 @@ export default class PopUp {
     }
   } */
 
-  close() {
-    //closeModal(this._popUpElement);
-    this._popUpElement.classList.remove("modal_opened");
-    document.removeEventListener("keydown", (evt) => {
-      this._handleEscapeKey(evt);
-    });
+  open() {
+    this._popUpElement.classList.add("modal_opened");
+    document.addEventListener("keydown", this._handleEscapeKey);
+    document.addEventListener("mousedown", this._handleOutsideClick);
   }
 
-  open() {
-    //openModal(this._popUpElement);
-    this._popUpElement.classList.add("modal_opened");
-    document.addEventListener("keydown", handleEscapeKey);
+  close() {
+    this._popUpElement.classList.remove("modal_opened");
+    document.removeEventListener("keydown", this._handleEscapeKey);
+    document.removeEventListener("mousedown", this._handleOutsideClick);
   }
-  //
+
+  _handleEscapeKey = (evt) => {
+    if (evt.key === "Escape") {
+      this.close();
+    }
+  };
 
   _handleOutsideClick = (evt) => {
-    if (evt.target === evt.currentTarget) {
+    if (evt.target.classList.contains("modal")) {
       this.close();
     }
   };
 
   setEventListeners() {
+    this._closeButton.addEventListener("click", () => {
+      this.close();
+    });
+  }
+}
+/*
+let closeButton = document.getElementById("#modal-close-button");
+if (closeButton) {
+  let this._closeButton = closeButton.ariaValueMax;
+} */
+
+/*
+  _handleOutsideClick = (evt) => {
+    if (evt.target === evt.currentTarget) {
+      this.close();
+    }
+  }; */
+
+/*
+  setEventListeners() {
     document.addEventListener("keydown", (evt) => {
       this._handleEscapeKey(evt);
     });
-    /*
+    
     this._closeButton = this._popUpElement.querySelector(".modal__close");
     this._closeButton.addEventListener("click", () => {
       this.close();
@@ -57,6 +80,5 @@ export default class PopUp {
       if (evt.target === evt.currentTarget) {
         this.close();
       }
-    }); */
-  }
-}
+    });
+  }  */
