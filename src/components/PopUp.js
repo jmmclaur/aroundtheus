@@ -1,7 +1,6 @@
 export default class PopUp {
   constructor({ popUpSelector }) {
     this._popUpElement = document.querySelector(popUpSelector);
-    //this._handleEscapeKey = this._handleEscapeKey.bind(this);
     this._closeButton = this._popUpElement.querySelector(".modal__close");
     this.close = this.close.bind(this);
   }

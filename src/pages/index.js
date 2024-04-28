@@ -16,8 +16,8 @@ import { initialCards } from "../utils/constant.js";
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 //const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
-const profileTitle = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
+const profileTitle = document.querySelector("#profile-title");
+const profileDescription = document.querySelector("#profile-description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
@@ -37,18 +37,22 @@ const addCardModal = document.querySelector("#add-card-modal");
 const addSubmitButton = addCardModal.querySelector(".modal__button");
 
 /* Preview Elements */
-const previewCardModal = document.querySelector("#modal-preview");
+//const previewCardModal = document.querySelector("#modal-preview");
 const previewImage = document.querySelector(".modal__preview-image");
 const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
-const previewTitle = document.querySelector(".modal-image");
+//const previewTitle = document.querySelector(".modal-image");
 //const previewCloseButton = previewCardModal.querySelector("button");
 
 const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------ */
 
 /* Form Validators */
+const userInfo = new UserInfo({
+  profileTitle: ".profile__title",
+  profileDescription: ".profile__description",
+});
 
 /* ------------------------------------------------------------------------------ */
 
@@ -79,7 +83,8 @@ function closeModalOnRemoteClick(evt) {
 
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+//previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
+//popupWithImage.addEventListener("mousedown", closeModalOnRemoteClick);
 
 /* ------------------------------------------------------------------------------ */
 
@@ -156,15 +161,18 @@ profilePopUp.setEventListeners(); //ok
 const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
 cardPopUp.setEventListeners(); //ok
 
-const popupWithImage = new popUpWithImage(".modal__preview-image");
-popupWithImage.setEventListeners(); //ok
+const popupImage = new popUpWithImage("#modal-preview");
+popupImage.setEventListeners(); //passing the wrong thing through here
 
-const userInfo = new UserInfo({
+/* const previewCardModal = new previewCardModal("#modal-preview");
+previewCardModal.setEventListeners(); */
+
+/*const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   descriptionSelector: ".profile__description",
-}); //ok
+}); //ok */
 
-const cardSection = new section(
+/*const cardSection = new section(
   {
     items: initialCards,
     renderer: (cardData) => {
@@ -173,4 +181,13 @@ const cardSection = new section(
     },
   },
   ".gallery__cards"
-); //ok
+); //ok */
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  ".gallery__cards"
+);
+cardSection.renderItems();
