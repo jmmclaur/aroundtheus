@@ -18,11 +18,13 @@ export default class PopUpWithImage extends Popup {
     //popUpImage.alt = name;
     //popUpImage.src = link;
     this._image = this._popUpElement.querySelector(".modal__preview-image");
-    this._description = this._popUpElement.querySelector(".modal__text"); //this is labelled wrong, check html4.28.2024
+    this._caption = this._popUpElement.querySelector(
+      ".modal__preview-description"
+    ); //this is labeled wrong, check html4.28.2024//fixed
 
     this._image.src = data.link;
     this._image.alt = data.name;
-    this._description.textContent = data.name;
+    this._caption.textContent = data.name;
     super.open();
     //this._popUpImage.src = data.link;
     //this._popUpImage.alt = data.name;

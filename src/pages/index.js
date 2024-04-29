@@ -117,20 +117,22 @@ previewCardModal.setEventListeners();
 //this is brand new, let's replace const modalWithImage = new ModalWithImage format
 //
 
+/*
 initialCards.forEach((cardData) => {
   const card = createCard(cardData);
   cardListEl.append(card);
-}); //ok
+}); //ok */
 
 function renderCard(cardData) {
-  const card = createCard(cardData, cardSelector, handleImageClick);
-  return card.getView();
-} //ok
+  const addCard = new Card(cardData, cardSelector, handleImageClick);
+  return addCard.getView();
+} //ok //maybe new Card? where is that file? it is imported
 
 function createCard(cardData) {
   const cardElement = new Card(cardData, "#card-template", handleImageClick);
   return cardElement.getView();
-} //ok
+} //ok why do the cards disappear when we block this section? */
+//maybe the initialCards is impacting it?
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({ name: data.title, description: data.description });
