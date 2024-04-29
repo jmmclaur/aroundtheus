@@ -6,9 +6,10 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import popUpWithForm from "../components/PopUpWithForm.js";
-import section from "../components/Section.js";
+import Section from "../components/Section.js";
 import popUpWithImage from "../components/PopUpWithImage.js";
 import { initialCards } from "../utils/constant.js";
+import PopUpWithImage from "../components/PopUpWithImage.js";
 
 /* ------------------------------------------------------------------------------ */
 
@@ -105,13 +106,16 @@ forms.forEach((form) => {
   formValidator.enableValidation();
 }); //ok
 
-//Old stuff down below
-//previewImage, previewDescription, previewTitle
-
 // let's try to figure out the preview stuff
 function handleImageClick(name, link) {
   previewCardModal.open(name, link);
-}
+} //createCard and renderCard what should these be named as? Need to fix those along w/ the previewImageModal 4.28.2024
+//something is wrong w/ card.getView, previewCardModal
+
+const previewCardModal = new PopUpWithImage("#modal-preview");
+previewCardModal.setEventListeners();
+//this is brand new, let's replace const modalWithImage = new ModalWithImage format
+//
 
 initialCards.forEach((cardData) => {
   const card = createCard(cardData);
@@ -120,7 +124,6 @@ initialCards.forEach((cardData) => {
 
 function renderCard(cardData) {
   const card = createCard(cardData, cardSelector, handleImageClick);
-  cardListEl.prepend(card);
   return card.getView();
 } //ok
 
@@ -161,8 +164,9 @@ profilePopUp.setEventListeners(); //ok
 const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
 cardPopUp.setEventListeners(); //ok
 
-const popupImage = new popUpWithImage("#modal-preview");
-popupImage.setEventListeners(); //passing the wrong thing through here
+// this is being replaced w/ previewCardModal at line115
+/* const popupImage = new popUpWithImage("#modal-preview");
+popupImage.setEventListeners(); //passing the wrong thing through here */
 
 /* const previewCardModal = new previewCardModal("#modal-preview");
 previewCardModal.setEventListeners(); */
