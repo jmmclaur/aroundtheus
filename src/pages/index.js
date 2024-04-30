@@ -16,7 +16,6 @@ import PopUpWithImage from "../components/PopUpWithImage.js";
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-//const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
 const profileTitle = document.querySelector("#profile-title");
 const profileDescription = document.querySelector("#profile-description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -34,48 +33,33 @@ const cardListEl = document.querySelector(".gallery__cards");
 const addCardButton = document.querySelector(".profile__add-button"); //change from document to addCardModal
 const addCardForm = document.querySelector("#add-card-form");
 const addCardModal = document.querySelector("#add-card-modal");
-//const addCardCloseButton = addCardModal.querySelector("button");
 const addSubmitButton = addCardModal.querySelector(".modal__button");
 
 /* Preview Elements */
-//const previewCardModal = document.querySelector("#modal-preview");
 const previewImage = document.querySelector(".modal__preview-image");
 const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
-//const previewTitle = document.querySelector(".modal-image");
-//const previewCloseButton = previewCardModal.querySelector("button");
 
 const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------ */
 
-/* Form Validators */
 const userInfo = new UserInfo({
   profileTitle: ".profile__title",
   profileDescription: ".profile__description",
 });
 
-/* ------------------------------------------------------------------------------ */
-
-/* Functions */
-
 profileEditForm.addEventListener("submit", handleProfileEditSubmit); //ok
 addCardForm.addEventListener("submit", handleAddCardSubmit); //ok
 
-/* ------------------------------------------------------------------------------ */
-
-/* Event Listener */
 profileEditButton.addEventListener("click", () => {
   profilePopUp.open();
-}); //ok
+});
 
 addCardButton.addEventListener("click", () => {
   cardPopUp.open();
-}); //ok
+});
 
-/* ------------------------------------------------------------------------------ */
-
-/* Popup Escape */
 function closeModalOnRemoteClick(evt) {
   if (evt.target === evt.currentTarget) {
     closeModal(evt.target);
@@ -84,8 +68,6 @@ function closeModalOnRemoteClick(evt) {
 
 profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
 addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-//previewCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-//popupWithImage.addEventListener("mousedown", closeModalOnRemoteClick);
 
 /* ------------------------------------------------------------------------------ */
 
@@ -97,36 +79,26 @@ const config = {
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
-}; //ok
+};
 
-const forms = document.querySelectorAll(config.formSelector); //ok
+const forms = document.querySelectorAll(config.formSelector);
 
 forms.forEach((form) => {
   const formValidator = new FormValidator(config, form);
   formValidator.enableValidation();
-}); //ok
+});
 
-// let's try to figure out the preview stuff
 function handleImageClick(name, link) {
   previewCardModal.open(name, link);
-} //createCard and renderCard what should these be named as? Need to fix those along w/ the previewImageModal 4.28.2024
-//something is wrong w/ card.getView, previewCardModal
+}
 
 const previewCardModal = new PopUpWithImage("#modal-preview");
 previewCardModal.setEventListeners();
-//this is brand new, let's replace const modalWithImage = new ModalWithImage format
-//
-
-/*
-initialCards.forEach((cardData) => {
-  const card = createCard(cardData);
-  cardListEl.append(card);
-}); //ok */
 
 function renderCard(cardData) {
   const addCard = new Card(cardData, cardSelector, handleImageClick);
   return addCard.getView();
-} //ok //maybe new Card? where is that file? it is imported
+}
 
 function createCard(cardData) {
   const cardElement = new Card(cardData, "#card-template", handleImageClick);
@@ -134,18 +106,29 @@ function createCard(cardData) {
 } //ok why do the cards disappear when we block this section? */
 //maybe the initialCards is impacting it?
 
+//need to rename ModalWithForm to PopUpWithForm
+const editModal = new popUpWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
+
+const addModal = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
+
+editModal.setEventListeners();
+addModal.setEventListeners();
+
 function handleProfileEditSubmit(data) {
-  userInfo.setUserInfo({ name: data.title, description: data.description });
-  profileEditModal.closest();
-}
+  userInfo.setUserInfo({ title: data.title, description: data.description });
+  editModal.close();
+} //editModal needs to be defined
 
 function handleAddCardSubmit(userInfo) {
   const name = userInfo.title;
   const link = userInfo.link;
   const createCard = renderCard({ name, link });
   cardSection.addItem(createCard);
-  addCardModal.closest();
-}
+  addModal.close();
+} //addModal needs to be defined
 
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
@@ -154,40 +137,14 @@ profileEditButton.addEventListener("click", () => {
   profileEditModal.open();
 });
 
-// so I need to remove the close buttons and from here, move event listeners (close buttons too) to popup.js, and some listeners into popupwithform.js
-
-// sprint 8 refactoring
 const profilePopUp = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
-profilePopUp.setEventListeners(); //ok
+profilePopUp.setEventListeners();
 
 const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
-cardPopUp.setEventListeners(); //ok
-
-// this is being replaced w/ previewCardModal at line115
-/* const popupImage = new popUpWithImage("#modal-preview");
-popupImage.setEventListeners(); //passing the wrong thing through here */
-
-/* const previewCardModal = new previewCardModal("#modal-preview");
-previewCardModal.setEventListeners(); */
-
-/*const userInfo = new UserInfo({
-  titleSelector: ".profile__title",
-  descriptionSelector: ".profile__description",
-}); //ok */
-
-/*const cardSection = new section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardElement = createCard(cardData);
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".gallery__cards"
-); //ok */
+cardPopUp.setEventListeners();
 
 const cardSection = new Section(
   {

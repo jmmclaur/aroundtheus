@@ -1,16 +1,17 @@
 export default class FormValidator {
-  // good to go, updated 4.19.2024
   constructor(settings, formElement) {
     this._formElement = formElement;
-    //this._formSelector = settings.formSelector;
+    this._formSelector = settings.formSelector;
     this._inputSelector = settings.inputSelector;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._errorClass = settings.errorClass;
     this._errorList = settings.errorList;
-    //this._inputEls = [...this.form.querySelectorAll(this._inputSelector)];
-    //this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._inputEls = this._formElement.querySelectorAll(this._inputSelector);
+    this._submitButton = this._formElement.querySelector(
+      this._submitButtonSelector
+    );
   }
 
   _showInputError(inputEl) {
@@ -50,6 +51,14 @@ export default class FormValidator {
     return !inputElements.every((inputElement) => inputElement.validity.valid);
   } */
 
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.disableButton();
+    } else {
+      this._enableButton();
+    }
+  }
+  /* let's try something new
   toggleButtonstate() {
     if (this._hasInvalidInput()) {
       this.disableSubmitButton();
@@ -57,7 +66,7 @@ export default class FormValidator {
     }
     this._submitButton.classList.remove(this._inactiveButtonClass);
     this._submitButton.disabled = false;
-  }
+  } */
 
   _setEventListeners() {
     this._inputEls = this._formElement.querySelectorAll(this._inputSelector);
@@ -67,7 +76,7 @@ export default class FormValidator {
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", () => {
         this._checkInputValidity(inputEl);
-        this._toggleButtonstate();
+        this._toggleButtonState();
       });
     });
   }
@@ -91,9 +100,8 @@ export default class FormValidator {
     this._submitButton.classList.remove(this._inactiveButtonClass);
     this._submitButton.disabled = false;
   }
-  //idk if this is needed
 
-  disableSubmitButton() {
+  disableButton() {
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
   }
