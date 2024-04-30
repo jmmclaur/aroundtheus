@@ -49,15 +49,17 @@ const userInfo = new UserInfo({
   profileDescription: ".profile__description",
 });
 
+/*
 profileEditForm.addEventListener("submit", handleProfileEditSubmit); //ok
 addCardForm.addEventListener("submit", handleAddCardSubmit); //ok
+*/
 
 profileEditButton.addEventListener("click", () => {
-  profilePopUp.open();
+  editModal.open();
 });
 
 addCardButton.addEventListener("click", () => {
-  cardPopUp.open();
+  addModal.open();
 });
 
 function closeModalOnRemoteClick(evt) {
@@ -125,18 +127,19 @@ function handleProfileEditSubmit(data) {
 function handleAddCardSubmit(userInfo) {
   const name = userInfo.title;
   const link = userInfo.link;
-  const createCard = renderCard({ name, link });
-  cardSection.addItem(createCard);
+  const newCard = renderCard({ name, link });
+  cardSection.addItem(newCard);
   addModal.close();
 } //addModal needs to be defined
 
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
-  profileTitleInput.value = currentUserInfo.name;
+  profileTitleInput.value = currentUserInfo.title;
   profileDescriptionInput.value = currentUserInfo.description;
-  profileEditModal.open();
+  editModal.open();
 });
 
+/*
 const profilePopUp = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -145,7 +148,7 @@ profilePopUp.setEventListeners();
 
 const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
 cardPopUp.setEventListeners();
-
+*/
 const cardSection = new Section(
   {
     items: initialCards,
