@@ -5,22 +5,6 @@ export default class PopUp {
     this.close = this.close.bind(this);
   }
 
-  /*
-  _handleEscapeKey = (evt) => {
-    if (evt.key === "Escape") {
-      this.close();
-    }
-  }; */
-
-  //
-  /*
-  _handleEscapeKey(evt) {
-    if (evt.key === "Escape") {
-      const modal = document.querySelector(".modal_opened");
-      closeModal(modal);
-    }
-  } */
-
   open() {
     this._popUpElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscapeKey);
@@ -51,33 +35,3 @@ export default class PopUp {
     });
   }
 }
-/*
-let closeButton = document.getElementById("#modal-close-button");
-if (closeButton) {
-  let this._closeButton = closeButton.ariaValueMax;
-} */
-
-/*
-  _handleOutsideClick = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      this.close();
-    }
-  }; */
-
-/*
-  setEventListeners() {
-    document.addEventListener("keydown", (evt) => {
-      this._handleEscapeKey(evt);
-    });
-    
-    this._closeButton = this._popUpElement.querySelector(".modal__close");
-    this._closeButton.addEventListener("click", () => {
-      this.close();
-    });
-    //this._popUpElement.addEventListener("click", this._handleOutsideClick);
-    this._popUpElement.addEventListener("mousedown", (evt) => {
-      if (evt.target === evt.currentTarget) {
-        this.close();
-      }
-    });
-  }  */

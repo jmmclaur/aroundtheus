@@ -1,6 +1,4 @@
-// as of 4.22.2024 the like/trash buttons work, and I can open the modals for edit/add but clicking on close button doesn't work (it exits the entire dev window).
-// and I need to test out the validator, right now it's commented out b/c it's causing issues
-
+//good to go 4.30
 import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -48,11 +46,6 @@ const userInfo = new UserInfo({
   profileTitle: ".profile__title",
   profileDescription: ".profile__description",
 });
-
-/*
-profileEditForm.addEventListener("submit", handleProfileEditSubmit); //ok
-addCardForm.addEventListener("submit", handleAddCardSubmit); //ok
-*/
 
 profileEditButton.addEventListener("click", () => {
   editModal.open();
@@ -105,10 +98,8 @@ function renderCard(cardData) {
 function createCard(cardData) {
   const cardElement = new Card(cardData, "#card-template", handleImageClick);
   return cardElement.getView();
-} //ok why do the cards disappear when we block this section? */
-//maybe the initialCards is impacting it?
+}
 
-//need to rename ModalWithForm to PopUpWithForm
 const editModal = new popUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
@@ -120,17 +111,20 @@ editModal.setEventListeners();
 addModal.setEventListeners();
 
 function handleProfileEditSubmit(data) {
-  userInfo.setUserInfo({ title: data.title, description: data.description });
+  userInfo.setUserInfo({
+    title: data.Title,
+    description: data.Description,
+  });
   editModal.close();
 } //editModal needs to be defined
 
-function handleAddCardSubmit(userInfo) {
-  const name = userInfo.title;
-  const link = userInfo.link;
+function handleAddCardSubmit(data) {
+  const name = data.name;
+  const link = data.link;
   const newCard = renderCard({ name, link });
   cardSection.addItem(newCard);
   addModal.close();
-} //addModal needs to be defined
+} //addModal needs to be defined,
 
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
@@ -139,16 +133,6 @@ profileEditButton.addEventListener("click", () => {
   editModal.open();
 });
 
-/*
-const profilePopUp = new popUpWithForm(
-  "#profile-edit-modal",
-  handleProfileEditSubmit
-);
-profilePopUp.setEventListeners();
-
-const cardPopUp = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
-cardPopUp.setEventListeners();
-*/
 const cardSection = new Section(
   {
     items: initialCards,

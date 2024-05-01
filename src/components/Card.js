@@ -1,5 +1,5 @@
 export default class Card {
-  //good to go 4.17, 4.22
+  //good to go 4.30
   constructor(data, cardSelector, handleImageClick) {
     this._data = data;
     this._name = data.name;

@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
   padding-top: 40px;
   font-family: "Inter", Arial, Helvetica, sans-serif;

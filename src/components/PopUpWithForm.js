@@ -30,13 +30,3 @@ export default class popUpWithForm extends PopUp {
     return this._inputValues;
   }
 }
-/*
-  close() {
-    this._popupForm.removeEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      this.close();
-    });
-    this._popupForm.reset();
-    super.closeModal();
-  } */
