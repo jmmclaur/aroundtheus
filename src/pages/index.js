@@ -3,9 +3,9 @@ import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
-import popUpWithForm from "../components/PopUpWithForm.js";
+import PopUpWithForm from "../components/PopUpWithForm.js";
 import Section from "../components/Section.js";
-import popUpWithImage from "../components/PopUpWithImage.js";
+//import PopUpWithImage from "../components/PopUpWithImage.js";
 import { initialCards } from "../utils/constant.js";
 import PopUpWithImage from "../components/PopUpWithImage.js";
 
@@ -55,15 +55,6 @@ addCardButton.addEventListener("click", () => {
   addModal.open();
 });
 
-function closeModalOnRemoteClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeModal(evt.target);
-  }
-}
-
-profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-
 /* ------------------------------------------------------------------------------ */
 
 /* Restructuring */
@@ -95,25 +86,20 @@ function renderCard(cardData) {
   return addCard.getView();
 }
 
-function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card-template", handleImageClick);
-  return cardElement.getView();
-}
-
-const editModal = new popUpWithForm(
+const editModal = new PopUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
 
-const addModal = new popUpWithForm("#add-card-modal", handleAddCardSubmit);
+const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
 
 editModal.setEventListeners();
 addModal.setEventListeners();
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({
-    title: data.Title,
-    description: data.Description,
+    title: data.title,
+    description: data.description,
   });
   editModal.close();
 } //editModal needs to be defined

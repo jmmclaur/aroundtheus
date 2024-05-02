@@ -1,6 +1,5 @@
 .profile {
   display: flex;
-  flex-direction: row;
   align-items: center;
   width: 100%;
   padding-top: 40px;
@@ -40,7 +39,8 @@
   background: transparent url(../images/edit-button.svg) no-repeat center;
   height: 24px;
   width: 24px;
-  grid-area: "button1";
+  grid-template: "button1";
+  grid-area: button1;
   border: 1px solid #fff;
   transition: opacity 0.4s linear;
   align-self: center;
@@ -56,7 +56,9 @@
   line-height: 22px;
   font-weight: 400;
   grid-template: "description";
+  grid-area: description;
   max-width: 415px;
+  width: 100%;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
