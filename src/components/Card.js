@@ -1,5 +1,5 @@
 export default class Card {
-  //good to go 4.30
+  //good to go 4.30, idk what the reviewer means about changing profile elements in here
   constructor(data, cardSelector, handleImageClick) {
     this._data = data;
     this._name = data.name;

@@ -13,14 +13,14 @@ import PopUpWithImage from "../components/PopUpWithImage.js";
 
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileTitle = document.querySelector("#profile-title");
-const profileDescription = document.querySelector("#profile-description");
+//const profileEditModal = document.querySelector("#profile-edit-modal");
+//const profileTitle = document.querySelector("#profile-title");
+//const profileDescription = document.querySelector("#profile-description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+//const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 /* Gallery Elements */
 const cardTemplate =
@@ -88,21 +88,30 @@ function renderCard(cardData) {
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
-  handleProfileEditSubmit
+  handleProfileEditSubmit,
+  config
 );
 
-const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
+const addModal = new PopUpWithForm(
+  "#add-card-modal",
+  handleAddCardSubmit,
+  config
+);
+//const user = new UserInfo("#profile-title-input", "#profile-description-input");
 
 editModal.setEventListeners();
 addModal.setEventListeners();
 
+const user = new UserInfo("#profile-title-input", "#profile-description-input");
+
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({
-    title: data.title,
-    description: data.description,
+    title: data.title.trim(),
+    description: data.description.trim(),
   });
   editModal.close();
-} //editModal needs to be defined
+} //changed setUserInfo to getUserInfo
+//something is wrong w/ this something w/ userInfo isn't working
 
 function handleAddCardSubmit(data) {
   const name = data.name;
@@ -110,14 +119,14 @@ function handleAddCardSubmit(data) {
   const newCard = renderCard({ name, link });
   cardSection.addItem(newCard);
   addModal.close();
-} //addModal needs to be defined,
+}
 
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
   profileTitleInput.value = currentUserInfo.title;
   profileDescriptionInput.value = currentUserInfo.description;
   editModal.open();
-});
+}); //changed setUserInfo to getUserInfo, idk but it moves the population to the left of the form
 
 const cardSection = new Section(
   {
