@@ -43,8 +43,8 @@ const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------ */
 
 const userInfo = new UserInfo({
-  profileTitle: "#profile-title", //modal__input_type_title
-  profileDescription: "#profile-description", //modal__input_type_description
+  profileTitle: ".modal__input_type_title", //modal__input_type_title
+  profileDescription: ".modal__input_type_description", //modal__input_type_description
 });
 
 profileEditButton.addEventListener("click", () => {
@@ -115,11 +115,11 @@ function handleAddCardSubmit(data) {
 }
 
 profileEditButton.addEventListener("click", () => {
-  const currentUserInfo = userInfo.getUserInfo();
-  profileTitleInput.value = currentUserInfo.title;
-  profileDescriptionInput.value = currentUserInfo.description.trim();
-  editModal.open.reset();
-}); //changed setUserInfo to getUserInfo, idk but it moves the population to the left of the form
+  editModal.open();
+  const profileInfo = userInfo.getUserInfo();
+  editModal.setInputValues(profileInfo);
+  profileEditFormValidator.resetValidation();
+});
 
 const cardSection = new Section(
   {
