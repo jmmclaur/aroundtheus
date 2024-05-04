@@ -28,8 +28,7 @@
   line-height: 48px;
   font-weight: 500;
   max-width: 375px;
-  grid-template: "title";
-  grid-area: "title";
+  grid-area: title;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -40,8 +39,7 @@
   background: transparent url(../images/edit-button.svg) no-repeat center;
   height: 24px;
   width: 24px;
-  grid-template: "button1";
-  grid-area: "button1";
+  grid-area: button1;
   border: 1px solid #fff;
   transition: opacity 0.4s linear;
   align-self: center;
@@ -56,8 +54,7 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  grid-template: "description";
-  grid-area: "description";
+  grid-area: description;
   max-width: 415px;
   width: 100%;
   margin: 0;
@@ -70,10 +67,9 @@
   background: transparent url(../images/add-button.svg) no-repeat center;
   height: 50px;
   width: 150px;
-  grid-area: "button2";
-  grid-template: "button2";
+  grid-area: button2;
   border: 2px solid #fff;
-  margin: 35px 0 0 auto;
+  margin-left: auto;
   border-radius: 2px;
   transition: opacity 0.4s linear;
 }

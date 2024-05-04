@@ -31,16 +31,12 @@
             class="profile__image"
           />
           <div class="profile__info">
-            <div class="profile__wrapper">
-              <h1 class="profile__title" id="profile-title">
-                Jacques Cousteau
-              </h1>
-              <button
-                class="profile__edit-button"
-                id="profile-edit-button"
-                type="button"
-              ></button>
-            </div>
+            <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
+            <button
+              class="profile__edit-button"
+              id="profile-edit-button"
+              type="button"
+            ></button>
             <p class="profile__description" id="profile-description">
               Explorer
             </p>
@@ -70,34 +66,35 @@
         ></button>
         <p class="modal__title">Edit Profile</p>
         <form class="modal__form" id="profile-edit-form">
-          <input
-            class="modal__input modal__input_type_title"
-            type="text"
-            name="title"
-            placeholder="Jacques Cousteau"
-            id="profile-title-input"
-            required
-            maxlength="40"
-            minlength="2"
-          />
-
+          <label class="modal__label" for="modal-title-input">
+            <input
+              class="modal__input modal__input_type_title"
+              type="text"
+              name="title"
+              placeholder="Jacques Cousteau"
+              id="profile-title-input"
+              required
+              maxlength="40"
+              minlength="2"
+            />
+          </label>
           <span class="modal__error" id="profile-title-input-error"></span>
-
-          <input
-            class="modal__input modal__input_type_description"
-            type="text"
-            name="description"
-            placeholder="Explorer"
-            id="profile-description-input"
-            required
-            maxlength="200"
-            minlength="2"
-          />
-          <span
-            class="modal__error"
-            id="profile-description-input-error"
-          ></span>
-
+          <label class="modal__label" for="modal-description-input">
+            <input
+              class="modal__input modal__input_type_description"
+              type="text"
+              name="description"
+              placeholder="Explorer"
+              id="profile-description-input"
+              required
+              maxlength="200"
+              minlength="2"
+            />
+            <span
+              class="modal__error"
+              id="profile-description-input-error"
+            ></span>
+          </label>
           <button class="modal__button modal__button_disabled" type="submit">
             Save
           </button>

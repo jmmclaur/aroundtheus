@@ -14,8 +14,8 @@ import PopUpWithImage from "../components/PopUpWithImage.js";
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 //const profileEditModal = document.querySelector("#profile-edit-modal");
-//const profileTitle = document.querySelector("#profile-title");
-//const profileDescription = document.querySelector("#profile-description");
+const profileTitle = document.querySelector("#profile-title");
+const profileDescription = document.querySelector("#profile-description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
@@ -43,8 +43,8 @@ const cardSelector = "#card-template";
 /* ------------------------------------------------------------------------------ */
 
 const userInfo = new UserInfo({
-  profileTitle: ".profile__title",
-  profileDescription: ".profile__description",
+  profileTitle: "#profile-title", //modal__input_type_title
+  profileDescription: "#profile-description", //modal__input_type_description
 });
 
 profileEditButton.addEventListener("click", () => {
@@ -88,30 +88,23 @@ function renderCard(cardData) {
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
-  handleProfileEditSubmit,
-  config
+  handleProfileEditSubmit
 );
 
-const addModal = new PopUpWithForm(
-  "#add-card-modal",
-  handleAddCardSubmit,
-  config
-);
-//const user = new UserInfo("#profile-title-input", "#profile-description-input");
+const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
 
 editModal.setEventListeners();
 addModal.setEventListeners();
 
-const user = new UserInfo("#profile-title-input", "#profile-description-input");
+//const user = new UserInfo("#profile-title-input", "#profile-description-input");
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({
-    title: data.title.trim(),
-    description: data.description.trim(),
+    title: data.title,
+    description: data.description,
   });
   editModal.close();
-} //changed setUserInfo to getUserInfo
-//something is wrong w/ this something w/ userInfo isn't working
+} //corrected layout of the edit modal before typing, but where does the info go?
 
 function handleAddCardSubmit(data) {
   const name = data.name;
@@ -124,8 +117,8 @@ function handleAddCardSubmit(data) {
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
   profileTitleInput.value = currentUserInfo.title;
-  profileDescriptionInput.value = currentUserInfo.description;
-  editModal.open();
+  profileDescriptionInput.value = currentUserInfo.description.trim();
+  editModal.open.reset();
 }); //changed setUserInfo to getUserInfo, idk but it moves the population to the left of the form
 
 const cardSection = new Section(
