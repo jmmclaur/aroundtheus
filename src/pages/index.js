@@ -47,9 +47,10 @@ const userInfo = new UserInfo({
   profileDescription: ".modal__input_type_description", //modal__input_type_description
 });
 
+/*
 profileEditButton.addEventListener("click", () => {
   editModal.open();
-});
+}); */
 
 addCardButton.addEventListener("click", () => {
   addModal.open();
