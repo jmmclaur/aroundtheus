@@ -13,14 +13,14 @@ import PopUpWithImage from "../components/PopUpWithImage.js";
 
 /* Profile Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
-//const profileEditModal = document.querySelector("#profile-edit-modal");
+const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileTitle = document.querySelector("#profile-title");
 const profileDescription = document.querySelector("#profile-description");
 const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-//const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileEditForm = profileEditModal.querySelector(".modal__form");
 
 /* Gallery Elements */
 const cardTemplate =
@@ -89,10 +89,15 @@ function renderCard(cardData) {
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
-  handleProfileEditSubmit
+  handleProfileEditSubmit,
+  config
 );
 
-const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
+const addModal = new PopUpWithForm(
+  "#add-card-modal",
+  handleAddCardSubmit,
+  config
+);
 
 editModal.setEventListeners();
 addModal.setEventListeners();
@@ -114,6 +119,10 @@ function handleAddCardSubmit(data) {
   cardSection.addItem(newCard);
   addModal.close();
 }
+
+//try this maybe
+const profileEditFormValidator = new FormValidator(config, profileEditForm);
+profileEditFormValidator.enableValidation();
 
 profileEditButton.addEventListener("click", () => {
   editModal.open();
