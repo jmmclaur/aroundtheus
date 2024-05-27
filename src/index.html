@@ -25,11 +25,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="avatar__section">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Avatar"
+              class="profile__image"
+            />
+            <button class="avatar__button" type="button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <button
@@ -158,6 +161,32 @@
         ></button>
         <img src="#" alt="" class="modal__preview-image" id="modal-image" />
         <h2 class="modal__preview-description"></h2>
+      </div>
+    </div>
+
+    <!-- Avatar Modal -->
+    <div class="modal" id="avatar-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="avatar-edit-button"
+        ></button>
+        <form class="modal__form">
+          <h1 class="modal__title">Avatar Picture</h1>
+          <input
+            type="url"
+            name="link"
+            id="avatar-picture"
+            class="modal__input modal__input_type_url"
+            placeholder="Avatar URL"
+            required
+          />
+          <span class="modal__error" id="avatar-picture-error"></span>
+          <button class="modal__button" type="submit" disabled>
+            <span class="modal__button-text">Save</span>
+          </button>
+        </form>
       </div>
     </div>
 

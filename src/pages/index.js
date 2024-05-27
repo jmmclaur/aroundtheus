@@ -1,12 +1,12 @@
-//good to go 4.30
+//good to go 4.30, 5.19
+import Api from "../components/Api.js";
 import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import PopUpWithForm from "../components/PopUpWithForm.js";
 import Section from "../components/Section.js";
-//import PopUpWithImage from "../components/PopUpWithImage.js";
-import { initialCards } from "../utils/constant.js";
+import { initialCards, config } from "../utils/constant.js";
 import PopUpWithImage from "../components/PopUpWithImage.js";
 
 /* ------------------------------------------------------------------------------ */
@@ -40,52 +40,59 @@ const previewDescription = document.querySelector(
 );
 
 const cardSelector = "#card-template";
+
+/* Avatar Elements */
+const profileAvatarButton = document.querySelector(".profile__avatar-button");
+const profileAvatarModal = document.querySelector("#avatar-modal");
+const profileAvatarForm = profileAvatarModal.querySelector(".modal__form");
+
 /* ------------------------------------------------------------------------------ */
+/* API */
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+  headers: {
+    authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
+    "Content-Type": "application/json",
+  },
+});
+
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: renderCard,
+  },
+  "#gallery__cards"
+);
+cardSection.renderItems();
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    cards.forEach((card) => renderCard(card));
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+api
+  .getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo({
+      title: data.title,
+      description: data.description,
+      avatar: data.avatar,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const userInfo = new UserInfo({
   profileTitle: ".modal__input_type_title", //modal__input_type_title
   profileDescription: ".modal__input_type_description", //modal__input_type_description
-});
-
-/*
-profileEditButton.addEventListener("click", () => {
-  editModal.open();
-}); */
-
-addCardButton.addEventListener("click", () => {
-  addModal.open();
-});
-
-/* ------------------------------------------------------------------------------ */
-
-/* Restructuring */
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const forms = document.querySelectorAll(config.formSelector);
-
-forms.forEach((form) => {
-  const formValidator = new FormValidator(config, form);
-  formValidator.enableValidation();
-});
-
-function handleImageClick(name, link) {
-  previewCardModal.open(name, link);
-}
-
-const previewCardModal = new PopUpWithImage("#modal-preview");
-previewCardModal.setEventListeners();
-
-function renderCard(cardData) {
-  const addCard = new Card(cardData, cardSelector, handleImageClick);
-  return addCard.getView();
-}
+  avatarSelector: ".profile__image",
+}); //good
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
@@ -102,15 +109,27 @@ const addModal = new PopUpWithForm(
 editModal.setEventListeners();
 addModal.setEventListeners();
 
-//const user = new UserInfo("#profile-title-input", "#profile-description-input");
+const previewCardModal = new PopUpWithImage("#modal-preview");
+previewCardModal.setEventListeners();
+
+export function renderCard(cardData) {
+  const card = new Card(
+    cardData,
+    handleImageClick,
+    handleDeleteCard,
+    "#card-template"
+  );
+  const cardEl = card.getView();
+  cardSection.addItem(cardEl);
+}
 
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({
     title: data.title,
     description: data.description,
   });
-  editModal.close();
-} //corrected layout of the edit modal before typing, but where does the info go?
+  profileEditModal.close();
+} //good
 
 function handleAddCardSubmit(data) {
   const name = data.name;
@@ -120,9 +139,28 @@ function handleAddCardSubmit(data) {
   addModal.close();
 }
 
-//try this maybe
-const profileEditFormValidator = new FormValidator(config, profileEditForm);
-profileEditFormValidator.enableValidation();
+function handleImageClick({ name, link }) {
+  PopUpWithImage.open(name, link);
+}
+
+function handleDeleteCard(cardId) {
+  cardDeletePopup.open();
+  cardDeletePopup.setSubmitAction(() => {
+    cardDeletePopup.setLoading(true, "Deleting...");
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        this.handleDeleteCard();
+        cardDeletePopup.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        cardDeletePopup.setLoading(false, "Yes");
+      });
+  });
+}
 
 profileEditButton.addEventListener("click", () => {
   editModal.open();
@@ -131,11 +169,32 @@ profileEditButton.addEventListener("click", () => {
   profileEditFormValidator.resetValidation();
 });
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: renderCard,
-  },
-  ".gallery__cards"
-);
-cardSection.renderItems();
+profileAddButton.addEventListener("click", () => {
+  addCardFormValidator.resetValidation();
+  addCardPopUp.open();
+});
+
+addCardButton.addEventListener("click", () => {
+  addModal.open();
+});
+
+const forms = document.querySelectorAll(config.formSelector);
+
+forms.forEach((form) => {
+  const formValidator = new FormValidator(config, form);
+  formValidator.enableValidation();
+});
+
+const profileEditFormValidator = new FormValidator(config, profileEditForm);
+profileEditFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(config, addCardForm);
+addCardFormValidator.enableValidation();
+
+/*
+const confirmModal = new PoppWithConfirmation("#confirm-delete-modal");
+confirmModal.setEventListeners(); */
+
+//old stuff below can be cut out
+//refactored to make everything look nicer, now see what's being called and what's not
+//5.26.2024

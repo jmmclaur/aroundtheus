@@ -34,4 +34,15 @@ export default class PopUp {
       this.close();
     });
   }
+
+  addEventListeners() {
+    this._popupElement.addEventListener("mousedown", (e) => {
+      if (
+        e.target === this._popupElement ||
+        e.target.classList.contains("modal__close")
+      ) {
+        this.close();
+      }
+    });
+  }
 }

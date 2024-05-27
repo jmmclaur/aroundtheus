@@ -1,11 +1,12 @@
 export default class Card {
   //good to go 4.30, idk what the reviewer means about changing profile elements in here
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(data, cardSelector, handleImageClick, handleDeleteButton) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteButton = handleDeleteButton;
   }
 
   _setEventListeners() {
