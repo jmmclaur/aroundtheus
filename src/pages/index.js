@@ -49,15 +49,9 @@ const profileAvatarForm = profileAvatarModal.querySelector(".modal__form");
 
 /* ------------------------------------------------------------------------------ */
 /* API */
+//GET "https://around-api.en.tripleten-services.com/v1/users/me";
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
-  headers: {
-    authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
-    "Content-Type": "application/json",
-  },
-});
-
+/*
 fetch("https://around-api.en.tripleten-services.com/v1/cards", {
   headers: {
     authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
@@ -67,6 +61,29 @@ fetch("https://around-api.en.tripleten-services.com/v1/cards", {
   .then((result) => {
     console.log(result);
   });
+*/
+
+/*
+getInitialCards();
+{
+  return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+    headers: {
+      authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
+    },
+  }).then((res) => {
+    if (res.status) {
+      return res.json();
+    }
+  });
+} */
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1/",
+  headers: {
+    authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
+    "Content-Type": "application/json",
+  },
+});
 
 const cardSection = new Section(
   {
