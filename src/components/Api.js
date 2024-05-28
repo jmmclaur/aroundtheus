@@ -1,76 +1,77 @@
 export default class Api {
-  constructor(options) {
-    // Constructor body
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  getUserInfoAndCards() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
+  renderResult(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
   }
 
   getInitialCards() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "GET",
+      headers: this._headers,
+    }).then(this.renderResult);
+  }
+
+  addCard({ name, url }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({ name, link: url }),
+    }).then(this.renderResult);
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/user`, {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+    }).then(this.renderResult);
+  }
+
+  updateUserInfo(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ name: name, about: about }),
     });
   }
 
-  // Function to fetch user info and cards together
-  fetchData() {
-    const userInfoPromise = this.getUserInfo();
-    const cardsPromise = this.getInitialCards();
-
-    return Promise.all([userInfoPromise, cardsPromise]);
-  }
-
-  deleteCard() {
-    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
-      headers: {
-        authorization: "4a5b23f0-f2a7-4209-a8e7-d3bcf73a20e6",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          console.log("Problem");
-          return;
-        }
-        return res.json();
-        // return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  getCards() {
-    return fetch(`${this._baseUrl}/cards`, {
+  updateAvatar({ link }) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      body: JSON.stringify({ avatar: link }),
+    }).then(this.renderResult);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this.renderResult);
+  }
+
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    }).then(this.renderResult);
+  }
+
+  dislikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this.renderResult);
   }
 }

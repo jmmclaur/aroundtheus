@@ -35,6 +35,7 @@ export default class PopUp {
     });
   }
 
+  /*
   addEventListeners() {
     this._popupElement.addEventListener("mousedown", (e) => {
       if (
@@ -44,5 +45,5 @@ export default class PopUp {
         this.close();
       }
     });
-  }
+  } */
 }

@@ -8,6 +8,7 @@ import PopUpWithForm from "../components/PopUpWithForm.js";
 import Section from "../components/Section.js";
 import { initialCards, config } from "../utils/constant.js";
 import PopUpWithImage from "../components/PopUpWithImage.js";
+import PopUpWithConfirmation from "../components/PopUpWithConfirmation.js";
 
 /* ------------------------------------------------------------------------------ */
 
@@ -57,6 +58,16 @@ const api = new Api({
   },
 });
 
+fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+  headers: {
+    authorization: "f0969997-b1fb-4c1c-9062-68f00b8d62d1",
+  },
+})
+  .then((res) => res.json())
+  .then((result) => {
+    console.log(result);
+  });
+
 const cardSection = new Section(
   {
     items: initialCards,
@@ -66,13 +77,25 @@ const cardSection = new Section(
 );
 cardSection.renderItems();
 
+let section;
+
 api
   .getInitialCards()
   .then((cards) => {
-    cards.forEach((card) => renderCard(card));
+    section = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const sectionCard = renderCard(cardData);
+          section.addItem(sectionCard);
+        },
+      },
+      ".gallery__list "
+    );
+    section.renderItems();
   })
   .catch((error) => {
-    console.error(error);
+    console.error("Error fetching initial cards", error);
   });
 
 api
@@ -89,10 +112,10 @@ api
   });
 
 const userInfo = new UserInfo({
-  profileTitle: ".modal__input_type_title", //modal__input_type_title
-  profileDescription: ".modal__input_type_description", //modal__input_type_description
+  profileTitle: ".modal__input_type_title",
+  profileDescription: ".modal__input_type_description",
   avatarSelector: ".profile__image",
-}); //good
+});
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
@@ -112,35 +135,63 @@ addModal.setEventListeners();
 const previewCardModal = new PopUpWithImage("#modal-preview");
 previewCardModal.setEventListeners();
 
-export function renderCard(cardData) {
+function renderCard(cardData) {
   const card = new Card(
     cardData,
+    "#card-template",
     handleImageClick,
     handleDeleteCard,
-    "#card-template"
+    handleLike
   );
-  const cardEl = card.getView();
-  cardSection.addItem(cardEl);
+  return card.getView();
 }
 
+function handleProfileEditSubmit({ title, description }) {
+  editModal.setLoading(true);
+  api
+    .updateUserInfo(title, description)
+    .then(() => {
+      userInfo.setUserInfo({ title: title, description: description });
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editModal.setLoading(false);
+      editModal.close();
+    });
+}
+
+/*
 function handleProfileEditSubmit(data) {
   userInfo.setUserInfo({
     title: data.title,
     description: data.description,
   });
   profileEditModal.close();
-} //good
+} //good */
 
 function handleAddCardSubmit(data) {
-  const name = data.name;
-  const link = data.link;
-  const newCard = renderCard({ name, link });
-  cardSection.addItem(newCard);
-  addModal.close();
+  addModal.setLoading(true);
+  api
+    .addCard(data)
+    .then((cardData) => {
+      //const name = data.name;
+      //const link = data.link;
+      const card = renderCard(cardData);
+      section.addItem(card);
+      addModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      addModal.setLoading(false);
+    });
 }
 
 function handleImageClick({ name, link }) {
-  PopUpWithImage.open(name, link);
+  popupWithImage.open(name, link);
 }
 
 function handleDeleteCard(cardId) {
@@ -162,20 +213,52 @@ function handleDeleteCard(cardId) {
   });
 }
 
+function handleAvatarSubmit(link) {
+  profileAvatarPopup.setLoading(true);
+  api
+    .updateAvatar(link)
+    .then((userData) => {
+      userInfo.setAvatar(userData);
+      profileAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      profileAvatarPopup.setLoading(false);
+    });
+}
+
+function handleLike(cardId) {
+  if (cardId._isLiked) {
+    api
+      .dislikeCard(cardId._id)
+      .then(() => {
+        cardId.handleLikeIcon();
+        cardId._isLiked = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  if (!cardId._isLiked) {
+    api
+      .likeCard(cardId._id)
+      .then(() => {
+        cardId.handleLikeIcon();
+        cardId._isLiked = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+}
+
 profileEditButton.addEventListener("click", () => {
   editModal.open();
   const profileInfo = userInfo.getUserInfo();
   editModal.setInputValues(profileInfo);
   profileEditFormValidator.resetValidation();
-});
-
-profileAddButton.addEventListener("click", () => {
-  addCardFormValidator.resetValidation();
-  addCardPopUp.open();
-});
-
-addCardButton.addEventListener("click", () => {
-  addModal.open();
 });
 
 const forms = document.querySelectorAll(config.formSelector);
@@ -191,9 +274,36 @@ profileEditFormValidator.enableValidation();
 const addCardFormValidator = new FormValidator(config, addCardForm);
 addCardFormValidator.enableValidation();
 
+const avatarFormValidator = new FormValidator(config, profileAvatarForm);
+avatarFormValidator.enableValidation();
+
+const profileAvatarPopup = new PopUpWithForm(
+  "#profile-avatar-modal",
+  handleAvatarSubmit,
+  profileAvatarButton
+);
+
+addCardButton.addEventListener("click", () => {
+  addCardFormValidator.resetValidation();
+  addModal.open();
+});
+addModal.setEventListeners();
+
 /*
-const confirmModal = new PoppWithConfirmation("#confirm-delete-modal");
-confirmModal.setEventListeners(); */
+addCardButton.addEventListener("click", () => {
+  addModal.open();
+}); */
+
+profileAvatarButton.addEventListener("click", () => {
+  profileAvatarPopup.open();
+});
+profileAvatarPopup.setEventListeners();
+
+const popupWithImage = new PopUpWithImage("#preview-card-modal");
+popupWithImage.addEventListeners();
+
+const cardDeletePopup = new PopUpWithConfirmation("#delete-card-modal");
+cardDeletePopup.setEventListeners();
 
 //old stuff below can be cut out
 //refactored to make everything look nicer, now see what's being called and what's not
