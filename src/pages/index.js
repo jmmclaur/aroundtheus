@@ -52,13 +52,19 @@ api
   .getInitialCards()
   .then((cards) => {
     section = new Section(
-      { items: cards, renderer: renderCard },
-      ".gallery__list "
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const cardEl = renderCard(cardData);
+          section.addItem(cardEl);
+        },
+      },
+      ".gallery__cards"
     );
     section.renderItems();
   })
   .catch((error) => {
-    console.error(error);
+    console.log(error);
   }); //let's see if this format works better, okay error is gone now...
 
 /*
