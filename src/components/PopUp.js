@@ -1,7 +1,7 @@
 export default class PopUp {
   constructor({ popUpSelector }) {
     this._popUpElement = document.querySelector(popUpSelector);
-    this._closeButton = this._popUpElement.querySelector(".modal__close");
+    this._closeButton = document.querySelector(".modal__close");
     this.close = this.close.bind(this);
   }
 
@@ -29,21 +29,29 @@ export default class PopUp {
     }
   };
 
+  /*
   setEventListeners() {
     this._closeButton.addEventListener("click", () => {
       this.close();
     });
-  }
+  } */
 
-  /*
   addEventListeners() {
-    this._popupElement.addEventListener("mousedown", (e) => {
+    this._popUpElement.addEventListener("keydown", (e) => {
       if (
-        e.target === this._popupElement ||
+        e.target === this._popUpElement ||
         e.target.classList.contains("modal__close")
       ) {
         this.close();
       }
     });
-  } */
+    this._popUpElement.addEventListener("mousedown", (e) => {
+      if (
+        e.target === this._popUpElement ||
+        e.target.classList.contains("modal__close")
+      ) {
+        this.close();
+      }
+    });
+  }
 }

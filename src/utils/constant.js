@@ -33,3 +33,46 @@ export const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
+/* Profile Elements */
+export const profileEditButton = document.querySelector("#profile-edit-button");
+export const profileEditModal = document.querySelector("#profile-edit-modal"); //how is this used in index.js?
+export const profileTitle = document.querySelector("#profile-title"); //can take out
+export const profileDescription = document.querySelector(
+  "#profile-description"
+); //can take out
+export const profileTitleInput = document.querySelector("#profile-title-input");
+export const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
+export const profileEditForm =
+  profileEditModal.querySelector("#profile-edit-form");
+
+/* Gallery Elements */
+export const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild; //can take out
+export const cardListEl = document.querySelector(".gallery__cards"); //can take out
+
+/* Add Button Elements */
+export const addCardButton = document.querySelector(".profile__add-button");
+export const addCardForm = document.querySelector("#add-card-form");
+export const addCardModal = document.querySelector("#add-card-modal");
+export const addSubmitButton = addCardModal.querySelector(".modal__button");
+//changed from addsubmitbutton to addcardsubmit to see if that changes anything
+/* Preview Elements */
+export const previewImage = document.querySelector(".modal__preview-image");
+export const previewDescription = document.querySelector(
+  ".modal__preview-description"
+);
+
+export const cardSelector = "#card-template"; //could take out
+
+/* Avatar Elements */
+export const profileAvatarButton = document.querySelector(
+  "#avatar-edit-button"
+);
+export const profileAvatarModal = document.querySelector("#avatar-modal");
+export const profileAvatarForm =
+  profileAvatarModal.querySelector(".modal__form");
+
+//all of the classes and ids seem fine in here 5.28.2024

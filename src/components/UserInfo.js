@@ -6,11 +6,12 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    this._userInfo = {
+    const userInfo = {
       title: this._title.textContent,
       description: this._description.textContent,
+      avatar: this._avatar.src,
     };
-    return this._userInfo;
+    return userInfo;
   }
 
   setUserInfo(data) {
@@ -19,11 +20,11 @@ export default class UserInfo {
     this._avatar.src = data.avatar;
   }
 
-  getUserInfo() {
-    return this._userInfo;
-  }
-
   setAvatar({ avatar }) {
-    this._avatar.src = avatar;
+    this._avatar.src = avatar.avatar;
   }
 }
+
+//profile modal popping up now fixed this._userinfo to just const userinfo
+//the edit avatar doesn't do anything yet, which is fine
+//also need the avatar and initial cards to pull up

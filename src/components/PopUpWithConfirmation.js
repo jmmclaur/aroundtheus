@@ -1,10 +1,10 @@
-import Popup from "./PopUp";
+import PopUp from "./PopUp";
 
-export default class PopupWithConfirmation extends Popup {
-  constructor(popupSelector) {
-    super({ popupSelector });
-    this._popupForm = this._popupElement.querySelector(".modal__form");
-    this._submitButton = this._popupForm.querySelector(".modal__button");
+export default class PopUpWithConfirmation extends PopUp {
+  constructor(popUpSelector) {
+    super({ popUpSelector });
+    this._popUpForm = this._popUpElement.querySelector(".modal__form");
+    this._submitButton = this._popUpForm.querySelector(".modal__button");
     this._submitButtonText =
       this._submitButton.querySelector("#delete-card-modal");
   }
@@ -22,10 +22,12 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   setEventListeners() {
-    this._popupForm.addEventListener("submit", (e) => {
+    this._popUpForm.addEventListener("submit", (e) => {
       e.preventDefault();
       this._handleFormSubmit();
     });
     super.addEventListeners();
   }
 }
+
+//corrected the capitalization, now there are no starting erros 5.28.2024 11:38pm
