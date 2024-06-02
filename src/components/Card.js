@@ -4,29 +4,30 @@ export default class Card {
     data,
     cardSelector,
     handleImageClick,
-    handleDeleteClick,
-    handleLikeClick
+    handleDeleteCard,
+    handleLike
   ) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
-    this._handleDeleteClick = handleDeleteClick;
-    this._handleLikeClick = handleLikeClick;
-    //this._openPreviewModal = openPreviewModal;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleLike = handleLike;
+    this._id = data._id;
+    this._isLiked = data._isLiked;
   }
 
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLikeClick();
+        this._handleLike(this);
       });
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
-        this._handleDeleteClick();
+        this._handleDeleteCard(this._id);
       });
     this._cardElement
       .querySelector(".card__image")
@@ -35,15 +36,15 @@ export default class Card {
       });
   }
 
-  _handleLikeIcon() {
+  handleLikeIcon() {
     this._cardElement
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
-  }
-  _handleDeleteButton() {
+  } //fixed the like button!! 5.31.2024
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
+  } //fixed delete card!! renamed from deletebutton 5.31.2024
 
   getView() {
     this._cardElement = document
@@ -57,7 +58,17 @@ export default class Card {
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
     this._setEventListeners();
+    this._renderLikes();
+
     return this._cardElement;
+  }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._cardElement.classList.add(".card__like-button_active");
+    } else {
+      this._cardElement.classList.remove(".card__like-button_active");
+    }
   }
 }
 

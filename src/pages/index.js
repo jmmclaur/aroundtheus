@@ -5,7 +5,7 @@ import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
-//import PopUp from "../components/PopUp.js";
+import PopUp from "../components/PopUp.js";
 import PopUpWithForm from "../components/PopUpWithForm.js";
 import Section from "../components/Section.js";
 import {
@@ -54,8 +54,8 @@ api
     section = new Section(
       {
         items: cards,
-        renderer: (cardData) => {
-          const cardEl = renderCard(cardData);
+        renderer: (data) => {
+          const cardEl = renderCard(data); //cardData to data
           section.addItem(cardEl);
         },
       },
@@ -67,35 +67,16 @@ api
     console.log(error);
   }); //let's see if this format works better, okay error is gone now...
 
-/*
-api
-  .getInitialCards()
-  .then((cards) => {
-    section = new Section(
-      {
-        items: cards,
-        renderer: (cardData) => {
-          const sectionCard = renderCard(cardData);
-          section.addItem(sectionCard);
-        },
-      },
-      ".gallery__list "
-    );
-    section.renderItems();
-  })
-  .catch((error) => {
-    //something is wrong w/ catch
-    console.error("Error fetching initial cards", error);
-  }); //something is wrong w/ this and prepend? */
+//okay rendering the cards is correct now, let's fix the add card submit!
 
 api
   .getUserInfo()
-  .then((userData) => {
+  .then((data) => {
     userInfo.setUserInfo({
-      title: userData.title,
-      description: userData.description,
-      avatar: userData.avatar,
-    });
+      title: data.title,
+      description: data.description,
+      avatar: data.avatar,
+    }); //lets try it w/ data instead of userData
   })
   .catch((err) => {
     console.log(err);
@@ -104,23 +85,23 @@ api
 const userInfo = new UserInfo({
   titleSelector: ".modal__input_type_title",
   descriptionSelector: ".modal__input_type_description",
-  avatarSelector: ".profile__image",
+  avatarSelector: "#avatar-picture", //.profile__image to #avatar-picture, yep now it's there but you still can't edit it, let's see why
 }); //make sure these selectors are correct, something wrong w/ userinfo
 
 function handleImageClick({ name, link }) {
   popupWithImage.open(name, link);
 } //
 
-function renderCard(cardData) {
+function renderCard(data) {
   const card = new Card(
-    cardData,
+    data,
     "#card-template",
     handleImageClick,
     handleDeleteCard,
     handleLike
   );
   return card.getView();
-} //
+} //cardData to data
 
 function handleProfileEditSubmit(data) {
   editModal.setLoading(true);
@@ -138,14 +119,14 @@ function handleProfileEditSubmit(data) {
     });
 } //
 
-function handleAddCardSubmit(name, link) {
+function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
   api
-    .addCard(name, link)
-    .then((cardData) => {
+    .addCard(name, url)
+    .then((data) => {
       //const name = name;
       //const link = link;
-      const card = renderCard(cardData);
+      const card = renderCard(data); //cardData to data
       section.addItem(card);
       addModal.close();
     })
@@ -158,18 +139,18 @@ function handleAddCardSubmit(name, link) {
 } //
 
 function handleAvatarSubmit(url) {
-  profileAvatarPopup.setLoading(true);
+  profileAvatarPopUp.setLoading(true);
   api
-    .updateAvatar(url)
-    .then((userData) => {
-      userInfo.setAvatar(userData);
-      profileAvatarPopup.close();
+    .updateAvatar(url) //userData to data, url to link << flip is around
+    .then((data) => {
+      userInfo.setAvatar(data);
+      profileAvatarPopUp.close();
     })
     .catch((err) => {
       console.error(err);
     })
     .finally(() => {
-      profileAvatarPopup.setLoading(false);
+      profileAvatarPopUp.setLoading(false);
     });
 }
 
@@ -190,14 +171,14 @@ function handleDeleteCard(cardId) {
         cardDeletePopUp.setLoading(false, "Yes");
       });
   });
-}
+} //this section has an error w/ deleting the card
 
 function handleLike(cardId) {
   if (cardId._isLiked) {
     api
       .dislikeCard(cardId._id)
       .then(() => {
-        cardId.handleLikeIcon();
+        cardId.handleLikeIcon(); //likeIcon to like
         cardId._isLiked = false;
       })
       .catch((err) => {
@@ -208,14 +189,14 @@ function handleLike(cardId) {
     api
       .likeCard(cardId._id)
       .then(() => {
-        cardId.handleLikeIcon();
+        cardId.handleLikeIcon(); //likeIcon to like
         cardId._isLiked = true;
       })
       .catch((err) => {
         console.error(err);
       });
   }
-}
+} //this section has an error w/ liking
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
@@ -226,16 +207,16 @@ addFormValidator.enableValidation();
 const avatarFormValidator = new FormValidator(config, profileAvatarForm);
 avatarFormValidator.enableValidation();
 
-const profileAvatarPopup = new PopUpWithForm(
+const profileAvatarPopUp = new PopUpWithForm(
   "#avatar-modal",
   handleAvatarSubmit,
   profileAvatarButton
 );
 
 profileAvatarButton.addEventListener("click", () => {
-  profileAvatarPopup.open();
+  profileAvatarPopUp.open();
 });
-profileAvatarPopup.setEventListeners();
+profileAvatarPopUp.setEventListeners();
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",

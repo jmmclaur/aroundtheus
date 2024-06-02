@@ -28,3 +28,6 @@ export default class UserInfo {
 //profile modal popping up now fixed this._userinfo to just const userinfo
 //the edit avatar doesn't do anything yet, which is fine
 //also need the avatar and initial cards to pull up
+
+//add card form works and after refreshing the page the cards stay there and form is empty, call it good
+//working on the profile form now 5.31.2024

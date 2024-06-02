@@ -46,7 +46,8 @@ export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 export const profileEditForm =
-  profileEditModal.querySelector("#profile-edit-form");
+  profileEditModal.querySelector("#profile-edit-form"); //lets change #profile-edit-form to modal__form
+//for some reason this changed the avatar? maybe there is a dif class for this in html
 
 /* Gallery Elements */
 export const cardTemplate =
@@ -69,7 +70,7 @@ export const cardSelector = "#card-template"; //could take out
 
 /* Avatar Elements */
 export const profileAvatarButton = document.querySelector(
-  "#avatar-edit-button"
+  ".avatar__button" //#avatar-edit-button to .avatar__button, this makes the modal open, but it won't save
 );
 export const profileAvatarModal = document.querySelector("#avatar-modal");
 export const profileAvatarForm =
