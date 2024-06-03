@@ -142,8 +142,8 @@ function handleAvatarSubmit(url) {
   profileAvatarPopUp.setLoading(true);
   api
     .updateAvatar(url) //userData to data, url to link << flip is around
-    .then((data) => {
-      userInfo.setAvatar(data);
+    .then(() => {
+      userInfo.setAvatar(data.avatar);
       profileAvatarPopUp.close();
     })
     .catch((err) => {
