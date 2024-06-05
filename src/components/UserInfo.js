@@ -14,15 +14,34 @@ export default class UserInfo {
     return userInfo;
   }
 
+  /*
+  getUserInfo() {
+    return {
+      title: this._title.textContent,
+      description: this._description.textContent,
+      avatar: this._avatar.src,
+    };
+  } */
+
   setUserInfo(data) {
     this._title.textContent = data.title;
     this._description.textContent = data.description;
     this._avatar.src = data.avatar;
   }
+  /*
+  setUserInfo(data) {
+    this._title.textContent = data.title;
+    this._description.textContent = data.description;
+    this._avatar.src = data.avatar;
+  } */
 
   setAvatar({ avatar }) {
     this._avatar.src = avatar.avatar;
   }
+  /*
+  setAvatar({ avatar }) {
+    this._avatar.src = avatar.avatar;
+  } */
 }
 
 //profile modal popping up now fixed this._userinfo to just const userinfo

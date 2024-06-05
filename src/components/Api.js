@@ -4,9 +4,9 @@ export default class Api {
     this._headers = headers;
   }
 
-  getUserInfoAndCards() {
+  /* getUserInfoAndCards() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
-  }
+  } */
 
   renderResult(res) {
     if (res.ok) {
@@ -41,20 +41,8 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  /*
-  updateUserInfo(res) {
+  updateUserInfo(title, description) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: "title",
-        about: "description",
-      }),
-    }).then(this.renderResult(res));
-  } */
-
-  async updateUserInfo(title, description) {
-    const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -62,7 +50,6 @@ export default class Api {
         about: description,
       }),
     });
-    return this.renderResult(res);
   }
 
   async deleteCard(cardId) {

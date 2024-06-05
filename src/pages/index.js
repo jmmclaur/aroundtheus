@@ -77,7 +77,7 @@ api
       description: data.description,
       avatar: data.avatar,
     });
-    console.log(data.avatar);
+    console.log(avatar);
   })
   .catch((err) => {
     console.log(err);
@@ -125,8 +125,9 @@ function handleProfileEditSubmit({ title, description }) {
     .finally(() => {
       editModal.setLoading(false);
     });
-  //.setUserInfo({ title, description });
-} //this above is correct, just need to add a setUserInfo section so the modal connects it to the page after reloading 6.5
+}
+
+//this above is correct, just need to add a setUserInfo section so the modal connects it to the page after reloading 6.5
 
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
@@ -236,7 +237,7 @@ const editModal = new PopUpWithForm(
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   const { title, description } = userInfo.getUserInfo();
-  profileTitleInput.value = title;
+  profileTitleInput.value = title; //look to see if this matches api
   profileDescriptionInput.value = description;
   editModal.open();
 });
