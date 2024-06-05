@@ -44,7 +44,7 @@ const api = new Api({
     authorization: "bba6e655-3c43-4bc9-84b1-5706718b60cd",
     "Content-Type": "application/json",
   },
-}); //
+});
 
 let section;
 
@@ -76,7 +76,8 @@ api
       title: data.title,
       description: data.description,
       avatar: data.avatar,
-    }); //lets try it w/ data instead of userData
+    });
+    console.log(data.avatar);
   })
   .catch((err) => {
     console.log(err);
@@ -85,8 +86,12 @@ api
 const userInfo = new UserInfo({
   titleSelector: ".modal__input_type_title",
   descriptionSelector: ".modal__input_type_description",
-  avatarSelector: "#avatar-picture", //.profile__image to #avatar-picture, yep now it's there but you still can't edit it, let's see why
-}); //make sure these selectors are correct, something wrong w/ userinfo
+  avatarSelector: ".profile__image",
+});
+/*
+api.getUser().then((formData) => {
+  userInfo.setUserInfo(formData.name, formData.about);
+}); //idk if this is needed */
 
 function handleImageClick({ name, link }) {
   popupWithImage.open(name, link);
@@ -101,14 +106,17 @@ function renderCard(data) {
     handleLike
   );
   return card.getView();
-} //cardData to data
+}
 
-function handleProfileEditSubmit(data) {
+function handleProfileEditSubmit({ title, description }) {
   editModal.setLoading(true);
   api
-    .updateUserInfo(data.title, data.description)
-    .then((cards) => {
-      userInfo.setUserInfo(cards);
+    .updateUserInfo(title, description)
+    .then((data) => {
+      userInfo.setUserInfo({
+        name: data.title,
+        about: data.description,
+      });
       editModal.close();
     })
     .catch((err) => {
@@ -117,7 +125,8 @@ function handleProfileEditSubmit(data) {
     .finally(() => {
       editModal.setLoading(false);
     });
-} //
+  //.setUserInfo({ title, description });
+} //this above is correct, just need to add a setUserInfo section so the modal connects it to the page after reloading 6.5
 
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
@@ -126,7 +135,7 @@ function handleAddCardSubmit(name, url) {
     .then((data) => {
       //const name = name;
       //const link = link;
-      const card = renderCard(data); //cardData to data
+      const card = renderCard(data);
       section.addItem(card);
       addModal.close();
     })
@@ -138,12 +147,12 @@ function handleAddCardSubmit(name, url) {
     });
 } //
 
-function handleAvatarSubmit(url) {
+function handleAvatarSubmit(link) {
   profileAvatarPopUp.setLoading(true);
   api
-    .updateAvatar(url) //userData to data, url to link << flip is around
-    .then(() => {
-      userInfo.setAvatar(data.avatar);
+    .updateAvatar(link)
+    .then((data) => {
+      userInfo.setAvatar(data);
       profileAvatarPopUp.close();
     })
     .catch((err) => {
@@ -152,7 +161,8 @@ function handleAvatarSubmit(url) {
     .finally(() => {
       profileAvatarPopUp.setLoading(false);
     });
-}
+} //data for the sections (not userdata or avatar or data.avatar)
+//the flower updates when you refresh the page, is this bc await?
 
 function handleDeleteCard(cardId) {
   cardDeletePopUp.open();
@@ -196,7 +206,7 @@ function handleLike(cardId) {
         console.error(err);
       });
   }
-} //this section has an error w/ liking
+}
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
@@ -225,12 +235,10 @@ const editModal = new PopUpWithForm(
 
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
-  const userData = userInfo.getUserInfo();
-  //const profileEditModal = userInfo.getUserInfo(); //profile info should be something else
-  //editModal.setInputValues(profileEditModal); //maybe profileeditmodal instead of profileinfo?
-  profileTitleInput.value = userData.title;
-  profileDescriptionInput.value = userData.description;
-  editModal.open(); //think I'm on the right track for title and description
+  const { title, description } = userInfo.getUserInfo();
+  profileTitleInput.value = title;
+  profileDescriptionInput.value = description;
+  editModal.open();
 });
 editModal.setEventListeners();
 

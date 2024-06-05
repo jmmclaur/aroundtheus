@@ -4,9 +4,9 @@ export default class Api {
     this._headers = headers;
   }
 
-  /*getUserInfoAndCards() {
+  getUserInfoAndCards() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
-  } */
+  }
 
   renderResult(res) {
     if (res.ok) {
@@ -41,19 +41,26 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  updateUserInfo(name, about) {
+  /*
+  updateUserInfo(res) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ name: name, about: about }),
-    });
-  }
+      body: JSON.stringify({
+        name: "title",
+        about: "description",
+      }),
+    }).then(this.renderResult(res));
+  } */
 
-  async setUserAvatar(url) {
-    const res = await fetch(`${this._baseUrl}/users/me/avatar`, {
+  async updateUserInfo(title, description) {
+    const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: url }),
+      body: JSON.stringify({
+        name: title,
+        about: description,
+      }),
     });
     return this.renderResult(res);
   }
@@ -82,31 +89,12 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  async updateAvatar({ url }) {
+  async updateAvatar({ link }) {
     const res = await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: url }),
+      body: JSON.stringify({ avatar: link }),
     });
     return this.renderResult(res);
-  } // let's see if this fixes the updateAvatar function
+  } //what if I just use setAvatar instead of updateAvatar b/c they're the same thing
 }
-
-//delete card, like and dislike not working let's look at card.js to see what's up
-
-/*
-  updateAvatar({ url }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({ avatar: url }),
-    }).then(this.renderResult);
-  } */
-
-/*
-  likeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this.renderResult);
-  } */
