@@ -41,9 +41,11 @@ export const profileTitle = document.querySelector("#profile-title"); //can take
 export const profileDescription = document.querySelector(
   "#profile-description"
 ); //can take out
-export const profileTitleInput = document.querySelector("#profile-title-input");
+export const profileTitleInput = document.querySelector(
+  ".modal__input_type_title"
+);
 export const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
+  ".modal__input_type_description"
 );
 export const profileEditForm =
   profileEditModal.querySelector("#profile-edit-form"); //lets change #profile-edit-form to modal__form

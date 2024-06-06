@@ -29,6 +29,7 @@ export default class Api {
     return this.renderResult(res);
   }
 
+  //trying new below
   async getUserInfo() {
     const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
@@ -37,22 +38,13 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  setUserInfo(title, description, avatar) {
+  setUserInfo(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({
-        name: title,
-        about: description,
-        avatar: avatar,
-      }),
-    }).then((res) => {
-      if (!res.ok) {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-      return res.json();
+      body: JSON.stringify({ name: name, about: about }),
     });
-  } //leave avatar alone it's fine
+  }
 
   async deleteCard(cardId) {
     const res = await fetch(`${this._baseUrl}/cards/${cardId}`, {
@@ -78,21 +70,12 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  async updateAvatar({ link }) {
+  async updateAvatar({ url }) {
     const res = await fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ avatar: link }),
+      body: JSON.stringify({ avatar: url }),
     });
     return this.renderResult(res);
-  } //what if I just use setAvatar instead of updateAvatar b/c they're the same thing
+  }
 }
-
-/*
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "bba6e655-3c43-4bc9-84b1-5706718b60cd",
-    "Content-Type": "application/json",
-  },
-}); */

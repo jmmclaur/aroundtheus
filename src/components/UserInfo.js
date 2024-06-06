@@ -1,38 +1,33 @@
 export default class UserInfo {
-  constructor({ nameSelector, aboutSelector, avatarSelector }) {
-    this._title = document.querySelector(nameSelector);
-    this._description = document.querySelector(aboutSelector);
+  constructor({ titleSelector, descriptionSelector, avatarSelector }) {
+    this._title = document.querySelector(titleSelector);
+    this._description = document.querySelector(descriptionSelector);
     this._avatar = document.querySelector(avatarSelector);
   }
 
+  //new phrasing below 6.5
   getUserInfo() {
-    const userInfo = {
+    return {
       title: this._title.textContent,
       description: this._description.textContent,
-      avatar: this._avatar.src,
     };
-    return userInfo;
   }
 
-  setUserInfo({ name, about, avatar }) {
-    this._title.textContent = name;
-    this._description.textContent = about;
+  setUserInfo({ title, description, avatar }) {
+    this._title.textContent = title;
+    this._description.textContent = description;
     this._avatar.src = avatar;
   }
 
-  setAvatar({ avatar }) {
-    this._avatar.src = avatar.avatar;
+  getAvatar({ avatar }) {
+    this._avatar.src = avatar;
   }
-}
 
-/*
-const userInfo = new UserInfo(
-  ".modal__input_type_title",
-  ".modal__input_type_description"
-); */
-//profile modal popping up now fixed this._userinfo to just const userinfo
-//the edit avatar doesn't do anything yet, which is fine
-//also need the avatar and initial cards to pull up
+  /*
+  updateAvatar(newAvatar) {
+    this._avatar.src = newAvatar;
+  } */
+}
 
 //add card form works and after refreshing the page the cards stay there and form is empty, call it good
 //working on the profile form now 5.31.2024

@@ -1,4 +1,4 @@
-//good to go 4.30
+//good to go 4.30, submission attempt Sprint 9 #1 6.5.2024
 
 import Api from "../components/Api.js";
 import "../pages/index.css";
@@ -9,7 +9,7 @@ import PopUp from "../components/PopUp.js";
 import PopUpWithForm from "../components/PopUpWithForm.js";
 import Section from "../components/Section.js";
 import {
-  //initialCards,
+  initialCards,
   config,
   profileEditButton,
   profileEditModal,
@@ -34,7 +34,6 @@ import {
 import PopUpWithImage from "../components/PopUpWithImage.js";
 import PopUpWithConfirmation from "../components/PopUpWithConfirmation.js";
 
-//what if for addsubmitbutton we change to addcardsubmit? and same for the edit submit
 /* ------------------------------------------------------------------------------ */
 /* API */
 
@@ -67,22 +66,24 @@ api
     console.log(error);
   });
 
+//trying something new below
 api
   .getUserInfo()
   .then((data) => {
     userInfo.setUserInfo({
-      name: data.this._title,
-      about: data.description,
+      title: data.name,
+      description: data.about,
       avatar: data.avatar,
     });
   })
   .catch((err) => {
     console.log(err);
-  }); //changing all title/description to name/about
+  });
 
+//something new below
 const userInfo = new UserInfo({
-  nameSelector: "#profile-title-input",
-  aboutSelector: "#profile-description-input",
+  titleSelector: ".profile__title", //
+  descriptionSelector: ".profile__description", //
   avatarSelector: ".profile__image",
 });
 
@@ -101,15 +102,13 @@ function renderCard(data) {
   return card.getView();
 }
 
+// something new below
 function handleProfileEditSubmit({ title, description }) {
   editModal.setLoading(true);
   api
-    .setUserInfo(title, description) //so I need to set something for setUserInfo
+    .setUserInfo(title, description)
     .then(() => {
-      userInfo.setUserInfo({
-        name: title,
-        about: description,
-      });
+      userInfo.setUserInfo({ name: title, about: description });
       editModal.close();
     })
     .catch((err) => {
@@ -118,7 +117,7 @@ function handleProfileEditSubmit({ title, description }) {
     .finally(() => {
       editModal.setLoading(false);
     });
-}
+} //edit modal allows you to update, but form reset not working
 
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
@@ -137,12 +136,17 @@ function handleAddCardSubmit(name, url) {
     });
 }
 
-function handleAvatarSubmit(link) {
-  profileAvatarPopUp.setLoading(true);
+//something new
+/*
+const newAvatar = "https://some-url.com";
+handleAvatarSubmit(newAvatar); */
+
+function handleAvatarSubmit(url) {
+  //profileAvatarPopUp.setLoading(true);
   api
-    .updateAvatar(link)
+    .updateAvatar(url)
     .then((data) => {
-      userInfo.setAvatar(data);
+      userInfo.getAvatar(data);
       profileAvatarPopUp.close();
     })
     .catch((err) => {
