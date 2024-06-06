@@ -1,7 +1,7 @@
 export default class UserInfo {
-  constructor({ titleSelector, descriptionSelector, avatarSelector }) {
-    this._title = document.querySelector(titleSelector);
-    this._description = document.querySelector(descriptionSelector);
+  constructor({ nameSelector, aboutSelector, avatarSelector }) {
+    this._title = document.querySelector(nameSelector);
+    this._description = document.querySelector(aboutSelector);
     this._avatar = document.querySelector(avatarSelector);
   }
 
@@ -14,36 +14,22 @@ export default class UserInfo {
     return userInfo;
   }
 
-  /*
-  getUserInfo() {
-    return {
-      title: this._title.textContent,
-      description: this._description.textContent,
-      avatar: this._avatar.src,
-    };
-  } */
-
-  setUserInfo(data) {
-    this._title.textContent = data.title;
-    this._description.textContent = data.description;
-    this._avatar.src = data.avatar;
+  setUserInfo({ name, about, avatar }) {
+    this._title.textContent = name;
+    this._description.textContent = about;
+    this._avatar.src = avatar;
   }
-  /*
-  setUserInfo(data) {
-    this._title.textContent = data.title;
-    this._description.textContent = data.description;
-    this._avatar.src = data.avatar;
-  } */
 
   setAvatar({ avatar }) {
     this._avatar.src = avatar.avatar;
   }
-  /*
-  setAvatar({ avatar }) {
-    this._avatar.src = avatar.avatar;
-  } */
 }
 
+/*
+const userInfo = new UserInfo(
+  ".modal__input_type_title",
+  ".modal__input_type_description"
+); */
 //profile modal popping up now fixed this._userinfo to just const userinfo
 //the edit avatar doesn't do anything yet, which is fine
 //also need the avatar and initial cards to pull up

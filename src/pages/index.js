@@ -55,7 +55,7 @@ api
       {
         items: cards,
         renderer: (data) => {
-          const cardEl = renderCard(data); //cardData to data
+          const cardEl = renderCard(data);
           section.addItem(cardEl);
         },
       },
@@ -65,37 +65,30 @@ api
   })
   .catch((error) => {
     console.log(error);
-  }); //let's see if this format works better, okay error is gone now...
-
-//okay rendering the cards is correct now, let's fix the add card submit!
+  });
 
 api
   .getUserInfo()
   .then((data) => {
     userInfo.setUserInfo({
-      title: data.title,
-      description: data.description,
+      name: data.this._title,
+      about: data.description,
       avatar: data.avatar,
     });
-    console.log(avatar);
   })
   .catch((err) => {
     console.log(err);
-  });
+  }); //changing all title/description to name/about
 
 const userInfo = new UserInfo({
-  titleSelector: ".modal__input_type_title",
-  descriptionSelector: ".modal__input_type_description",
+  nameSelector: "#profile-title-input",
+  aboutSelector: "#profile-description-input",
   avatarSelector: ".profile__image",
 });
-/*
-api.getUser().then((formData) => {
-  userInfo.setUserInfo(formData.name, formData.about);
-}); //idk if this is needed */
 
 function handleImageClick({ name, link }) {
   popupWithImage.open(name, link);
-} //
+}
 
 function renderCard(data) {
   const card = new Card(
@@ -111,11 +104,11 @@ function renderCard(data) {
 function handleProfileEditSubmit({ title, description }) {
   editModal.setLoading(true);
   api
-    .updateUserInfo(title, description)
-    .then((data) => {
+    .setUserInfo(title, description) //so I need to set something for setUserInfo
+    .then(() => {
       userInfo.setUserInfo({
-        name: data.title,
-        about: data.description,
+        name: title,
+        about: description,
       });
       editModal.close();
     })
@@ -127,15 +120,11 @@ function handleProfileEditSubmit({ title, description }) {
     });
 }
 
-//this above is correct, just need to add a setUserInfo section so the modal connects it to the page after reloading 6.5
-
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
   api
     .addCard(name, url)
     .then((data) => {
-      //const name = name;
-      //const link = link;
       const card = renderCard(data);
       section.addItem(card);
       addModal.close();
@@ -146,7 +135,7 @@ function handleAddCardSubmit(name, url) {
     .finally(() => {
       addModal.setLoading(false);
     });
-} //
+}
 
 function handleAvatarSubmit(link) {
   profileAvatarPopUp.setLoading(true);
@@ -162,8 +151,7 @@ function handleAvatarSubmit(link) {
     .finally(() => {
       profileAvatarPopUp.setLoading(false);
     });
-} //data for the sections (not userdata or avatar or data.avatar)
-//the flower updates when you refresh the page, is this bc await?
+}
 
 function handleDeleteCard(cardId) {
   cardDeletePopUp.open();
@@ -182,14 +170,14 @@ function handleDeleteCard(cardId) {
         cardDeletePopUp.setLoading(false, "Yes");
       });
   });
-} //this section has an error w/ deleting the card
+}
 
 function handleLike(cardId) {
   if (cardId._isLiked) {
     api
       .dislikeCard(cardId._id)
       .then(() => {
-        cardId.handleLikeIcon(); //likeIcon to like
+        cardId.handleLikeIcon();
         cardId._isLiked = false;
       })
       .catch((err) => {
@@ -200,7 +188,7 @@ function handleLike(cardId) {
     api
       .likeCard(cardId._id)
       .then(() => {
-        cardId.handleLikeIcon(); //likeIcon to like
+        cardId.handleLikeIcon();
         cardId._isLiked = true;
       })
       .catch((err) => {
@@ -237,7 +225,7 @@ const editModal = new PopUpWithForm(
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   const { title, description } = userInfo.getUserInfo();
-  profileTitleInput.value = title; //look to see if this matches api
+  profileTitleInput.value = title;
   profileDescriptionInput.value = description;
   editModal.open();
 });
@@ -256,13 +244,3 @@ popupWithImage.addEventListeners();
 
 const cardDeletePopUp = new PopUpWithConfirmation("#delete-modal");
 cardDeletePopUp.setEventListeners();
-
-////////
-//corrected editmodalpopup to editmodal
-//corrected addmodalpopup to addmodal
-
-//now need to get initial cards, avatar, forms, popup cards
-
-/* function openPreviewModal(data) {
-  previewImagePopup.open(data);
-} */
