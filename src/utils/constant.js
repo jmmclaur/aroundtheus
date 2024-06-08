@@ -36,19 +36,14 @@ export const config = {
 
 /* Profile Elements */
 export const profileEditButton = document.querySelector("#profile-edit-button");
-export const profileEditModal = document.querySelector("#profile-edit-modal"); //how is this used in index.js?
-export const profileTitle = document.querySelector("#profile-title"); //can take out
-export const profileDescription = document.querySelector(
-  "#profile-description"
-); //can take out
+export const profileEditModal = document.querySelector("#profile-edit-modal"); //how is this used in index.js? maybe change editModal to profileEditModal
 export const profileTitleInput = document.querySelector(
   ".modal__input_type_title"
 );
 export const profileDescriptionInput = document.querySelector(
   ".modal__input_type_description"
 );
-export const profileEditForm =
-  profileEditModal.querySelector("#profile-edit-form"); //lets change #profile-edit-form to modal__form
+export const profileEditForm = profileEditModal.querySelector(".modal__form"); //lets change #profile-edit-form to modal__form
 //for some reason this changed the avatar? maybe there is a dif class for this in html
 
 /* Gallery Elements */
@@ -60,7 +55,7 @@ export const cardListEl = document.querySelector(".gallery__cards"); //can take 
 export const addCardButton = document.querySelector(".profile__add-button");
 export const addCardForm = document.querySelector("#add-card-form");
 export const addCardModal = document.querySelector("#add-card-modal");
-export const addSubmitButton = addCardModal.querySelector(".modal__button");
+export const addCardSubmit = addCardModal.querySelector(".modal__button");
 //changed from addsubmitbutton to addcardsubmit to see if that changes anything
 /* Preview Elements */
 export const previewImage = document.querySelector(".modal__preview-image");

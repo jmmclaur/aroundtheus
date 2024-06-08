@@ -82,8 +82,8 @@ api
 
 //something new below
 const userInfo = new UserInfo({
-  titleSelector: ".profile__title", //
-  descriptionSelector: ".profile__description", //
+  titleSelector: ".profile__title",
+  descriptionSelector: ".profile__description",
   avatarSelector: ".profile__image",
 });
 
@@ -102,7 +102,6 @@ function renderCard(data) {
   return card.getView();
 }
 
-// something new below
 function handleProfileEditSubmit({ title, description }) {
   editModal.setLoading(true);
   api
@@ -135,11 +134,6 @@ function handleAddCardSubmit(name, url) {
       addModal.setLoading(false);
     });
 }
-
-//something new
-/*
-const newAvatar = "https://some-url.com";
-handleAvatarSubmit(newAvatar); */
 
 function handleAvatarSubmit(url) {
   //profileAvatarPopUp.setLoading(true);
@@ -224,16 +218,14 @@ profileAvatarPopUp.setEventListeners();
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
-);
+); //originally editModal but switched and it says it is already declared?
 
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
-  const { title, description } = userInfo.getUserInfo();
-  profileTitleInput.value = title;
-  profileDescriptionInput.value = description;
   editModal.open();
 });
 editModal.setEventListeners();
+//profileEditForm.reset();
 
 const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
 
