@@ -47,9 +47,9 @@ export const profileEditForm = profileEditModal.querySelector(".modal__form"); /
 //for some reason this changed the avatar? maybe there is a dif class for this in html
 
 /* Gallery Elements */
-export const cardTemplate =
+/*export const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild; //can take out
-export const cardListEl = document.querySelector(".gallery__cards"); //can take out
+export const cardListEl = document.querySelector(".gallery__cards"); //can take out */
 
 /* Add Button Elements */
 export const addCardButton = document.querySelector(".profile__add-button");
@@ -63,12 +63,12 @@ export const previewDescription = document.querySelector(
   ".modal__preview-description"
 );
 
-export const cardSelector = "#card-template"; //could take out
+/* export const cardSelector = "#card-template"; //could take out */
 
 /* Avatar Elements */
 export const profileAvatarButton = document.querySelector(
   ".avatar__button" //#avatar-edit-button to .avatar__button, this makes the modal open, but it won't save
-);
+); //the avatar works now, it updates immediately when you hit submit 6.8.2024
 export const profileAvatarModal = document.querySelector("#avatar-modal");
 export const profileAvatarForm =
   profileAvatarModal.querySelector(".modal__form");

@@ -18,15 +18,15 @@ import {
   profileTitleInput,
   profileDescriptionInput,
   profileEditForm,
-  cardTemplate,
-  cardListEl,
+  //cardTemplate,
+  //cardListEl,
   addCardButton,
   addCardForm,
   addCardModal,
   addCardSubmit,
   previewImage,
   previewDescription,
-  cardSelector,
+  //cardSelector,
   profileAvatarButton,
   profileAvatarModal,
   profileAvatarForm,
@@ -117,6 +117,7 @@ function handleProfileEditSubmit({ title, description }) {
       editModal.setLoading(false);
     });
 } //edit modal allows you to update, but form reset not working
+//fixed the form so it is blank when modal opens 6.8.2024
 
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
@@ -219,6 +220,8 @@ const editModal = new PopUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 ); //originally editModal but switched and it says it is already declared?
+//maybe I should use something other than profile-edit-modal?
+//let's try profile-edit-form instead 6.8.2024, nope!
 
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
