@@ -36,11 +36,20 @@ export default class Card {
       });
   }
 
+  //new 40-44
+  setIsLiked(isLiked) {
+    // set instance variable
+    this._isLiked = isLiked;
+    this._renderLikes();
+  }
+
+  /* reviwer said to remove 6.9.2024
   handleLikeIcon() {
     this._cardElement
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
-  } //fixed the like button!! 5.31.2024
+  } //fixed the like button!! 5.31.2024 */
+
   handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;

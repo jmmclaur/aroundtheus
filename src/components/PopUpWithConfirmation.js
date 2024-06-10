@@ -5,9 +5,11 @@ export default class PopUpWithConfirmation extends PopUp {
     super({ popUpSelector });
     this._popUpForm = this._popUpElement.querySelector(".modal__form");
     this._submitButton = this._popUpForm.querySelector(".modal__button");
-    this._submitButtonText =
-      this._submitButton.querySelector("#delete-card-modal");
-  }
+    this._submitButtonText = this._submitButton.textContent;
+    /*this._submitButtonText =
+      this._submitButton.querySelector("#delete-card-modal"); */
+  } //should I still have the id listed? probably let's try it. nope
+  //6.9.2024
 
   setSubmitAction(action) {
     this._handleFormSubmit = action;

@@ -47,8 +47,9 @@ const api = new Api({
 
 let section;
 
-api
-  .getInitialCards()
+api;
+//.getInitialCards()
+Promise.all(initialCards)
   .then((cards) => {
     section = new Section(
       {
@@ -137,7 +138,7 @@ function handleAddCardSubmit(name, url) {
 }
 
 function handleAvatarSubmit(url) {
-  //profileAvatarPopUp.setLoading(true);
+  profileAvatarPopUp.setLoading(true);
   api
     .updateAvatar(url)
     .then((data) => {
@@ -171,6 +172,7 @@ function handleDeleteCard(cardId) {
   });
 }
 
+/* reviewer wants this changed 
 function handleLike(cardId) {
   if (cardId._isLiked) {
     api
@@ -194,6 +196,14 @@ function handleLike(cardId) {
         console.error(err);
       });
   }
+} */
+
+function handleLike(card) {
+if (card.isLiked()) {
+  api.dislikeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
+};
+} else { 
+  api.likeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
 }
 
 const profileFormValidator = new FormValidator(config, profileEditForm);

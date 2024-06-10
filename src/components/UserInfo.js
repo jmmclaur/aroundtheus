@@ -13,20 +13,18 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ title, description, avatar }) {
+  setUserInfo({ title, description }) {
     this._title.textContent = title;
     this._description.textContent = description;
+  } //split the sections 6.9
+
+  setAvatar({ avatar }) {
     this._avatar.src = avatar;
-  }
+  } //split the sections 6.9
 
   getAvatar({ avatar }) {
     this._avatar.src = avatar;
   }
-
-  /*
-  updateAvatar(newAvatar) {
-    this._avatar.src = newAvatar;
-  } */
 }
 
 //add card form works and after refreshing the page the cards stay there and form is empty, call it good
