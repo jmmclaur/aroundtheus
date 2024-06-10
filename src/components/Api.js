@@ -12,6 +12,10 @@ export default class Api {
     }
   }
 
+  getUserInfoAndCards() {
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
   async getInitialCards() {
     const res = await fetch(`${this._baseUrl}/cards`, {
       method: "GET",

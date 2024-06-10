@@ -151,7 +151,7 @@ function handleAvatarSubmit(url) {
     .finally(() => {
       profileAvatarPopUp.setLoading(false);
     });
-}
+} //avatar updates but resets afters refreshing the page
 
 function handleDeleteCard(cardId) {
   cardDeletePopUp.open();
@@ -172,7 +172,7 @@ function handleDeleteCard(cardId) {
   });
 }
 
-/* reviewer wants this changed 
+/* reviewer wants this changed */
 function handleLike(cardId) {
   if (cardId._isLiked) {
     api
@@ -196,15 +196,17 @@ function handleLike(cardId) {
         console.error(err);
       });
   }
-} */
+}
 
+/*
+trying new stuff below 6.10
 function handleLike(card) {
 if (card.isLiked()) {
   api.dislikeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
 };
 } else { 
   api.likeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
-}
+} */
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
@@ -225,6 +227,7 @@ profileAvatarButton.addEventListener("click", () => {
   profileAvatarPopUp.open();
 });
 profileAvatarPopUp.setEventListeners();
+//avatar updates but doesn't save, let's find out why 6.10
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
