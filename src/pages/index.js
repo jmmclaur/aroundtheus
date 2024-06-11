@@ -190,10 +190,10 @@ function handleDeleteCard(cardId) {
 function handleLike(cardId) {
   if (cardId.isLiked) {
     api
-      .dislikeCard(cardId.id)
+      .dislikeCard(cardId._id)
       .then(() => {
         cardId.handleLikeIcon();
-        cardId._isLiked = false;
+        cardId._updateIsLiked = false;
       })
       .catch((err) => {
         console.error(err);
@@ -201,10 +201,10 @@ function handleLike(cardId) {
   }
   if (!cardId.isLiked) {
     api
-      .likeCard(cardId.id) //something wrong here, am I calling it wrong? what is cardId.id even?
+      .likeCard(cardId._id) //something wrong here, am I calling it wrong? what is cardId.id even?
       .then(() => {
         cardId.handleLikeIcon();
-        cardId._isLiked = true;
+        cardId._updateIsLiked = true;
       })
       .catch((err) => {
         console.error(err);
