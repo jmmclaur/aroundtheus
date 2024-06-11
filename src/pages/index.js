@@ -186,9 +186,32 @@ function handleDeleteCard(cardId) {
   });
 }
 
-//trying the like again 6.10
-
-/* reviewer wants this changed */
+//trying the like again 6.10, 6.11
+function handleLike(cardId) {
+  if (cardId.isLiked) {
+    api
+      .dislikeCard(cardId.id)
+      .then(() => {
+        cardId.handleLikeIcon();
+        cardId._isLiked = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  if (!cardId.isLiked) {
+    api
+      .likeCard(cardId.id) //something wrong here, am I calling it wrong? what is cardId.id even?
+      .then(() => {
+        cardId.handleLikeIcon();
+        cardId._isLiked = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+}
+/* reviewer wants this changed 
 function handleLike(cardId) {
   if (cardId._isLiked === true) {
     api
@@ -211,7 +234,7 @@ function handleLike(cardId) {
         console.error(err);
       });
   }
-}
+} */
 /*
   if (!cardId._isLiked) {
     api

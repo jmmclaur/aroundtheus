@@ -60,20 +60,18 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  async likeCard(cardId) {
-    const res = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    });
-    return this.renderResult(res);
+    }).then(this.renderResult);
   }
 
-  async dislikeCard(cardId) {
-    const res = await fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+  dislikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    });
-    return this.renderResult(res);
+    }).then(this.renderResult);
   }
 
   async updateAvatar({ url }) {

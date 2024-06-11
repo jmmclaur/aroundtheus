@@ -23,7 +23,7 @@ export default class Card {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLike(this);
+        this._handleLike(this); //something is wrong here
       });
     this._cardElement
       .querySelector(".card__trash-button")
@@ -42,14 +42,14 @@ export default class Card {
     // set instance variable
     this._isLiked = isLiked;
     this._renderLikes();
-  } */
+  } put it down below in updateIsLiked method */
 
-  /* reviwer said to remove 6.9.2024 
+  /* reviwer said to remove 6.9.2024 */
   handleLikeIcon() {
     this._cardElement
       .querySelector(".card__like-button")
       .classList.toggle("card__like-button_active");
-  } //fixed the like button!! 5.31.2024 */
+  }
 
   handleDeleteCard() {
     this._cardElement.remove();
@@ -68,20 +68,26 @@ export default class Card {
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
     this._setEventListeners();
-    this._renderLikes();
+    this._renderLike();
 
     return this._cardElement;
   }
 
-  _renderLikes() {
+  _renderLike() {
     if (this._isLiked) {
       this._cardElement.classList.add(".card__like-button_active");
     } else {
       this._cardElement.classList.remove(".card__like-button_active");
     }
   }
+
+  //what is needed with this method below?
+  updateIsLiked(isLiked) {
+    this._isLiked = isLiked;
+    this._renderLike();
+  }
 }
-//6.10 fix the like below
+//6.10 fix the like button, need to tell the server it's true
 
 //something isn't right w/ the like/trash icons, but we need to see the cards first lol
 //where are the initial cards called from? components, let's check it out
