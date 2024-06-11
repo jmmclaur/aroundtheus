@@ -1,3 +1,5 @@
+//6.10 let's fix  the like buttons
+
 export default class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;

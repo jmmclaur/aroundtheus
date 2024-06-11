@@ -18,6 +18,7 @@ export default class Card {
     this._isLiked = data._isLiked;
   }
 
+  //check out like on this page 6.10
   _setEventListeners() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -36,14 +37,14 @@ export default class Card {
       });
   }
 
-  /*new 40-44
+  /*new 40-44 
   setIsLiked(isLiked) {
     // set instance variable
     this._isLiked = isLiked;
     this._renderLikes();
   } */
 
-  /* reviwer said to remove 6.9.2024 */
+  /* reviwer said to remove 6.9.2024 
   handleLikeIcon() {
     this._cardElement
       .querySelector(".card__like-button")
@@ -80,6 +81,7 @@ export default class Card {
     }
   }
 }
+//6.10 fix the like below
 
 //something isn't right w/ the like/trash icons, but we need to see the cards first lol
 //where are the initial cards called from? components, let's check it out

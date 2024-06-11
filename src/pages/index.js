@@ -74,12 +74,26 @@ api
     userInfo.setUserInfo({
       title: data.name,
       description: data.about,
+    });
+    userInfo.setAvatar({ avatar: data.avatar });
+  })
+  .catch((err) => {
+    console.log(err);
+  }); //yay it works!! 6.10
+
+/* original
+  api
+  .getUserInfo()
+  .then((data) => {
+    userInfo.setUserInfo({
+      title: data.name,
+      description: data.about,
       avatar: data.avatar,
     });
   })
   .catch((err) => {
     console.log(err);
-  });
+  }); */
 
 //something new below
 const userInfo = new UserInfo({
@@ -172,9 +186,11 @@ function handleDeleteCard(cardId) {
   });
 }
 
+//trying the like again 6.10
+
 /* reviewer wants this changed */
 function handleLike(cardId) {
-  if (cardId._isLiked) {
+  if (cardId._isLiked === true) {
     api
       .dislikeCard(cardId._id)
       .then(() => {
@@ -184,7 +200,19 @@ function handleLike(cardId) {
       .catch((err) => {
         console.error(err);
       });
+  } else {
+    api
+      .likeCard(cardId._id)
+      .then(() => {
+        cardId._isLiked = true;
+        cardId.handleLikeIcon();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
+}
+/*
   if (!cardId._isLiked) {
     api
       .likeCard(cardId._id)
@@ -195,9 +223,9 @@ function handleLike(cardId) {
       .catch((err) => {
         console.error(err);
       });
-  }
-}
+  } 
 
+}
 /*
 trying new stuff below 6.10
 function handleLike(card) {
