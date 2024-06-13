@@ -14,17 +14,20 @@ export default class Card {
     this._handleImageClick = handleImageClick;
     this._handleDeleteCard = handleDeleteCard;
     this._handleLike = handleLike;
-    this._id = data._id;
-    this._isLiked = data._isLiked;
+    this.id = data._id;
+    this.isLiked = data.isLiked;
   }
 
   //check out like on this page 6.10
   _setEventListeners() {
-    this._cardElement
+    /*this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this._handleLike(this); //something is wrong here
-      });
+        this._handleLike(); //something is wrong here, took out this
+      }); */
+    this._likeButton.addEventListener("click", () => {
+      this._handleLike(this);
+    });
     this._cardElement
       .querySelector(".card__trash-button")
       .addEventListener("click", () => {
@@ -37,18 +40,8 @@ export default class Card {
       });
   }
 
-  /*new 40-44 
-  setIsLiked(isLiked) {
-    // set instance variable
-    this._isLiked = isLiked;
-    this._renderLikes();
-  } put it down below in updateIsLiked method */
-
-  /* reviwer said to remove 6.9.2024 */
   handleLikeIcon() {
-    this._cardElement
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   handleDeleteCard() {
@@ -67,14 +60,16 @@ export default class Card {
     cardImageEl.src = this._data.link;
     cardImageEl.alt = this._data.name;
     cardTitleEl.textContent = this._data.name;
+    this._likeButton = this._cardElement.querySelector(".card__like-button");
+
     this._setEventListeners();
-    this._renderLike();
+    this._renderLikes();
 
     return this._cardElement;
   }
 
-  _renderLike() {
-    if (this._isLiked) {
+  _renderLikes() {
+    if (this.isLiked) {
       this._cardElement.classList.add(".card__like-button_active");
     } else {
       this._cardElement.classList.remove(".card__like-button_active");
@@ -85,7 +80,7 @@ export default class Card {
   updateIsLiked(isLiked) {
     this._isLiked = isLiked;
     this._renderLike();
-  }
+  } //should I be using this instead of cardId?
 }
 //6.10 fix the like button, need to tell the server it's true
 

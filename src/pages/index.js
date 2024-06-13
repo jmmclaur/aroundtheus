@@ -114,6 +114,7 @@ function renderCard(data) {
     handleDeleteCard,
     handleLike
   );
+  console.log(card);
   return card.getView();
 }
 
@@ -186,34 +187,9 @@ function handleDeleteCard(cardId) {
   });
 }
 
-//trying the like again 6.10, 6.11
+/* original, still doesn't work 6.12
 function handleLike(cardId) {
-  if (cardId.isLiked) {
-    api
-      .dislikeCard(cardId._id)
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId._updateIsLiked = false;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  if (!cardId.isLiked) {
-    api
-      .likeCard(cardId._id) //something wrong here, am I calling it wrong? what is cardId.id even?
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId._updateIsLiked = true;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-}
-/* reviewer wants this changed 
-function handleLike(cardId) {
-  if (cardId._isLiked === true) {
+  if (cardId._isLiked) {
     api
       .dislikeCard(cardId._id)
       .then(() => {
@@ -223,19 +199,7 @@ function handleLike(cardId) {
       .catch((err) => {
         console.error(err);
       });
-  } else {
-    api
-      .likeCard(cardId._id)
-      .then(() => {
-        cardId._isLiked = true;
-        cardId.handleLikeIcon();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
   }
-} */
-/*
   if (!cardId._isLiked) {
     api
       .likeCard(cardId._id)
@@ -246,18 +210,35 @@ function handleLike(cardId) {
       .catch((err) => {
         console.error(err);
       });
-  } 
-
-}
-/*
-trying new stuff below 6.10
-function handleLike(card) {
-if (card.isLiked()) {
-  api.dislikeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
-};
-} else { 
-  api.likeCard(card).then(response => card.setIsLiked(response._isLiked)).catch(() => console.error(err));
+  }
 } */
+
+//trying the like again 6.10, 6.11
+
+function handleLike(cardInstance) {
+  if (cardInstance.isLiked) {
+    api
+      .dislikeCard(cardInstance.id)
+      .then(() => {
+        cardInstance.handleLikeIcon();
+        cardInstance.isLiked = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  if (!cardInstance.isLiked) {
+    api
+      .likeCard(cardInstance.id)
+      .then(() => {
+        cardInstance.handleLikeIcon();
+        cardInstance.isLiked = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+} //this looks fine now 6.11, check card and api
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
