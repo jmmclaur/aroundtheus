@@ -26,7 +26,7 @@ export default class Card {
         this._handleLike(); //something is wrong here, took out this
       }); */
     this._likeButton.addEventListener("click", () => {
-      this._handleLike(this);
+      this._handleLike(this._id);
     });
     this._cardElement
       .querySelector(".card__trash-button")
@@ -79,7 +79,7 @@ export default class Card {
   //what is needed with this method below?
   updateIsLiked(isLiked) {
     this._isLiked = isLiked;
-    this._renderLike();
+    this._renderLikes();
   } //should I be using this instead of cardId?
 }
 //6.10 fix the like button, need to tell the server it's true

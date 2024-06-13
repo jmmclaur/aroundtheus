@@ -215,30 +215,54 @@ function handleLike(cardId) {
 
 //trying the like again 6.10, 6.11
 
-function handleLike(cardInstance) {
-  if (cardInstance.isLiked) {
+function handleLike(cardId) {
+  if (cardId.isLiked) {
     api
-      .dislikeCard(cardInstance.id)
+      .dislikeCard(cardId.id)
       .then(() => {
-        cardInstance.handleLikeIcon();
-        cardInstance.isLiked = false;
+        cardId.handleLikeIcon();
+        cardId.isLiked = false; //do I need to define 'isLiked'?
       })
       .catch((err) => {
         console.error(err);
       });
   }
-  if (!cardInstance.isLiked) {
+  if (!cardId.isLiked) {
     api
-      .likeCard(cardInstance.id)
+      .likeCard(cardId.id)
       .then(() => {
-        cardInstance.handleLikeIcon();
-        cardInstance.isLiked = true;
+        cardId.handleLikeIcon();
+        cardId.isLiked = true;
       })
       .catch((err) => {
         console.error(err);
       });
   }
-} //this looks fine now 6.11, check card and api
+} //6.11 new version still isn't working, id isn't defined idk why
+
+/*try new below
+const likeButton = document.querySelector(".card__like-button");
+const numberOfLikesElement = document.querySelector(".number-of-likes");
+
+let numberOfLikes = Number.parseInt(numberOfLikesElement.textContent, 10);
+let isLiked = false;
+
+const handleLike = () => {
+  if (!isLiked) {
+    likeButton.classList.add("isLiked");
+    numberOfLikes++;
+    numberOfLikesElement.textContent = numberOfLikes;
+    isLiked = !isLiked;
+  } else {
+    likeButton.classList.remove("isLiked");
+    numberOfLikes--;
+    numberOfLikesElement.textContent = numberOfLikes;
+    isLiked = !isLiked;
+  }
+};
+
+likeButton.addEventListener("click", likeClick);
+*/
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
