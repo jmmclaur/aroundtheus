@@ -1,32 +1,26 @@
 export const initialCards = [
   {
-    id: {},
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
     isLiked: false,
   },
   {
-    id: {},
     name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
   },
   {
-    id: {},
     name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
   },
   {
-    id: {},
     name: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
   },
   {
-    id: {},
     name: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
   },
   {
-    id: {},
     name: "Lago di Braies",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
@@ -81,3 +75,6 @@ export const profileAvatarForm =
   profileAvatarModal.querySelector(".modal__form");
 
 //all of the classes and ids seem fine in here 5.28.2024
+export const cardDeleteButton = document.querySelector(".card__trash-button");
+export const cardDeleteModal = document.querySelector("#delete-modal");
+export const cardDeleteForm = cardDeleteModal.querySelector(".modal__form");

@@ -30,6 +30,9 @@ import {
   profileAvatarButton,
   profileAvatarModal,
   profileAvatarForm,
+  cardDeleteButton,
+  cardDeleteModal,
+  cardDeleteForm,
 } from "../utils/constant.js";
 import PopUpWithImage from "../components/PopUpWithImage.js";
 import PopUpWithConfirmation from "../components/PopUpWithConfirmation.js";
@@ -48,9 +51,9 @@ const api = new Api({
 let section;
 
 api;
-//.getInitialCards()
-Promise.all(initialCards)
-  .then((cards) => {
+
+Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
+  ([cards, data]) => {
     section = new Section(
       {
         items: cards,
@@ -62,40 +65,16 @@ Promise.all(initialCards)
       ".gallery__cards"
     );
     section.renderItems();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
-//trying something new below
-api
-  .getUserInfo()
-  .then((data) => {
     userInfo.setUserInfo({
       title: data.name,
       description: data.about,
     });
+
     userInfo.setAvatar({ avatar: data.avatar });
-  })
-  .catch((err) => {
-    console.log(err);
-  }); //yay it works!! 6.10
+  }
+);
 
-/* original
-  api
-  .getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo({
-      title: data.name,
-      description: data.about,
-      avatar: data.avatar,
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  }); */
-
-//something new below
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
   descriptionSelector: ".profile__description",
@@ -132,8 +111,7 @@ function handleProfileEditSubmit({ title, description }) {
     .finally(() => {
       editModal.setLoading(false);
     });
-} //edit modal allows you to update, but form reset not working
-//fixed the form so it is blank when modal opens 6.8.2024
+}
 
 function handleAddCardSubmit(name, url) {
   addModal.setLoading(true);
@@ -166,16 +144,16 @@ function handleAvatarSubmit(url) {
     .finally(() => {
       profileAvatarPopUp.setLoading(false);
     });
-} //avatar updates but resets afters refreshing the page
+}
 
-function handleDeleteCard(cardId) {
+function handleDeleteCard(card) {
   cardDeletePopUp.open();
   cardDeletePopUp.setSubmitAction(() => {
     cardDeletePopUp.setLoading(true, "Deleting...");
     api
-      .deleteCard(cardId)
+      .deleteCard(card.id)
       .then(() => {
-        this.handleDeleteCard();
+        card.handleDeleteCard();
         cardDeletePopUp.close();
       })
       .catch((err) => {
@@ -185,84 +163,32 @@ function handleDeleteCard(cardId) {
         cardDeletePopUp.setLoading(false, "Yes");
       });
   });
+} //fixed the delete!!!
+
+function handleLike(cardInstance) {
+  if (cardInstance.isLiked) {
+    api
+      .dislikeCard(cardInstance.id)
+      .then(() => {
+        cardInstance.handleLikeIcon();
+        cardInstance.isLiked = false;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+  if (!cardInstance.isLiked) {
+    api
+      .likeCard(cardInstance.id)
+      .then(() => {
+        cardInstance.handleLikeIcon();
+        cardInstance.isLiked = true;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
-
-/* original, still doesn't work 6.12
-function handleLike(cardId) {
-  if (cardId._isLiked) {
-    api
-      .dislikeCard(cardId._id)
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId._isLiked = false;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  if (!cardId._isLiked) {
-    api
-      .likeCard(cardId._id)
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId._isLiked = true;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-} */
-
-//trying the like again 6.10, 6.11
-
-function handleLike(cardId) {
-  if (cardId.isLiked) {
-    api
-      .dislikeCard(cardId.id)
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId.isLiked = false; //do I need to define 'isLiked'?
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  if (!cardId.isLiked) {
-    api
-      .likeCard(cardId.id)
-      .then(() => {
-        cardId.handleLikeIcon();
-        cardId.isLiked = true;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-} //6.11 new version still isn't working, id isn't defined idk why
-
-/*try new below
-const likeButton = document.querySelector(".card__like-button");
-const numberOfLikesElement = document.querySelector(".number-of-likes");
-
-let numberOfLikes = Number.parseInt(numberOfLikesElement.textContent, 10);
-let isLiked = false;
-
-const handleLike = () => {
-  if (!isLiked) {
-    likeButton.classList.add("isLiked");
-    numberOfLikes++;
-    numberOfLikesElement.textContent = numberOfLikes;
-    isLiked = !isLiked;
-  } else {
-    likeButton.classList.remove("isLiked");
-    numberOfLikes--;
-    numberOfLikesElement.textContent = numberOfLikes;
-    isLiked = !isLiked;
-  }
-};
-
-likeButton.addEventListener("click", likeClick);
-*/
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
@@ -283,21 +209,17 @@ profileAvatarButton.addEventListener("click", () => {
   profileAvatarPopUp.open();
 });
 profileAvatarPopUp.setEventListeners();
-//avatar updates but doesn't save, let's find out why 6.10
 
 const editModal = new PopUpWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
-); //originally editModal but switched and it says it is already declared?
-//maybe I should use something other than profile-edit-modal?
-//let's try profile-edit-form instead 6.8.2024, nope!
+);
 
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
   editModal.open();
 });
 editModal.setEventListeners();
-//profileEditForm.reset();
 
 const addModal = new PopUpWithForm("#add-card-modal", handleAddCardSubmit);
 

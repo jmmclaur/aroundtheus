@@ -35,7 +35,6 @@ export default class Api {
     return this.renderResult(res);
   }
 
-  //trying new below
   async getUserInfo() {
     const res = await fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
@@ -52,22 +51,21 @@ export default class Api {
     });
   }
 
-  async deleteCard(cardId) {
-    const res = await fetch(`${this._baseUrl}/cards/${cardId}`, {
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    });
-    return this.renderResult(res);
+    }).then(this.renderResult);
   }
 
-  likeCard({ cardId }) {
+  likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this.renderResult);
   }
 
-  dislikeCard({ cardId }) {
+  dislikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
