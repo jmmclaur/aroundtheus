@@ -32,9 +32,11 @@ export default class Card {
       });
   }
 
+  /*
   handleLikeIcon() {
     this._likeButton.classList.toggle("card__like-button_active");
-  }
+  } removing b/c updateIsLiked is used instead 
+  need ot change handleLikeIcon to updateIsLiked in index*/
 
   handleDeleteCard() {
     this._cardElement.remove();
@@ -60,16 +62,22 @@ export default class Card {
     return this._cardElement;
   }
 
-  _renderLikes() {
-    if (this.isLiked) {
-      this._cardElement.classList.add(".card__like-button_active");
-    } else {
-      this._cardElement.classList.remove(".card__like-button_active");
-    }
-  }
-
-  updateIsLiked(isLiked) {
+  setIsLiked(isLiked) {
     this._isLiked = isLiked;
     this._renderLikes();
   }
+
+  _renderLikes() {
+    if (this._isLiked) {
+      this._likeButton.classList.add(".card__like-button_active");
+    } else {
+      this._likeButton.classList.remove(".card__like-button_active");
+    }
+  } //swap cardElement with likeButton
+  //idk if I need to add a toggle
+
+  /*new below
+  isLiked() {
+    return this._isLiked;
+  } */
 }

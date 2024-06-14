@@ -22,9 +22,10 @@ export default class UserInfo {
     this._avatar.src = avatar;
   } //split the sections 6.9
 
+  /*
   getAvatar({ avatar }) {
-    this._avatar.src = avatar;
-  }
+    //this._avatar.src = avatar; get needs to get info 6.14
+  } changing getAvatar in index.js to setAvatar, that seemed to work */
 }
 
 //add card form works and after refreshing the page the cards stay there and form is empty, call it good

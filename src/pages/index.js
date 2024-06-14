@@ -135,7 +135,7 @@ function handleAvatarSubmit(url) {
   api
     .updateAvatar(url)
     .then((data) => {
-      userInfo.getAvatar(data);
+      userInfo.setAvatar(data);
       profileAvatarPopUp.close();
     })
     .catch((err) => {
@@ -166,29 +166,30 @@ function handleDeleteCard(card) {
 } //fixed the delete!!!
 
 function handleLike(cardInstance) {
-  if (cardInstance.isLiked) {
+  if (cardInstance._isLiked) {
     api
       .dislikeCard(cardInstance.id)
       .then(() => {
-        cardInstance.handleLikeIcon();
-        cardInstance.isLiked = false;
+        cardInstance.setIsLiked();
+        cardInstance._renderLikes = false;
       })
       .catch((err) => {
         console.error(err);
       });
   }
-  if (!cardInstance.isLiked) {
+  if (!cardInstance._isLiked) {
     api
       .likeCard(cardInstance.id)
       .then(() => {
-        cardInstance.handleLikeIcon();
-        cardInstance.isLiked = true;
+        cardInstance.setIsLiked();
+        cardInstance._renderLikes = true;
       })
       .catch((err) => {
         console.error(err);
       });
   }
-}
+} //request is sending but it's not rendering?
+//do I need to toggle the button on?
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
