@@ -62,11 +62,10 @@ export default class Card {
     return this._cardElement;
   }
 
-  //what are these two methods supposed to do, setisliked renderlikes?
   setIsLiked(isLiked) {
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this._renderLikes();
-  } //this should tell whether or not a card is liked, requires argument
+  }
 
   _renderLikes() {
     if (this.isLiked) {
@@ -75,9 +74,4 @@ export default class Card {
       this._likeButton.classList.remove("card__like-button_active");
     }
   } //removed the . before the boolean argument, likes appear after refresh
-
-  /*new below 
-  isLiked() {
-    return this.isLiked;
-  } */
 }

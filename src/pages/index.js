@@ -52,8 +52,8 @@ let section;
 
 api;
 
-Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-  ([cards, data]) => {
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, data]) => {
     section = new Section(
       {
         items: cards,
@@ -72,8 +72,10 @@ Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
     });
 
     userInfo.setAvatar({ avatar: data.avatar });
-  }
-);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 const userInfo = new UserInfo({
   titleSelector: ".profile__title",
@@ -104,8 +106,7 @@ function handleProfileEditSubmit({ title, description }) {
     .then(() => {
       userInfo.setUserInfo({ name: title, about: description });
       editModal.close();
-      profileEditForm.reset();
-      //profileFormValidator.disableButton();
+      //profileEditForm.reset();
     })
     .catch((err) => {
       console.error(err);
@@ -165,7 +166,7 @@ function handleDeleteCard(card) {
         cardDeletePopUp.setLoading(false, "Yes");
       });
   });
-} //fixed the delete!!!
+}
 
 function handleLike(cardInstance) {
   if (cardInstance.isLiked) {
@@ -188,8 +189,7 @@ function handleLike(cardInstance) {
         console.error(err);
       });
   }
-} //request is sending but it's not rendering?
-//do I need to toggle the button on?
+}
 
 const profileFormValidator = new FormValidator(config, profileEditForm);
 profileFormValidator.enableValidation();
@@ -218,6 +218,9 @@ const editModal = new PopUpWithForm(
 
 profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
+  const { title, description } = userInfo.getUserInfo();
+  profileTitleInput.value = title;
+  profileDescriptionInput.value = description;
   editModal.open();
 });
 editModal.setEventListeners();
