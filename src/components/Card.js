@@ -62,22 +62,22 @@ export default class Card {
     return this._cardElement;
   }
 
+  //what are these two methods supposed to do, setisliked renderlikes?
   setIsLiked(isLiked) {
     this._isLiked = isLiked;
     this._renderLikes();
-  }
+  } //this should tell whether or not a card is liked, requires argument
 
   _renderLikes() {
-    if (this._isLiked) {
-      this._likeButton.classList.add(".card__like-button_active");
+    if (this.isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
     } else {
-      this._likeButton.classList.remove(".card__like-button_active");
+      this._likeButton.classList.remove("card__like-button_active");
     }
-  } //swap cardElement with likeButton
-  //idk if I need to add a toggle
+  } //removed the . before the boolean argument, likes appear after refresh
 
-  /*new below
+  /*new below 
   isLiked() {
-    return this._isLiked;
+    return this.isLiked;
   } */
 }

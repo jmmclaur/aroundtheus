@@ -104,6 +104,8 @@ function handleProfileEditSubmit({ title, description }) {
     .then(() => {
       userInfo.setUserInfo({ name: title, about: description });
       editModal.close();
+      profileEditForm.reset();
+      //profileFormValidator.disableButton();
     })
     .catch((err) => {
       console.error(err);
@@ -166,23 +168,21 @@ function handleDeleteCard(card) {
 } //fixed the delete!!!
 
 function handleLike(cardInstance) {
-  if (cardInstance._isLiked) {
+  if (cardInstance.isLiked) {
     api
       .dislikeCard(cardInstance.id)
-      .then(() => {
-        cardInstance.setIsLiked();
-        cardInstance._renderLikes = false;
+      .then((data) => {
+        cardInstance.setIsLiked(data.isLiked);
       })
       .catch((err) => {
         console.error(err);
       });
   }
-  if (!cardInstance._isLiked) {
+  if (!cardInstance.isLiked) {
     api
       .likeCard(cardInstance.id)
-      .then(() => {
-        cardInstance.setIsLiked();
-        cardInstance._renderLikes = true;
+      .then((data) => {
+        cardInstance.setIsLiked(data.isLiked);
       })
       .catch((err) => {
         console.error(err);
